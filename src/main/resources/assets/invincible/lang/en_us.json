@@ -6,6 +6,7 @@
     "itemGroup.invincible.block_group": "逆天修仙 - 方块",
     "itemGroup.invincible.kung_fu_group": "逆天修仙 - 功法",
     "itemGroup.invincible.zhen_fu_group": "逆天修仙 - 阵法",
+    "itemGroup.invincible.lian_qi_group": "逆天修仙 - 炼器",
 
     "entity.invincible.reiki": "灵气",
 
@@ -34,6 +35,10 @@
     "block.invincible.reiki_stone_ore_4": "四级灵石矿",
     "block.invincible.deepslate_reiki_stone_ore_4": "四级深层灵石矿",
     "block.invincible.reiki_stone_ore_4.tooltip": "比较稀少的矿物，能用上已经过的很好了",
+
+    "block.invincible.angle_grinder": "角磨机",
+    "block.invincible.angle_grinder.name": "角磨机",
+    "block.invincible.angle_grinder.tooltip": "能将玉石原石打磨出来，不过玉石品质全看运气...",
 
     "block.invincible.zhen_yan_1": "一阶阵眼",
     "block.invincible.zhen_yan_1.name": "一阶阵眼",

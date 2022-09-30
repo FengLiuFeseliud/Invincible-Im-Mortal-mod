@@ -19,7 +19,7 @@ public class Zhen_Yan_ScreenHandler {
             this(syncId, playerInventory, new SimpleInventory(6));
         }
 
-        public Lv1(int syncId, PlayerInventory playerInventory, SimpleInventory inventory) {
+        public Lv1(int syncId, PlayerInventory playerInventory, Inventory inventory) {
             super(invincibleMod.ZHEN_YAN_1_SCREENHANDLER, syncId);
             this.inventory = inventory;
             checkSize(inventory, 6);

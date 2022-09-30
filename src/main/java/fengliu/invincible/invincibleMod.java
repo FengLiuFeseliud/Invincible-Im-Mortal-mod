@@ -31,17 +31,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fengliu.invincible.entity.Reiki;
+import fengliu.invincible.entity.block.Angle_Grinder_Entity;
 import fengliu.invincible.entity.block.Zhen_Yan_Entity;
 import fengliu.invincible.entity.renderer.Reiki_Renderer;
 import fengliu.invincible.item.Jade_Rough_Stone;
 import fengliu.invincible.item.Kung_Fu;
 import fengliu.invincible.item.Reiki_Stone;
+import fengliu.invincible.item.block.Angle_Grinder_Item;
 import fengliu.invincible.item.block.Jade_Rough_Stone_Ore;
 import fengliu.invincible.item.block.Reiki_Stone_Bricks_Item;
 import fengliu.invincible.item.block.Reiki_Stone_Ore;
 import fengliu.invincible.item.block.Zhen_Yan_Item;
+import fengliu.invincible.screen.handler.Angle_Grinder_ScreenHandler;
 import fengliu.invincible.screen.handler.Zhen_Yan_ScreenHandler;
-import fengliu.invincible.screen.handler.Zhen_Yan_ScreenHandler.Lv1;
+import fengliu.invincible.block.Angle_Grinder;
 import fengliu.invincible.block.Zhen_Yan;
 
 
@@ -215,8 +218,23 @@ public class invincibleMod implements ModInitializer {
 			.maxCount(64)
 	);
 
+	// 角磨机
+	public static final Block ANGLE_GRINDER = new Angle_Grinder(
+		AbstractBlock.Settings.of(Material.STONE).strength(5.0f).requiresTool()
+	);
+	public static final BlockItem ANGLE_GRINDER_ITEM = new Angle_Grinder_Item(
+		ANGLE_GRINDER,
+		new FabricItemSettings()
+			.maxCount(64)
+	);
+	public static BlockEntityType<Angle_Grinder_Entity> ANGLE_GRINDER_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
+		new Identifier(MOD_ID, "angle_grinder_entity"), 
+		FabricBlockEntityTypeBuilder.create(Angle_Grinder_Entity::new, ANGLE_GRINDER).build(null)
+	);
+
+	// 一阶阵眼
 	public static final Block ZHEN_YAN_1 = new Zhen_Yan.Lv1(
-		AbstractBlock.Settings.of(Material.STONE).strength(10.5f).requiresTool()
+		AbstractBlock.Settings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
 	public static final BlockItem ZHEN_YAN_1_ITEM = new Zhen_Yan_Item.Lv1(
 		ZHEN_YAN_1,
@@ -276,9 +294,18 @@ public class invincibleMod implements ModInitializer {
 	// 阵法组
 	public static final ItemGroup ZHEN_FU_GROUP = FabricItemGroupBuilder.create(
 		new Identifier(MOD_ID, "zhen_fu_group"))
-			.icon(() -> new ItemStack(REIKI_STONE_BRICKS_ITEM))
+			.icon(() -> new ItemStack(ZHEN_YAN_1_ITEM))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ZHEN_YAN_1));
+			})
+			.build();
+
+	// 炼器组
+	public static final ItemGroup LIAN_QI_GROUP = FabricItemGroupBuilder.create(
+		new Identifier(MOD_ID, "lian_qi_group"))
+			.icon(() -> new ItemStack(ANGLE_GRINDER_ITEM))
+			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ANGLE_GRINDER));
 			})
 			.build();
 
@@ -323,6 +350,9 @@ public class invincibleMod implements ModInitializer {
 		// 四级深层灵石矿
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4_ITEM);
+		// 角磨机
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER_ITEM);
 		// 一阶阵眼
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "zhen_yan_1"), ZHEN_YAN_1);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "zhen_yan_1"), ZHEN_YAN_1_ITEM);
@@ -360,9 +390,12 @@ public class invincibleMod implements ModInitializer {
 			.registerPortal();
 	}
 
+	public static final ScreenHandlerType<Angle_Grinder_ScreenHandler> ANGLE_GRINDER_SCREENHANDLER;
 	public static final ScreenHandlerType<Zhen_Yan_ScreenHandler.Lv1> ZHEN_YAN_1_SCREENHANDLER;
 	
 	static {
+		// 角磨机 UI
+		ANGLE_GRINDER_SCREENHANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(MOD_ID, "ui_angle_grinder_1"), Angle_Grinder_ScreenHandler::new);
 		// 一阶阵眼 UI
 		ZHEN_YAN_1_SCREENHANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(MOD_ID, "ui_zhen_yan_1"), Zhen_Yan_ScreenHandler.Lv1::new);
 	}

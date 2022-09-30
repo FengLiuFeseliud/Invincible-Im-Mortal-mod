@@ -3,6 +3,7 @@ package fengliu.invincible;
 import org.lwjgl.glfw.GLFW;
 
 import fengliu.invincible.api.Key;
+import fengliu.invincible.screen.Angle_Grinder_Screen;
 import fengliu.invincible.screen.Zhen_Yan_Screen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -15,6 +16,8 @@ public class invincibleClient implements ClientModInitializer  {
 	
     @Override
 	public void onInitializeClient() {
+		// 角磨机 UI
+		ScreenRegistry.register(invincibleMod.ANGLE_GRINDER_SCREENHANDLER, Angle_Grinder_Screen::new);
 		// 一阶阵眼 UI
 		ScreenRegistry.register(invincibleMod.ZHEN_YAN_1_SCREENHANDLER, Zhen_Yan_Screen.Lv1::new);
 

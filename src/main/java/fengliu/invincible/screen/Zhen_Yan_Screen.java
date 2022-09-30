@@ -19,7 +19,7 @@ public class Zhen_Yan_Screen{
 
         private static final Identifier TEXTTURE = new Identifier(MOD_ID, "textures/gui/zhen_yan_1.png");
 
-        public Lv1(fengliu.invincible.screen.handler.Zhen_Yan_ScreenHandler.Lv1 handler, PlayerInventory inventory, Text title) {
+        public Lv1(Zhen_Yan_ScreenHandler.Lv1 handler, PlayerInventory inventory, Text title) {
             super(handler, inventory, title);
             this.passEvents = false;
             this.backgroundHeight = 167;
