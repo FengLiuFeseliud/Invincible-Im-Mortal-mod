@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "RRR",
+        "RPR",
+        "RRR"
+    ],
+    "key": {
+        "R": {
+            "item": "invincible:reiki_stone_3"
+        },
+        "P": {
+            "item": "minecraft:deepslate_tiles"
+        }
+    },
+    "result": {
+        "item": "invincible:reiki_stone_bricks",
+        "count": 1
+    }
+}

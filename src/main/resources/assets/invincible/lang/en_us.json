@@ -1,0 +1,71 @@
+{
+    "key.invincible":"逆天修仙",
+    "key.invincible.reiki_practice":"修炼",
+    
+    "itemGroup.invincible.item_group": "逆天修仙 - 材料",
+    "itemGroup.invincible.block_group": "逆天修仙 - 方块",
+    "itemGroup.invincible.kung_fu_group": "逆天修仙 - 功法",
+    "itemGroup.invincible.zhen_fu_group": "逆天修仙 - 阵法",
+
+    "entity.invincible.reiki": "灵气",
+
+    "block.customportalapi.customportalblock": "破碎空间",
+
+    "block.invincible.reiki_stone_bricks": "灵石砖",
+    "block.invincible.reiki_stone_bricks.tooltip": "包含十足灵气砖石",
+
+    "block.invincible.jade_rough_stone_ore": "玉石原石矿",
+    "block.invincible.deepslate_jade_rough_stone_ore": "深层玉石原石矿",
+    "block.invincible.jade_rough_stone_ore.tooltip": "比较罕见的矿物，打磨出来好像可以注入法力？",
+
+
+    "block.invincible.reiki_stone_ore_1": "一级灵石矿",
+    "block.invincible.deepslate_reiki_stone_ore_1": "一级深层灵石矿",
+    "block.invincible.reiki_stone_ore_1.tooltip": "主世界十分罕见的矿物，包含着灵气",
+
+    "block.invincible.reiki_stone_ore_2": "二级灵石矿",
+    "block.invincible.deepslate_reiki_stone_ore_2": "二级深层灵石矿",
+    "block.invincible.reiki_stone_ore_2.tooltip": "在灵气稀薄的主世界不敢相信的存在！",
+
+    "block.invincible.reiki_stone_ore_3": "三级灵石矿",
+    "block.invincible.deepslate_reiki_stone_ore_3": "三级深层灵石矿",
+    "block.invincible.reiki_stone_ore_3.tooltip": "灵界十分常见的矿物，不过在主世界只可能从天下掉下的存在",
+    
+    "block.invincible.reiki_stone_ore_4": "四级灵石矿",
+    "block.invincible.deepslate_reiki_stone_ore_4": "四级深层灵石矿",
+    "block.invincible.reiki_stone_ore_4.tooltip": "比较稀少的矿物，能用上已经过的很好了",
+
+    "block.invincible.zhen_yan_1": "一阶阵眼",
+    "block.invincible.zhen_yan_1.name": "一阶阵眼",
+    "block.invincible.zhen_yan_1.tooltip": "一阶阵法的核心",
+
+    "item.invincible.reiki_stone_0": "灵石",
+    "item.invincible.reiki_stone_0.tooltip": "没冇灵气的普通石头，不过可以注入灵气？",
+    "item.invincible.reiki_stone_0.tooltip_2": "由水晶拆解而来，能干什么用呢？",
+
+    "item.invincible.reiki_stone_1": "一级灵石",
+    "item.invincible.reiki_stone_1.tooltip": "很小一块包含的灵气也不多，可以继续注入灵气？",
+    "item.invincible.reiki_stone_1.tooltip_2": "在灵气稀薄的主世界有一块已经十分罕见了！",
+
+    "item.invincible.reiki_stone_2": "二级灵石",
+    "item.invincible.reiki_stone_2.tooltip": "包含的灵气不多凑合前期修炼用，可以继续注入灵气？",
+    "item.invincible.reiki_stone_2.tooltip_2": "在灵气稀薄的主世界不敢相信的存在！",
+
+    "item.invincible.reiki_stone_3": "三级灵石",
+    "item.invincible.reiki_stone_3.tooltip": "完整的一块灵石前期修炼很好用，可以继续注入灵气？",
+    "item.invincible.reiki_stone_3.tooltip_2": "灵界常见的存在，不过在主世界只可能从天下掉下的存在",
+
+    "item.invincible.reiki_stone_4": "四级灵石",
+    "item.invincible.reiki_stone_4.tooltip": "比较稀少的灵石，灵气也很浓郁，可以继续注入灵气？",
+    "item.invincible.reiki_stone_4.tooltip_2": "不错的修炼材料，能用上已经过的很好了",
+
+    "item.invincible.reiki_stone_5": "五级灵石",
+    "item.invincible.reiki_stone_5.tooltip": "非常稀少的灵石， 灵气十分浓郁，可以继续注入灵气？",
+    "item.invincible.reiki_stone_5.tooltip_2": "一块好像可以有10000一级灵石的灵气",
+
+    "item.invincible.jade_rough_stone": "玉石原石",
+    "item.invincible.jade_rough_stone.tooltip": "未打磨的玉石，打磨出来好像可以注入法力？",
+
+    "item.invincible.kung_fu": "功法",
+    "item.invincible.kung_fu.tooltip": "学习修炼！"
+}

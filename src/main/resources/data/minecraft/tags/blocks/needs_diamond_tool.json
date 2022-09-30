@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "values": [
+        "invincible:reiki_stone_bricks",
+        "invincible:reiki_stone_ore_3",
+        "invincible:reiki_stone_ore_4",
+        "invincible:deepslate_reiki_stone_ore_3",
+        "invincible:deepslate_reiki_stone_ore_4"
+    ]
+}
