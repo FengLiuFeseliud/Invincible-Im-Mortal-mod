@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
 import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
@@ -220,7 +219,7 @@ public class invincibleMod implements ModInitializer {
 
 	// 角磨机
 	public static final Block ANGLE_GRINDER = new Angle_Grinder(
-		AbstractBlock.Settings.of(Material.STONE).strength(5.0f).requiresTool()
+		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
 	public static final BlockItem ANGLE_GRINDER_ITEM = new Angle_Grinder_Item(
 		ANGLE_GRINDER,
@@ -234,7 +233,7 @@ public class invincibleMod implements ModInitializer {
 
 	// 一阶阵眼
 	public static final Block ZHEN_YAN_1 = new Zhen_Yan.Lv1(
-		AbstractBlock.Settings.of(Material.STONE).strength(5.0f).requiresTool()
+		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
 	public static final BlockItem ZHEN_YAN_1_ITEM = new Zhen_Yan_Item.Lv1(
 		ZHEN_YAN_1,

@@ -10,7 +10,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Angle_Grinder extends Ui_Block.Block {
+public class Angle_Grinder extends Ui_Block.Block{
 
     public Angle_Grinder(Settings settings) {
         super(settings);

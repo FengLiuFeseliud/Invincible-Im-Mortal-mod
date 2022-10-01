@@ -24,42 +24,42 @@ public class Zhen_Yan_ScreenHandler {
             this.inventory = inventory;
             checkSize(inventory, 6);
 
-            this.addSlot(new Slot(this.inventory, 0, 0, 0){
+            this.addSlot(new Slot(this.inventory, 0, 80, 17){
                 @Override
                 public boolean canInsert(ItemStack stack){
                     return true;
                 }
             });
 
-            this.addSlot(new Slot(this.inventory, 1, 0, 0){
+            this.addSlot(new Slot(this.inventory, 1, 38, 40){
                 @Override
                 public boolean canInsert(ItemStack stack){
                     return true;
                 }
             });
 
-            this.addSlot(new Slot(this.inventory, 2, 0, 0){
+            this.addSlot(new Slot(this.inventory, 2, 59, 40){
                 @Override
                 public boolean canInsert(ItemStack stack){
                     return true;
                 }
             });
 
-            this.addSlot(new Slot(this.inventory, 3, 0, 0){
+            this.addSlot(new Slot(this.inventory, 3, 80, 40){
                 @Override
                 public boolean canInsert(ItemStack stack){
                     return true;
                 }
             });
 
-            this.addSlot(new Slot(this.inventory, 4, 0, 0){
+            this.addSlot(new Slot(this.inventory, 4, 101, 40){
                 @Override
                 public boolean canInsert(ItemStack stack){
                     return true;
                 }
             });
 
-            this.addSlot(new Slot(this.inventory, 5, 0, 0){
+            this.addSlot(new Slot(this.inventory, 5, 122, 40){
                 @Override
                 public boolean canInsert(ItemStack stack){
                     return true;
