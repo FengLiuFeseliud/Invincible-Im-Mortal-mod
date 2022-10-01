@@ -1,9 +1,9 @@
 package fengliu.invincible.api;
 
-
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -11,17 +11,25 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.state.StateManager.Builder;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class Ui_Block {
@@ -87,6 +95,38 @@ public class Ui_Block {
         @Override
         public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
             return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+        }
+    }
+
+    public static abstract class Model_Block extends Ui_Block.Block {
+
+        public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+
+        public Model_Block(Settings settings) {
+            super(settings);
+        }
+
+        @Override
+        public abstract VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context);
+
+        @Override
+        public BlockState getPlacementState(ItemPlacementContext ctx) {
+            return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+        }
+
+        @Override
+        public BlockState rotate(BlockState state, BlockRotation rotation) {
+            return state.with(FACING, rotation.rotate(state.get(FACING)));
+        }
+
+        @Override
+        public BlockState mirror(BlockState state, BlockMirror mirror) {
+            return state.rotate(mirror.getRotation(state.get(FACING)));
+        }
+
+        @Override
+        protected void appendProperties(Builder<net.minecraft.block.Block, BlockState> builder) {
+            builder.add(FACING);
         }
     }
     

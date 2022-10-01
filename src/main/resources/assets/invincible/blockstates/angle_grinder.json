@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "invincible:block/angle_grinder"
+        },
+        "facing=east": {
+            "model": "invincible:block/angle_grinder",
+            "y": 90
+        },
+        "facing=south": {
+            "model": "invincible:block/angle_grinder",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "invincible:block/angle_grinder",
+            "y": 270
+        }
+    }
+}
