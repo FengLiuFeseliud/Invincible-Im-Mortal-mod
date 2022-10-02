@@ -1,5 +1,7 @@
 package fengliu.invincible;
 
+import java.util.ConcurrentModificationException;
+
 import org.lwjgl.glfw.GLFW;
 
 import fengliu.invincible.api.Key;
@@ -13,6 +15,7 @@ import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.server.world.ServerWorld;
 
 public class invincibleClient implements ClientModInitializer  {
 	
@@ -32,10 +35,17 @@ public class invincibleClient implements ClientModInitializer  {
 		KeyBinding reiki_practice = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.reiki_practice", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_P, "key.invincible"));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			// 修炼
-			while (reiki_practice.wasPressed()) {
-				Key.reiki_practice(client.player.world, client.player);
+			if(client.world == null){
+				// 不在游戏中
+				return;
 			}
+			// 获取当前玩家所在服务器世界维度
+			ServerWorld serverWorld = client.getServer().getWorld(client.world.getRegistryKey());
+
+			while (reiki_practice.wasPressed()) {
+				Key.reiki_practice(client.world, serverWorld, client.player);
+			}
+			
 		});
 	}
 }

@@ -33,6 +33,7 @@ import fengliu.invincible.entity.Reiki;
 import fengliu.invincible.entity.block.Angle_Grinder_Entity;
 import fengliu.invincible.entity.block.Zhen_Yan_Entity;
 import fengliu.invincible.entity.renderer.Reiki_Renderer;
+import fengliu.invincible.item.Jade;
 import fengliu.invincible.item.Jade_Rough_Stone;
 import fengliu.invincible.item.Kung_Fu;
 import fengliu.invincible.item.Reiki_Stone;
@@ -97,6 +98,12 @@ public class invincibleMod implements ModInitializer {
 
 	// 玉石原石
 	public static final Item JADE_ROUGH_STONE= new Jade_Rough_Stone(
+		new FabricItemSettings()
+			.maxCount(64)
+	);
+
+	// 玉石原石
+	public static final Item JADE= new Jade(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
@@ -253,6 +260,7 @@ public class invincibleMod implements ModInitializer {
 			.icon(() -> new ItemStack(REIKI_STONE_3))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(JADE_ROUGH_STONE));
+				stacks.add(new ItemStack(JADE));
 				stacks.add(new ItemStack(REIKI_STONE_0));
 				stacks.add(new ItemStack(REIKI_STONE_1));
 				stacks.add(new ItemStack(REIKI_STONE_2));
@@ -280,7 +288,7 @@ public class invincibleMod implements ModInitializer {
 				stacks.add(new ItemStack(DEEPSLATE_REIKI_STONE_ORE_4));
 			})
 			.build();
-
+	
 	// 功法组
 	public static final ItemGroup KUNG_FU_GROUP = FabricItemGroupBuilder.create(
 		new Identifier(MOD_ID, "kung_fu_group"))
@@ -359,6 +367,8 @@ public class invincibleMod implements ModInitializer {
 
 		// 玉石原石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "jade_rough_stone"), JADE_ROUGH_STONE);
+		// 玉石
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "jade"), JADE);
 		// 灵石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_0"), REIKI_STONE_0);
 		// 一级灵石

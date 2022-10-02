@@ -1,5 +1,6 @@
 package fengliu.invincible.api;
 
+import fengliu.invincible.invincibleMod;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

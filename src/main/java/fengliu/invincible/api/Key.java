@@ -2,21 +2,25 @@ package fengliu.invincible.api;
 
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.entity.Reiki;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.server.world.ServerWorld;
 
 public class Key {
 
-    public static void reiki_practice(World world, PlayerEntity player){
-        Vec3d pos = player.getPos();
+    private static int spawn_reiki_sleep = 0;
 
-        Reiki reiki = new Reiki(invincibleMod.REIKI, world);
-        reiki.setPosition(pos);
+    public static void reiki_practice(ClientWorld clientWorld, ServerWorld serverWorld, ClientPlayerEntity player){
+        if(spawn_reiki_sleep != 0){
+            spawn_reiki_sleep -= 1;
+            return;
+        }
 
-        player.sendMessage(new LiteralText(reiki.toString()), false);
-        world.spawnEntity(reiki);
+        Reiki reiki = new Reiki(invincibleMod.REIKI, serverWorld);
+        reiki.setPosition(player.getPos());
+        if(serverWorld.spawnEntity(reiki)){
+            spawn_reiki_sleep = 5;
+        }
     }
     
 }

@@ -71,6 +71,19 @@
     "item.invincible.jade_rough_stone": "玉石原石",
     "item.invincible.jade_rough_stone.tooltip": "未打磨的玉石，打磨出来好像可以注入法力？",
 
+    "item.invincible.jade": "玉石",
+    "item.invincible.jade.tooltip": "用于炼器和阵法，品质越高效果越好！",
+    "item.invincible.jade.Lv0.tooltip": "未鉴定品质",
+    "item.invincible.jade.Lv1.tooltip": "品质：劣质",
+    "item.invincible.jade.Lv2.tooltip": "品质：多瑕疵",
+    "item.invincible.jade.Lv3.tooltip": "品质：不差不好",
+    "item.invincible.jade.Lv4.tooltip": "品质：瑕疵",
+    "item.invincible.jade.Lv5.tooltip": "品质：小瑕疵",
+    "item.invincible.jade.Lv6.tooltip": "品质：无瑕",
+    "item.invincible.jade.Lv7.tooltip": "品质：高级",
+    "item.invincible.jade.Lv8.tooltip": "品质：极品",
+    "item.invincible.jade.Lv9.tooltip": "品质：传说",
+
     "item.invincible.kung_fu": "功法",
     "item.invincible.kung_fu.tooltip": "学习修炼！"
 }
