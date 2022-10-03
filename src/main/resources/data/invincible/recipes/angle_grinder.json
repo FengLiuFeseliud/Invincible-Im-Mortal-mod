@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "DDD",
+        "ISI",
+        "IGI"
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:iron_block"
+        },
+        "D": {
+            "item": "minecraft:deepslate_tiles"
+        },
+        "G": {
+            "item": "minecraft:glass_pane"
+        },
+        "S": {
+            "item": "minecraft:iron_sword"
+        }
+    },
+    "result": {
+        "item": "invincible:angle_grinder",
+        "count": 1
+    }
+}

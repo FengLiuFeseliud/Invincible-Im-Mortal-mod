@@ -1,35 +1,41 @@
 package fengliu.invincible.screen.handler;
 
-import fengliu.invincible.invincibleMod;
+import fengliu.invincible.item.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 public class Angle_Grinder_ScreenHandler extends ScreenHandler {
 
     public Inventory inventory;
+    private final PropertyDelegate propertyDelegate;
 
     public Angle_Grinder_ScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(2));
+        this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(1));
     }
 
-    public Angle_Grinder_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(invincibleMod.ANGLE_GRINDER_SCREENHANDLER, syncId);
+    public Angle_Grinder_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
+        super(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, syncId);
         this.inventory = inventory;
+        this.propertyDelegate = propertyDelegate;
+        this.addProperties(propertyDelegate);
         checkSize(inventory, 2);
+        checkDataCount(propertyDelegate, 1);
 
-        this.addSlot(new Slot(this.inventory, 0, 56, 35){
+        this.addSlot(new Slot(this.inventory, 0, 81, 10){
             @Override
             public boolean canInsert(ItemStack stack){
-                return stack.isOf(invincibleMod.JADE_ROUGH_STONE);
+                return stack.isOf(ModItems.JADE_ROUGH_STONE);
             }
         });
 
-        this.addSlot(new Slot(this.inventory, 1, 116, 35){
+        this.addSlot(new Slot(this.inventory, 1, 81, 60){
             @Override
             public boolean canInsert(ItemStack stack){
                 return false;
@@ -46,42 +52,37 @@ public class Angle_Grinder_ScreenHandler extends ScreenHandler {
         }
     }
 
+    public int getTickCount(){
+        return this.propertyDelegate.get(0);
+    }
+
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
-        ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.slots.get(index);
-        if(!(slot != null && slot.hasStack())){
-            return itemStack;
-        }
-
-        ItemStack itemStack2 = slot.getStack().copy();
-        ItemStack itemStack3 = this.inventory.getStack(0);
-        ItemStack itemStack4 = this.inventory.getStack(1);
-        if(index == 2){
-            if(!this.insertItem(itemStack2, 3, 39, true)){
+        ItemStack newStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasStack()) {
+            ItemStack originalStack = slot.getStack();
+            newStack = originalStack.copy();
+            if (index < this.inventory.size()) {
+                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
                 return ItemStack.EMPTY;
             }
-            slot.onQuickTransfer(itemStack2, itemStack);
-        }else if(index == 0 || index == 1 ? !this.insertItem(itemStack2, 3, 39, false) : (itemStack3.isEmpty() || itemStack4.isEmpty() ? !this.insertItem(itemStack3, 3, 39, false) : !this.insertItem(itemStack4, 3, 39, false))){
-            return ItemStack.EMPTY;
+
+            if (originalStack.isEmpty()) {
+                slot.setStack(ItemStack.EMPTY);
+            } else {
+                slot.markDirty();
+            }
         }
 
-        if(itemStack2.isEmpty()){
-            slot.setStack(ItemStack.EMPTY);
-        }else{
-            slot.markDirty();
-        }
-
-        if(itemStack2.getCount() == itemStack.getCount()){
-            return ItemStack.EMPTY;
-        }
-        slot.onTakeItem(player, itemStack2);
-
-        return super.transferSlot(player, index);
+        return newStack;
     }
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return true;
+        return this.inventory.canPlayerUse(player);
     }
 }

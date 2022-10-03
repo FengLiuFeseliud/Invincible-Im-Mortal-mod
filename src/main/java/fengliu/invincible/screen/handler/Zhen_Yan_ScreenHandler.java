@@ -1,6 +1,5 @@
 package fengliu.invincible.screen.handler;
 
-import fengliu.invincible.invincibleMod;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -20,7 +19,7 @@ public class Zhen_Yan_ScreenHandler {
         }
 
         public Lv1(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-            super(invincibleMod.ZHEN_YAN_1_SCREENHANDLER, syncId);
+            super(ModScreenHandlers.ZHEN_YAN_1_SCREENHANDLER, syncId);
             this.inventory = inventory;
             checkSize(inventory, 6);
 

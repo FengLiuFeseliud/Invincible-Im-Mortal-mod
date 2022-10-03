@@ -1,6 +1,6 @@
 package fengliu.invincible.api;
 
-import fengliu.invincible.invincibleMod;
+import fengliu.invincible.entity.ModEntitys;
 import fengliu.invincible.entity.Reiki;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
@@ -16,7 +16,7 @@ public class Key {
             return;
         }
 
-        Reiki reiki = new Reiki(invincibleMod.REIKI, serverWorld);
+        Reiki reiki = new Reiki(ModEntitys.REIKI, serverWorld);
         reiki.setPosition(player.getPos());
         if(serverWorld.spawnEntity(reiki)){
             spawn_reiki_sleep = 5;

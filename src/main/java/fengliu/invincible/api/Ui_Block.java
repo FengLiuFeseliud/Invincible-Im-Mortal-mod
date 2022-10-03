@@ -1,6 +1,6 @@
 package fengliu.invincible.api;
 
-import fengliu.invincible.invincibleMod;
+import fengliu.invincible.entity.block.ImplementedInventory;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -72,9 +72,11 @@ public class Ui_Block {
                 return ActionResult.SUCCESS;
             }
 
-            BlockEntity entity = world.getBlockEntity(pos);
-            openHandledScreen(entity, player);
-            return super.onUse(state, world, pos, player, hand, hit);
+            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            if (screenHandlerFactory != null) {
+                player.openHandledScreen(screenHandlerFactory);
+            }
+            return ActionResult.SUCCESS;
         }
 
         @Override
@@ -97,6 +99,7 @@ public class Ui_Block {
         public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
             return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
         }
+
     }
 
     public static abstract class Model_Block extends Ui_Block.Block {
@@ -131,48 +134,38 @@ public class Ui_Block {
         }
     }
     
-    public static abstract class Entity extends LootableContainerBlockEntity {
+    public static abstract class Entity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory{
         
-        public DefaultedList<ItemStack> inv;
+        public DefaultedList<ItemStack> inventory;
 
         public Entity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
             super(blockEntityType, blockPos, blockState);
         }
 
         protected void setMaxItemStack(int maxItemStack){
-            inv = DefaultedList.ofSize(maxItemStack, ItemStack.EMPTY);
+            inventory = DefaultedList.ofSize(maxItemStack, ItemStack.EMPTY);
         }
 
         @Override
-        protected abstract Text getContainerName();
+        public abstract Text getDisplayName();
         @Override
-        protected abstract ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory);;
+        public abstract ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player);
+    
+        @Override
+        public DefaultedList<ItemStack> getItems() {
+            return this.inventory;
+        }
 
-        @Override
-        protected DefaultedList<ItemStack> getInvStackList() {
-            return this.inv;
-        }
-    
-        @Override
-        protected void setInvStackList(DefaultedList<ItemStack> list) {
-            this.inv = list;
-        }
-        
-        @Override
-        public int size() {
-            return this.inv.size();
-        }
-    
         @Override
         protected void writeNbt(NbtCompound nbt) {
             super.writeNbt(nbt);
-            Inventories.writeNbt(nbt, inv);
+            Inventories.writeNbt(nbt, inventory);
         }
     
         @Override
         public void readNbt(NbtCompound nbt) {
             super.readNbt(nbt);
-            Inventories.readNbt(nbt, inv);
+            Inventories.readNbt(nbt, inventory);
         }
     }
 

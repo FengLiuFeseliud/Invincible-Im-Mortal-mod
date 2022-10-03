@@ -2,7 +2,6 @@ package fengliu.invincible.item;
 
 import java.util.List;
 
-import fengliu.invincible.invincibleMod;
 import fengliu.invincible.api.Probability_Random;
 import fengliu.invincible.api.Probability_Random.Random_Item;
 import net.minecraft.client.item.TooltipContext;
@@ -38,6 +37,7 @@ public class Jade extends Item {
         }
     }
 
+    // 玉石等级和概率
     public static final Random_Item[] JADE_LV_LIST = {
         new Random_Item(0, new Jade_Lv(0, "item.invincible.jade.Lv0.tooltip")),
         // 95% Lv1 > Lv4
@@ -59,20 +59,20 @@ public class Jade extends Item {
         if(jadeItemStack.hasNbt()){
             return super.use(world, user, hand);
         }
-        jadeItemStack.setCount(jadeItemStack.getCount() - 1);
+        jadeItemStack.decrement(1);
         
         Random_Item random_jade_lv = Probability_Random.random(JADE_LV_LIST);
-
         NbtCompound jade_nbt = new NbtCompound();
         for(int index = 0; index < JADE_LV_LIST.length; index++){
-            if(random_jade_lv == JADE_LV_LIST[index]){
-                jade_nbt.putInt("invincible.jade_lv", index);
-                jade_nbt.putInt("invincible.jade_effect", ((Jade_Lv) random_jade_lv.getItem()).getEffect());
-                break;
+            if(random_jade_lv != JADE_LV_LIST[index]){
+                continue;
             }
+
+            jade_nbt.putInt("invincible.jade_lv", index);
+            jade_nbt.putInt("invincible.jade_effect", ((Jade_Lv) random_jade_lv.getItem()).getEffect());
         }
 
-        jadeItemStack = new ItemStack(invincibleMod.JADE, 1);
+        jadeItemStack = new ItemStack(ModItems.JADE, 1);
         jadeItemStack.setNbt(jade_nbt);
 
         world.spawnEntity(new ItemEntity(

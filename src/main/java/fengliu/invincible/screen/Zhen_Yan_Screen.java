@@ -13,11 +13,9 @@ import net.minecraft.util.Identifier;
 
 public class Zhen_Yan_Screen{
 
-    private static final String MOD_ID = invincibleMod.MOD_ID;
-
     public static class Lv1 extends HandledScreen<Zhen_Yan_ScreenHandler.Lv1>{
 
-        private static final Identifier TEXTTURE = new Identifier(MOD_ID, "textures/gui/zhen_yan_1.png");
+        private static final Identifier TEXTTURE = new Identifier(invincibleMod.MOD_ID, "textures/gui/zhen_yan_1.png");
 
         public Lv1(Zhen_Yan_ScreenHandler.Lv1 handler, PlayerInventory inventory, Text title) {
             super(handler, inventory, title);
