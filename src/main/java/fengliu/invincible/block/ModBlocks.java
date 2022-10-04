@@ -3,8 +3,10 @@ package fengliu.invincible.block;
 import fengliu.invincible.invincibleMod;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.OreBlock;
 import net.minecraft.block.Material;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
@@ -14,44 +16,54 @@ public class ModBlocks {
 		FabricBlockSettings.of(Material.STONE).strength(10.0f).requiresTool()
 	);
     // 玉石原石矿
-	public static final Block JADE_ROUGH_STONE_ORE = new Block(
-		FabricBlockSettings.of(Material.STONE).strength(6.5f).requiresTool()
+	public static final Block JADE_ROUGH_STONE_ORE = new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(6.5f).requiresTool(),
+		UniformIntProvider.create(2, 6)
 	);
     // 一级灵石矿
-	public static final Block REIKI_STONE_ORE_1= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
+	public static final Block REIKI_STONE_ORE_1= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool(),
+		UniformIntProvider.create(2, 6)
 	);
 	// 二级灵石矿
-	public static final Block REIKI_STONE_ORE_2= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(6.5f).requiresTool()
+	public static final Block REIKI_STONE_ORE_2= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(6.5f).requiresTool(),
+		UniformIntProvider.create(3, 7)
 	);
     // 三级灵石矿
-	public static final Block REIKI_STONE_ORE_3= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(8.0f).requiresTool()
+	public static final Block REIKI_STONE_ORE_3= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(8.0f).requiresTool(),
+		UniformIntProvider.create(4, 12)
 	);
 	// 四级灵石矿
-	public static final Block REIKI_STONE_ORE_4= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(9.5f).requiresTool()
+	public static final Block REIKI_STONE_ORE_4= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(9.5f).requiresTool(),
+		UniformIntProvider.create(12, 24)
 	);
 	// 深层玉石原石矿
-	public static final Block DEEPSLATE_JADE_ROUGH_STONE_ORE = new Block(
-		FabricBlockSettings.of(Material.STONE).strength(7.5f).requiresTool()
+	public static final Block DEEPSLATE_JADE_ROUGH_STONE_ORE = new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(7.5f).requiresTool(), 
+		UniformIntProvider.create(2, 6)
 	);
 	// 一级深层灵石矿
-	public static final Block DEEPSLATE_REIKI_STONE_ORE_1= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(6.0f).requiresTool()
+	public static final Block DEEPSLATE_REIKI_STONE_ORE_1= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(6.0f).requiresTool(),
+		UniformIntProvider.create(2, 6)
 	);
 	// 二级深层灵石矿
-	public static final Block DEEPSLATE_REIKI_STONE_ORE_2= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(7.5f).requiresTool()
+	public static final Block DEEPSLATE_REIKI_STONE_ORE_2= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(7.5f).requiresTool(),
+		UniformIntProvider.create(3, 7)
 	);
 	// 三级深层灵石矿
-	public static final Block DEEPSLATE_REIKI_STONE_ORE_3= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(9.0f).requiresTool()
+	public static final Block DEEPSLATE_REIKI_STONE_ORE_3= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(9.0f).requiresTool(),
+		UniformIntProvider.create(4, 12)
 	);
 	// 四级深层灵石矿
-	public static final Block DEEPSLATE_REIKI_STONE_ORE_4= new Block(
-		FabricBlockSettings.of(Material.STONE).strength(10.5f).requiresTool()
+	public static final Block DEEPSLATE_REIKI_STONE_ORE_4= new OreBlock(
+		FabricBlockSettings.of(Material.STONE).strength(10.5f).requiresTool(),
+		UniformIntProvider.create(12, 24)
 	);
 	// 角磨机
 	public static final Block ANGLE_GRINDER = new Angle_Grinder(

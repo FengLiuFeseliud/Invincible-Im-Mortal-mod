@@ -25,14 +25,18 @@ public class invincibleClient implements ClientModInitializer  {
 		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, Angle_Grinder_Screen::new);
 		// 一阶阵眼 UI
 		HandledScreens.register(ModScreenHandlers.ZHEN_YAN_1_SCREENHANDLER, Zhen_Yan_Screen.Lv1::new);
-
+		
 		
 		// 角磨机 渲染层设置
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ANGLE_GRINDER, RenderLayer.getCutout());
 
 		
-		// P键修炼
-		KeyBinding reiki_practice = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.reiki_practice", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_P, "key.invincible"));
+		// P键提升
+		KeyBinding cultivation_up  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_up", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_P, "key.invincible"));
+		// O键修炼
+		KeyBinding reiki_practice = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.reiki_practice", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.invincible"));
+		// I键查看修为
+		KeyBinding cultivation  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_I, "key.invincible"));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if(client.world == null){
@@ -41,9 +45,17 @@ public class invincibleClient implements ClientModInitializer  {
 			}
 			// 获取当前玩家所在服务器世界维度
 			ServerWorld serverWorld = client.getServer().getWorld(client.world.getRegistryKey());
+			
+			if(cultivation_up.wasPressed()) {
+				Key.cultivation_up(client.world, serverWorld, serverWorld.getPlayerByUuid(client.player.getUuid()));
+			}
 
 			while (reiki_practice.wasPressed()) {
-				Key.reiki_practice(client.world, serverWorld, client.player);
+				Key.reiki_practice(client.world, serverWorld, serverWorld.getPlayerByUuid(client.player.getUuid()));
+			}
+			
+			if(cultivation.wasPressed()) {
+				Key.cultivation(client.world, serverWorld, serverWorld.getPlayerByUuid(client.player.getUuid()));
 			}
 			
 		});

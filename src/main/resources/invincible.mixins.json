@@ -4,9 +4,11 @@
   "package": "fengliu.invincible.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ModEntityDataSaverMixin"
   ],
   "client": [
-    "invincibleMixin"
+    "invincibleMixin",
+    "ClearHubMixin"
   ],
   "injectors": {
     "defaultRequire": 1
