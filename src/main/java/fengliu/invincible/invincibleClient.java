@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 import fengliu.invincible.api.Key;
 import fengliu.invincible.block.ModBlocks;
+import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.screen.Angle_Grinder_Screen;
 import fengliu.invincible.screen.Zhen_Yan_Screen;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
@@ -15,12 +16,14 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.server.world.ServerWorld;
 
 public class invincibleClient implements ClientModInitializer  {
 	
     @Override
 	public void onInitializeClient() {
+		ModMessage.registerC2SPackets();
+
+
 		// 角磨机 UI
 		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, Angle_Grinder_Screen::new);
 		// 一阶阵眼 UI
@@ -36,26 +39,30 @@ public class invincibleClient implements ClientModInitializer  {
 		// O键修炼
 		KeyBinding reiki_practice = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.reiki_practice", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.invincible"));
 		// I键查看修为
-		KeyBinding cultivation  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_I, "key.invincible"));
+		KeyBinding cultivation_info  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_info", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_I, "key.invincible"));
+		// !测试! 消耗所有灵力
+		KeyBinding clear_mana = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.clear_mana", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.invincible"));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if(client.world == null){
 				// 不在游戏中
 				return;
 			}
-			// 获取当前玩家所在服务器世界维度
-			ServerWorld serverWorld = client.getServer().getWorld(client.world.getRegistryKey());
 			
 			if(cultivation_up.wasPressed()) {
-				Key.cultivation_up(client.world, serverWorld, serverWorld.getPlayerByUuid(client.player.getUuid()));
+				Key.cultivation_up(client);
 			}
 
 			while (reiki_practice.wasPressed()) {
-				Key.reiki_practice(client.world, serverWorld, serverWorld.getPlayerByUuid(client.player.getUuid()));
+				Key.reiki_practice(client);
 			}
 			
-			if(cultivation.wasPressed()) {
-				Key.cultivation(client.world, serverWorld, serverWorld.getPlayerByUuid(client.player.getUuid()));
+			if(cultivation_info.wasPressed()) {
+				Key.cultivation_info(client);
+			}
+
+			if(clear_mana.wasPressed()) {
+				Key.clear_mana(client);
 			}
 			
 		});

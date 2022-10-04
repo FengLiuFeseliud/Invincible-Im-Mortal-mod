@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import fengliu.invincible.block.ModBlocks;
 import fengliu.invincible.entity.ModEntitys;
 import fengliu.invincible.entity.block.ModBlockEntitys;
+import fengliu.invincible.event.ModServerTickEvent;
 import fengliu.invincible.item.ModItems;
 import fengliu.invincible.item.block.ModBlockItems;
+import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
 import fengliu.invincible.world.ModWorlds;
 
@@ -32,6 +34,11 @@ public class invincibleMod implements ModInitializer {
 		ModWorlds.registryAllWorlds();
 
 		ModItemGroup.allItemGroupBuild();
+
+		ModMessage.registerS2CPackets();
+
+		ModServerTickEvent.register();
+
 	}
 
 }
