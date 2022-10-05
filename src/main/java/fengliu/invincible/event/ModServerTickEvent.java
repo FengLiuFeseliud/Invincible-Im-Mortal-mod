@@ -1,7 +1,6 @@
 package fengliu.invincible.event;
 
-import fengliu.invincible.invincibleMod;
-import fengliu.invincible.util.CultivationData;
+import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,7 +23,7 @@ public class ModServerTickEvent{
                 return;
             }
 
-            CultivationData cultivationData = ((IEntityDataSaver) player).getCultivationData();
+            CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
             cultivationData.recoverMana(10);
             cultivationData.syncData((IEntityDataSaver) player);
 

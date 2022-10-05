@@ -20,8 +20,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fengliu.invincible.invincibleMod;
-import fengliu.invincible.util.CultivationData;
+import fengliu.invincible.util.CultivationCilentData;
 import fengliu.invincible.util.IEntityDataSaver;
+import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
 
 
 @Environment(EnvType.CLIENT)
@@ -41,9 +42,14 @@ public class ClearHubMixin {
     private int oldMana_show = 0;
     private boolean oldMana_show_end = false;
 
+    private int cultivationExp_show = 0;
+
     private static final Identifier BARS_TEXTURE = new Identifier(
         invincibleMod.MOD_ID, "textures/gui/bars.png"
     );
+
+    private static final int TEXTURE_Y = 81;
+    private static final int TEXTURE_X = 182;
 
     @Shadow
     @Final
@@ -64,20 +70,20 @@ public class ClearHubMixin {
         RenderSystem.setShaderTexture(0, BARS_TEXTURE);
 
         // 渲染空生命值条
-        DrawableHelper.drawTexture(matrices, x, y, 0, 27, 81, 9, 81, 71);
+        DrawableHelper.drawTexture(matrices, x, y, 0, 27, 81, 9, TEXTURE_X, TEXTURE_Y);
 
         // 渲染生命值条
         int healthBarWidth = Math.round((81 / (float) maxHealth) * lastHealth);
         if(healthBarWidth > 20){
-            DrawableHelper.drawTexture(matrices, x, y, 0, 0, healthBarWidth, 9, 81, 71);
+            DrawableHelper.drawTexture(matrices, x, y, 0, 0, healthBarWidth, 9, TEXTURE_X, TEXTURE_Y);
         }else{
             // 渲染 1/4 数值告紧
-            DrawableHelper.drawTexture(matrices, x, y, 0, 36, healthBarWidth, 9, 81, 71);
-            DrawableHelper.drawTexture(matrices, x - 5, y, 0, 52, 4, 8, 81, 71);
+            DrawableHelper.drawTexture(matrices, x, y, 0, 36, healthBarWidth, 9, TEXTURE_X, TEXTURE_Y);
+            DrawableHelper.drawTexture(matrices, x - 5, y, 0, 52, 4, 8, TEXTURE_Y, 71);
         }
         
         // 渲染空伤害吸收值条
-        DrawableHelper.drawTexture(matrices, x, y - 10, 0, 27, 81, 9, 81,71);
+        DrawableHelper.drawTexture(matrices, x, y - 10, 0, 27, 81, 9, TEXTURE_X, TEXTURE_Y);
         /*
          * 如果最大伤害吸收值为 0 设置 maxAbsorption 为 absorption
          * 如果最大伤害吸收值小于更新的 absorption 设置 maxAbsorption 为新的 absorption
@@ -90,35 +96,69 @@ public class ClearHubMixin {
             int absorptionBarWidth = Math.round((81 / (float) maxAbsorption) * absorption);
             // 渲染伤害吸收值条
             if(absorptionBarWidth > 20){
-                DrawableHelper.drawTexture(matrices, x, y - 10, 0, 18, absorptionBarWidth, 9, 81, 71);
+                DrawableHelper.drawTexture(matrices, x, y - 10, 0, 18, absorptionBarWidth, 9, TEXTURE_X, TEXTURE_Y);
             }else{
                 // 渲染 1/4 数值告紧
-                DrawableHelper.drawTexture(matrices, x, y - 10, 0, 45, absorptionBarWidth, 9, 81, 71);
-                DrawableHelper.drawTexture(matrices, x - 5, y - 10, 0, 54, 4, 8, 81, 71);
+                DrawableHelper.drawTexture(matrices, x, y - 10, 0, 45, absorptionBarWidth, 9, TEXTURE_X, TEXTURE_Y);
+                DrawableHelper.drawTexture(matrices, x - 5, y - 10, 0, 54, 4, 8, TEXTURE_X, TEXTURE_Y);
             }
         }else{
             // 没有伤害吸收值时重置最大伤害吸收值
             maxAbsorption = 0;
         }
 
-        CultivationData cultivationData = ((IEntityDataSaver) player).getCultivationData();
+        CultivationCilentData cultivationData = ((IEntityDataSaver) player).getCilentCultivationData();
         int mana = cultivationData.getMana();
         int maxMana = cultivationData.getCultivationLevel().getBaseMana();
 
         // 渲染空灵力值条
-        DrawableHelper.drawTexture(matrices, x + 101, y, 0, 27, 81, 9, 81, 71);
+        DrawableHelper.drawTexture(matrices, x + 101, y, 0, 27, 81, 9, TEXTURE_X, TEXTURE_Y);
 
         // 渲染灵力值条
         int manaBarWidth = Math.round((81 / (float) maxMana) * mana);
         if(manaBarWidth > 20){
-            DrawableHelper.drawTexture(matrices, x + 101, y, 0, 9, manaBarWidth, 9, 81, 71);
+            DrawableHelper.drawTexture(matrices, x + 101, y, 0, 9, manaBarWidth, 9, TEXTURE_X, TEXTURE_Y);
         }else{
             // 渲染 1/4 数值告紧
-            DrawableHelper.drawTexture(matrices, x + 101, y, 0, 62, manaBarWidth, 9, 81, 71);
-            DrawableHelper.drawTexture(matrices, x + 186, y, 0, 54, 4, 8, 81, 71);
+            DrawableHelper.drawTexture(matrices, x + 101, y, 0, 62, manaBarWidth, 9, TEXTURE_X, TEXTURE_Y);
+            DrawableHelper.drawTexture(matrices, x + 186, y, 0, 54, 4, 8, TEXTURE_X, TEXTURE_Y);
         }
 
-        TextRenderer renderer = MinecraftClient.getInstance().textRenderer;
+
+
+        int cultivationExp = cultivationData.getCultivationExp();
+        int maxNeedCultivationExp = cultivationData.getNeedCultivationExp();
+
+        // 渲染空修为值条
+        DrawableHelper.drawTexture(matrices, x, 5, 0, 71, 182, 5, TEXTURE_X, TEXTURE_Y);
+        
+        // 如果当前修为大于当前境界最大修为, 按当前能够到达的境界渲染
+        int cultivationExpBarWidth = 0;
+        if(cultivationExp > maxNeedCultivationExp && cultivationExp > cultivationData.getUpLevel().getUpLevelExp()){
+            // 超过最大境界渲染条
+            cultivationExpBarWidth = 182;
+        }else{
+            // 计算渲染所需修为
+            CultivationLevel level = cultivationData.getCultivationLevel();
+            if(level.canUpLevel(cultivationExp)){
+                level = cultivationData.getUpLevel();
+                maxNeedCultivationExp = level.getNeedCultivationExp();
+                cultivationExp_show = maxNeedCultivationExp + cultivationExp - level.getCultivationExp();
+            }else{
+                maxNeedCultivationExp = level.getNeedCultivationExp();
+                cultivationExp_show = cultivationExp - level.getCultivationExp();
+            }
+            cultivationExpBarWidth = Math.round((182 / (float) maxNeedCultivationExp) * cultivationExp_show);
+        }
+
+        // 渲染修为值条
+        DrawableHelper.drawTexture(matrices, x, 5, 0, 77, cultivationExpBarWidth, 5, TEXTURE_X, TEXTURE_Y);
+
+        MinecraftClient client = MinecraftClient.getInstance();
+        if(client == null){
+            return;
+        }
+        TextRenderer renderer = client.textRenderer;
 
         
         if(absorption > oldAbsorption){
@@ -185,6 +225,8 @@ public class ClearHubMixin {
         }else{
             renderer.draw(matrices, "     " , x + 182 - 15, y + 1, 0x009FCC);
         }
+
+
 
     }
 

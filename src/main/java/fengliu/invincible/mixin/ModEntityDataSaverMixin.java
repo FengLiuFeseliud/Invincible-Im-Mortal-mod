@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
-import fengliu.invincible.util.CultivationData;
+import fengliu.invincible.util.CultivationCilentData;
+import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
 
 @Mixin(Entity.class)
@@ -27,8 +28,14 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         return this.persistentData;
     }
 
-    public CultivationData getCultivationData(){
-        return new CultivationData(this);
+    @Override
+    public CultivationCilentData getCilentCultivationData() {
+        return new CultivationCilentData(this);
+    }
+
+    @Override
+    public CultivationServerData getServerCultivationData() {
+        return new CultivationServerData(this);
     }
 
     @Inject(method = "writeNbt", at = @At("HEAD"))

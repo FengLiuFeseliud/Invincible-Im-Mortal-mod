@@ -10,8 +10,13 @@ import net.minecraft.network.PacketByteBuf;
 public class CultivationClientPackets {
     
     public static void syncData(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender sender){
+        if(client.player == null){
+            return;
+        }
+        
         NbtCompound nbt = buf.readNbt();
         ((IEntityDataSaver) client.player).getPersistentData().putInt("cultivation_level", nbt.getInt("cultivation_level"));
+        ((IEntityDataSaver) client.player).getPersistentData().putInt("cultivation_exp", nbt.getInt("cultivation_exp"));
         ((IEntityDataSaver) client.player).getPersistentData().putInt("mana", nbt.getInt("mana"));
     }
 }

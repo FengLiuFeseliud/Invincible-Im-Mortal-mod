@@ -1,17 +1,10 @@
 package fengliu.invincible.util;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
-import fengliu.invincible.api.Probability_Random;
-import fengliu.invincible.api.Probability_Random.Random_Item;
-import fengliu.invincible.networking.ModMessage;
 
-public class CultivationData {
+public class CultivationCilentData {
 
-    private static CultivationLevel[] CultivationLevelAll = {
+    protected static CultivationLevel[] CultivationLevelAll = {
         new CultivationLevel(0, "invincible.cultivation_level.0", 0, 10000, 100, 0, 0, 0),
         // 练气
         new CultivationLevel(1, "invincible.cultivation_level.1", 10000, 20000, 100, 0, 0, 100),
@@ -42,7 +35,7 @@ public class CultivationData {
 
     private final IEntityDataSaver EntityData;
 
-    public CultivationData(IEntityDataSaver EntityData){
+    public CultivationCilentData(IEntityDataSaver EntityData){
         this.EntityData = EntityData;
     }
 
@@ -51,73 +44,30 @@ public class CultivationData {
     }
 
     public int getCultivationExp(){
-        NbtCompound nbt = EntityData.getPersistentData();
-        int cultivation_exp = nbt.getInt("cultivation_exp");
-        if(cultivation_exp < 0){
-            nbt.putInt("cultivation_exp", 0);
-            syncData(EntityData);
-            return 0;
-        }
-        return cultivation_exp;
+        return EntityData.getPersistentData().getInt("cultivation_exp");
     }
 
     public CultivationLevel getCultivationLevel(){
-        NbtCompound nbt = EntityData.getPersistentData();
-        int level = nbt.getInt("cultivation_level");
-
-        if(level < 0){
-            nbt.putInt("cultivation_level", 0);
-            syncData(EntityData);
-            return CultivationLevelAll[0];
-        }
-
-        if(level >= CultivationLevelAll.length - 1){
-            nbt.putInt("cultivation_level", CultivationLevelAll.length - 1);
-            syncData(EntityData);
-            return CultivationLevelAll[CultivationLevelAll.length - 1];
-        }
-
-        return CultivationLevelAll[level];
+        return CultivationLevelAll[EntityData.getPersistentData().getInt("cultivation_level")];
     }
 
     public int getMana(){
-        NbtCompound nbt = EntityData.getPersistentData();
-        int mana = nbt.getInt("mana");
-
-        if(mana < 0){
-            nbt.putInt("mana", 0);
-            syncData(EntityData);
-            return 0;
-        }
-
-        CultivationLevel level = getCultivationLevel();
-        if(mana > level.getBaseMana()){
-            nbt.putInt("mana", level.getBaseMana());
-            syncData(EntityData);
-            return level.getBaseMana();
-        }
-        
         return EntityData.getPersistentData().getInt("mana");
     }
 
-    public int addCultivationExpInUpLevel(int addExp){
-        int cultivationExp = getCultivationExp();
-        int new_cultivationExp = cultivationExp + addExp;
-        EntityData.getPersistentData().putInt("cultivation_exp", new_cultivationExp);
-        syncData(EntityData);
-
+    public int getUpLevelIndex(int maxCultivationExp){
         CultivationLevel in_level = getCultivationLevel();
         if(in_level.getLevel() >= CultivationLevelAll.length - 1){
             return 0;
         }
 
-        if(new_cultivationExp >= CultivationLevelAll[CultivationLevelAll.length - 1].getCultivationExp()){
+        if(maxCultivationExp >= CultivationLevelAll[CultivationLevelAll.length - 1].getCultivationExp()){
             return CultivationLevelAll[CultivationLevelAll.length - 1].getLevel() - in_level.getLevel();
         }
 
         int upInUpLevel = 0;
         for(CultivationLevel level: CultivationLevelAll){
-            if(level.canUpLevel(new_cultivationExp)){
+            if(level.canUpLevel(maxCultivationExp)){
                 continue;
             }
 
@@ -128,38 +78,13 @@ public class CultivationData {
         return upInUpLevel - getCultivationLevel().getLevel();
     }
 
-    public boolean upLevel(){
-        CultivationLevel level = getCultivationLevel();
-        if(level.getLevel() >= CultivationLevelAll.length - 1){
-            return false;
-        }
-
-        if(!level.canUpLevel(getCultivationExp())){
-            return false;
-        }
-
-        Random_Item[] random = {
-            new Random_Item(level.getUpLevelRate(), true),
-            new Random_Item(level.getUpLevelFailureRate(), false)
-        };
-        boolean random_result = (boolean) Probability_Random.random(random).getItem();
-
-        if(!random_result){
-            return random_result;
-        }
-
-        EntityData.getPersistentData().putInt("cultivation_level", level.getLevel() + 1);
-        syncData(EntityData);
-        return random_result;
-    }
-
     public CultivationLevel getUpLevel(){
         CultivationLevel in_level = getCultivationLevel();
         if(in_level.getLevel() >= CultivationLevelAll.length -1){
             return in_level;
         }
 
-        int upIndex = in_level.getLevel() + addCultivationExpInUpLevel(0) + 1;
+        int upIndex = in_level.getLevel() + getUpLevelIndex(getCultivationExp()) + 1;
         if(upIndex >= CultivationLevelAll.length -1){
             return CultivationLevelAll[CultivationLevelAll.length -1];
         }
@@ -167,34 +92,18 @@ public class CultivationData {
         return CultivationLevelAll[upIndex];
     }
 
-    public void recoverMana(int mana){
-        NbtCompound nbt = EntityData.getPersistentData();
-        CultivationLevel level = getCultivationLevel();
+    public int getNeedCultivationExp(){
+        int index = getUpLevelIndex(getCultivationExp());
 
-        int recover_mana = nbt.getInt("mana") + mana;
-        if(recover_mana > level.BaseMana){
-            recover_mana = level.BaseMana;
+        if(index == 0){
+            return getCultivationLevel().getNeedCultivationExp();
         }
 
-        EntityData.getPersistentData().putInt("mana", recover_mana);
-        syncData(EntityData);
-    }
-
-    public boolean consumeMana(int mana){
-        NbtCompound nbt = EntityData.getPersistentData();
-
-        int consume_mana = nbt.getInt("mana") - mana;
-        if(consume_mana < 0 || getCultivationLevel().BaseMana == 0){
-            return false;
+        if(index >= CultivationLevelAll.length){
+            return 0;
         }
-        nbt.putInt("mana", consume_mana);
-        syncData(EntityData);
-        return true;
-    }
 
-    public void syncData(IEntityDataSaver player){
-        ServerPlayNetworking.send((ServerPlayerEntity) EntityData, ModMessage.SYNC_DATA, 
-            PacketByteBufs.create().writeNbt((player.getPersistentData())));
+        return CultivationLevelAll[index].getNeedCultivationExp();
     }
     
     public static class CultivationLevel {
@@ -253,6 +162,10 @@ public class CultivationData {
 
         public int getBaseMana(){
             return BaseMana;
+        }
+
+        public int getNeedCultivationExp(){
+            return UpLevelExp - CultivationExp;
         }
 
         public boolean canUpLevel(int cultivationExp){
