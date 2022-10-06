@@ -47,10 +47,6 @@ public class ClearHubMixin {
 
     private int cultivationExp_show = 0;
 
-    private int oldCultivationExp = 0;
-    private int oldCultivationExp_show = 0;
-    private boolean oldCultivationExp_show_end = false;
-
     private static final Identifier BARS_TEXTURE = new Identifier(
         invincibleMod.MOD_ID, "textures/gui/bars.png"
     );
@@ -86,7 +82,7 @@ public class ClearHubMixin {
         }else{
             // 渲染 1/4 数值告紧
             DrawableHelper.drawTexture(matrices, x, y, 0, 36, healthBarWidth, 9, TEXTURE_X, TEXTURE_Y);
-            DrawableHelper.drawTexture(matrices, x - 5, y, 0, 52, 4, 8, TEXTURE_Y, 71);
+            DrawableHelper.drawTexture(matrices, x - 5, y, 0, 54, 4, 8, TEXTURE_X, TEXTURE_Y);
         }
         
         // 渲染空伤害吸收值条
@@ -135,7 +131,7 @@ public class ClearHubMixin {
         int maxNeedCultivationExp = cultivationData.getNeedCultivationExp();
 
         // 渲染空修为值条
-        DrawableHelper.drawTexture(matrices, x, 5, 0, 71, 182, 5, TEXTURE_X, TEXTURE_Y);
+        DrawableHelper.drawTexture(matrices, x, 4, 0, 71, 182, 5, TEXTURE_X, TEXTURE_Y);
         
         // 如果当前修为大于当前境界最大修为, 按当前能够到达的境界渲染
         int cultivationExpBarWidth = 0;
@@ -160,7 +156,7 @@ public class ClearHubMixin {
             cultivationExpBarWidth = 182;
         }
         // 渲染修为值条
-        DrawableHelper.drawTexture(matrices, x, 5, 0, 77, cultivationExpBarWidth, 5, TEXTURE_X, TEXTURE_Y);
+        DrawableHelper.drawTexture(matrices, x, 4, 0, 76, cultivationExpBarWidth, 5, TEXTURE_X, TEXTURE_Y);
 
         MinecraftClient client = MinecraftClient.getInstance();
         if(client == null){
