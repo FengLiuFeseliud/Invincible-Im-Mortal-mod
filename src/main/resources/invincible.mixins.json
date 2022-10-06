@@ -4,7 +4,10 @@
   "package": "fengliu.invincible.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ModEntityDataSaverMixin"
+    "ModEntityDataSaverMixin",
+    "ModPlayerDataSaveMixin",
+    "ModItemStackDataSaveMixin",
+    "ItemMixin"
   ],
   "client": [
     "invincibleMixin",

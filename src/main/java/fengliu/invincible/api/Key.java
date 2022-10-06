@@ -1,7 +1,7 @@
 package fengliu.invincible.api;
 
 import net.minecraft.client.MinecraftClient;
-
+import net.minecraft.network.PacketByteBuf;
 import fengliu.invincible.networking.ModMessage;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -28,7 +28,10 @@ public class Key {
     }
 
     public static void clear_mana(MinecraftClient client){
-        ClientPlayNetworking.send(ModMessage.CLEAR_MANA, PacketByteBufs.create());
+        PacketByteBuf pack = PacketByteBufs.create();
+        pack.writeInt(10);
+        
+        ClientPlayNetworking.send(ModMessage.CONSUME_MANA, pack);
     }
     
 }

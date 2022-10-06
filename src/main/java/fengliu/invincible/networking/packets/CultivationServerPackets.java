@@ -2,8 +2,10 @@ package fengliu.invincible.networking.packets;
 
 import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
+import fengliu.invincible.util.ReikiItemData;
 import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -18,7 +20,9 @@ public class CultivationServerPackets {
     public static void reiki_practice(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
         CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
         
-        int up_level = cultivationData.addCultivationExpInUpLevel(1000);
+        ItemStack itemStack = player.getStackInHand(player.getActiveHand());
+        
+        int up_level = cultivationData.addCultivationExpInUpLevel(10 + ReikiItemData.absord(1000, itemStack));
         if(up_level > OLD_LEVEL){
             OLD_LEVEL = up_level;
             CAN_SEND_CAN_UP_LEVEL_MSG = true;
@@ -96,13 +100,8 @@ public class CultivationServerPackets {
         player.sendMessage(new LiteralText("Lavel " + cultivationLevel.getLevel() + " LevelName " + cultivationLevel.getLevelName().getString() + " CultivationExp " + cultivationData.getCultivationExp() + " UpLevelExp " + cultivationLevel.getUpLevelExp() + " mana " + mana), false);
     }
 
-    public static void clear_mana(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
+    public static void consumeMana(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
         CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
-
-        if(cultivationData.consumeMana(10)){
-            player.sendMessage(new LiteralText("成功消耗灵力"), false);
-        }else{
-            player.sendMessage(new LiteralText("灵力不足"), false);
-        }
+        cultivationData.consumeMana(buf.readInt());
     }
 }

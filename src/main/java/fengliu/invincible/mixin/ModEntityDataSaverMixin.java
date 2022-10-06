@@ -12,6 +12,11 @@ import fengliu.invincible.util.CultivationCilentData;
 import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
 
+/*
+ * 为每个实体添加修为数据
+ */
+
+
 @Mixin(Entity.class)
 public class ModEntityDataSaverMixin implements IEntityDataSaver {
     private NbtCompound persistentData;
@@ -50,6 +55,14 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
     @Inject(method = "readNbt", at = @At("HEAD"))
     protected void injectReadNbt(NbtCompound nbt, CallbackInfo info){
         if(nbt.contains("invincible.player_cultivation", 10)){
+            return;
+        }
+        persistentData = nbt.getCompound("invincible.player_cultivation");
+    }
+
+    @Override
+    public void writePersistentData(NbtCompound nbt) {
+        if(!nbt.contains("invincible.player_cultivation", 10)){
             return;
         }
         persistentData = nbt.getCompound("invincible.player_cultivation");

@@ -12,6 +12,7 @@
     "info.invincible.cannot_up_level": "无法提升境界... 距离至 %d 境界，总需 %d 修为",
     "info.invincible.successful_up_level": "成功提升至 %d 境界!!! 距离下一个 %d 境界，总需 %d 修为",
     "info.invincible.unsuccessful_up_level": "提升境界失败，修为跌落至 %d %d 修为... 需恢复至 %d",
+    "info.invincible.item_reiki_residue": "物品灵气剩余：%d / %d",
 
     "invincible.cultivation_level.0": "凡人",
     "invincible.cultivation_level.1": "练气初期一重",

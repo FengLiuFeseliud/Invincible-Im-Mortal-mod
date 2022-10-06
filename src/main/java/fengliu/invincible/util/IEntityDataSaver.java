@@ -4,6 +4,7 @@ import net.minecraft.nbt.NbtCompound;
 
 public interface IEntityDataSaver {
     NbtCompound getPersistentData();
+    void writePersistentData(NbtCompound nbt);
     CultivationCilentData getCilentCultivationData();
     CultivationServerData getServerCultivationData();
 }

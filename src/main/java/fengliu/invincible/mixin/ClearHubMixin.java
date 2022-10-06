@@ -24,6 +24,9 @@ import fengliu.invincible.util.CultivationCilentData;
 import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
 
+/*
+ * 重写原版状态条 以更好显示上千血量
+ */
 
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
@@ -43,6 +46,10 @@ public class ClearHubMixin {
     private boolean oldMana_show_end = false;
 
     private int cultivationExp_show = 0;
+
+    private int oldCultivationExp = 0;
+    private int oldCultivationExp_show = 0;
+    private boolean oldCultivationExp_show_end = false;
 
     private static final Identifier BARS_TEXTURE = new Identifier(
         invincibleMod.MOD_ID, "textures/gui/bars.png"
@@ -124,8 +131,6 @@ public class ClearHubMixin {
             DrawableHelper.drawTexture(matrices, x + 186, y, 0, 54, 4, 8, TEXTURE_X, TEXTURE_Y);
         }
 
-
-
         int cultivationExp = cultivationData.getCultivationExp();
         int maxNeedCultivationExp = cultivationData.getNeedCultivationExp();
 
@@ -151,6 +156,9 @@ public class ClearHubMixin {
             cultivationExpBarWidth = Math.round((182 / (float) maxNeedCultivationExp) * cultivationExp_show);
         }
 
+        if(cultivationExpBarWidth > 182){
+            cultivationExpBarWidth = 182;
+        }
         // 渲染修为值条
         DrawableHelper.drawTexture(matrices, x, 5, 0, 77, cultivationExpBarWidth, 5, TEXTURE_X, TEXTURE_Y);
 
@@ -175,6 +183,10 @@ public class ClearHubMixin {
             oldAbsorption = absorption;
         }
 
+        // 渲染伤害吸收值
+        String absorption_str = "" + absorption;
+        renderer.draw(matrices, absorption_str, x + 41 - (float) (absorption_str.length() / 2 * 2.5), y - 9,  0xCC9500);
+
         // 渲染伤害吸收减少数字
         if(!oldAbsorption_show_end){
             renderer.draw(matrices, "-" + (oldAbsorption - absorption), x + 81 - 15, y - 9, 0xCC9500);
@@ -196,6 +208,10 @@ public class ClearHubMixin {
             oldHealth_show_end = true;
             oldHealth = lastHealth;
         }
+
+        // 渲染生命值
+        String lastHealth_str = "" + lastHealth;
+        renderer.draw(matrices, lastHealth_str, x + 41 - (float) (lastHealth_str.length() / 2 * 2.5), y + 1,  0xCC0000);
 
         // 渲染生命值减少数字
         if(!oldHealth_show_end){
@@ -219,15 +235,22 @@ public class ClearHubMixin {
             oldMana = mana;
         }
 
+        String mana_str = "" + mana;
+        // 渲染灵力值
+        renderer.draw(matrices, mana_str, x + 142 - (float) (mana_str.length() / 2 * 2.5), y + 1,  0x009FCC);
+
         // 渲染灵力值减少数字
         if(!oldMana_show_end){
-            renderer.draw(matrices, "-" + (oldMana - mana), x + 182 - 15, y + 1, 0x009FCC);
+            renderer.draw(matrices, "-" + (oldMana - mana), x + 167, y + 1, 0x009FCC);
         }else{
-            renderer.draw(matrices, "     " , x + 182 - 15, y + 1, 0x009FCC);
+            renderer.draw(matrices, "     " , x + 167, y + 1, 0x009FCC);
         }
 
-
-
+        CultivationLevel level = cultivationData.getCultivationLevel();
+        String levelName = level.getLevelName().getString();
+        levelName = levelName + " " + cultivationExp + "/" + level.getUpLevelExp();
+        // 渲染修为境界
+        renderer.draw(matrices, levelName, x + 20, 2, 0xffffff);
     }
 
     @Overwrite
