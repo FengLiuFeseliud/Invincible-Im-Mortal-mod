@@ -23,7 +23,11 @@ import net.minecraft.text.TranslatableText;
 @Mixin(Item.class)
 public class ItemMixin implements ReikiItem{
     private int Reiki = 0;
+    private int InitialReiki = 0;
     private int MaxReiki = 0;
+    private int TargetReiki = 0;
+    private int MaxInjectionReiki = 0;
+    private boolean CanInjectionReiki = false;
 
 
     public int getReiki() {
@@ -34,12 +38,46 @@ public class ItemMixin implements ReikiItem{
         return MaxReiki;
     }
 
-    public void setMaxReiki(int reiki) {
-        MaxReiki = reiki;
+    public int getInitialReiki(){
+        return InitialReiki;
+    }
+
+    public int getTargetReiki() {
+        return TargetReiki;
+    }
+
+    public int getMaxInjectionReiki(){
+        return MaxInjectionReiki;
+    }
+
+    public boolean canInjectionReiki(){
+        return CanInjectionReiki;
+    }
+
+    public void settings(ReikiSettings settings) {
+        if(settings.InitialReiki == -1){
+            Reiki = settings.MaxReiki;
+            InitialReiki = settings.MaxReiki;
+        }else{
+            Reiki = settings.InitialReiki;
+            InitialReiki = settings.InitialReiki;
+        }
+
+        MaxReiki = settings.MaxReiki;
+        CanInjectionReiki = settings.CanInjectionReiki;
+        if(CanInjectionReiki){
+            TargetReiki = settings.TargetReiki;
+            MaxInjectionReiki = settings.MaxInjectionReiki;
+        }
     }
 
     @Inject(method = "appendTooltip", at = @At("RETURN"))
     public  void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo info) {
         tooltip.add(new TranslatableText("info.invincible.item_reiki_residue", ReikiItemData.getReiki(stack), ReikiItemData.getMaxReiki(stack)));
+        if(!ReikiItemData.canInjectionReiki(stack)){
+            return;
+        }
+
+        tooltip.add(new TranslatableText("info.invincible.item_reiki_injection", ReikiItemData.getInjectionReiki(stack), ReikiItemData.getTargetReiki(stack)));
     }
 }

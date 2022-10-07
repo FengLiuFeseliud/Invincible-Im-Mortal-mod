@@ -8,14 +8,11 @@ import net.minecraft.world.World;
 
 public class Reiki_iron_sword extends ManaSword{
 
-    public Reiki_iron_sword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings,
-            ManaSettings manaSettings) {
-        super(toolMaterial, attackDamage, attackSpeed, settings, manaSettings);
+    public Reiki_iron_sword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings manaSkillsSettings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings, manaSkillsSettings);
     }
 
-    @Override
-    public boolean activeSkill(World world, PlayerEntity user, Hand hand, CultivationServerData cultivationData) {
-        user.sendMessage(getName(), isDamageable());
+    public static boolean activeSkill(World world, PlayerEntity user, Hand hand, CultivationServerData cultivationData) {
         return true;
     }
 

@@ -67,6 +67,15 @@ public class ModItemGroup {
 			})
 			.build();
 
+	// 法器组
+	public static final ItemGroup FA_QI_GROUP = FabricItemGroupBuilder.create(
+		new Identifier(MOD_ID, "fa_qi_group"))
+			.icon(() -> new ItemStack(ModItems.REIKI_IRON_SWORD))
+			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ModItems.REIKI_IRON_SWORD));
+			})
+			.build();
+
     public static void allItemGroupBuild(){
         
     }

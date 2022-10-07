@@ -1,12 +1,15 @@
 package fengliu.invincible.item;
 
 import fengliu.invincible.invincibleMod;
+import fengliu.invincible.item.ManaSkillsItem.ManaSkillSettings;
+import fengliu.invincible.util.ReikiItem.ReikiSettings;
 import fengliu.invincible.util.ReikiItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterials;
+import net.minecraft.text.TranslatableText;
 
 public class ModItems {
     private static final String MOD_ID = invincibleMod.MOD_ID;
@@ -55,15 +58,48 @@ public class ModItems {
 		new FabricItemSettings()
 			.maxCount(1)
 	);
-
+	// 灵铁剑
 	public static final Reiki_iron_sword REIKI_IRON_SWORD = new Reiki_iron_sword(
 		ToolMaterials.IRON, 7, 1, 
 			new FabricItemSettings()
 				.maxCount(1), 
-			new ManaSettings(50,10)
+			new ManaSkillSettings(Reiki_iron_sword::activeSkill)
+				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
+				.setConsume(100)
+				.setSkillCd(5)
 	);
 
+	// public static final Item TEST = new MinecartItem(AbstractMinecartEntity.Type.COMMAND_BLOCK, new Settings().maxCount(1));
+	public static void setAllItemReiki(){
+		// 灵石
+		((ReikiItem) REIKI_STONE_0).settings(
+			new ReikiSettings()
+				.maxReiki(0)
+				.injectionReikTarget(500)
+				.maxInjectionReiki(1000)
+				.canInjectionReiki(true)
+		);
+		// 一级灵石
+		((ReikiItem) REIKI_STONE_1).settings(
+			new ReikiSettings()
+				.maxReiki(1000)
+				.injectionReikTarget(2000)
+				.maxInjectionReiki(3000)
+				.canInjectionReiki(true)
+		);
+		// 二级灵石
+		((ReikiItem) REIKI_STONE_2).settings(
+			new ReikiSettings()
+				.maxReiki(3000)
+				.injectionReikTarget(6000)
+				.maxInjectionReiki(9000)
+				.canInjectionReiki(true)
+		);
+	}
+	
     public static void registerAllItem(){
+		setAllItemReiki();
+		
         // 玉石原石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "jade_rough_stone"), JADE_ROUGH_STONE);
 		// 玉石
@@ -72,10 +108,8 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_0"), REIKI_STONE_0);
 		// 一级灵石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_1"), REIKI_STONE_1);
-		((ReikiItem) REIKI_STONE_1).setMaxReiki(1000);
 		// 二级灵石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_2"), REIKI_STONE_2);
-		((ReikiItem) REIKI_STONE_2).setMaxReiki(3000);
 		// 三级灵石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_3"), REIKI_STONE_3);
 		// 四级灵石
@@ -84,7 +118,9 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_5"), REIKI_STONE_5);
 		// 功法
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "kung_fu"), KUNG_FU);
-
+		// 灵铁剑
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_sword"), REIKI_IRON_SWORD);
+
+		// Registry.register(Registry.ITEM, new Identifier(MOD_ID, "test"), TEST);
     }
 }

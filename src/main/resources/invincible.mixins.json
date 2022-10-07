@@ -6,7 +6,6 @@
   "mixins": [
     "ModEntityDataSaverMixin",
     "ModPlayerDataSaveMixin",
-    "ModItemStackDataSaveMixin",
     "ItemMixin"
   ],
   "client": [

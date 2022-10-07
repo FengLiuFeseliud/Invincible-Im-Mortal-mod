@@ -38,8 +38,10 @@ public class invincibleClient implements ClientModInitializer  {
 		KeyBinding cultivation_up  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_up", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_P, "key.invincible"));
 		// O键修炼
 		KeyBinding reiki_practice = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.reiki_practice", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, "key.invincible"));
-		// I键查看修为
-		KeyBinding cultivation_info  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_info", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_I, "key.invincible"));
+		// I键炼化
+		KeyBinding cultivation_item  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_item", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_I, "key.invincible"));
+		// U键查看修为
+		KeyBinding cultivation_info  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_info", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.invincible"));
 		// !测试! 消耗所有灵力
 		KeyBinding clear_mana = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.clear_mana", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.invincible"));
 
@@ -48,13 +50,17 @@ public class invincibleClient implements ClientModInitializer  {
 				// 不在游戏中
 				return;
 			}
-			
-			if(cultivation_up.wasPressed()) {
-				Key.cultivation_up(client);
-			}
 
 			while (reiki_practice.wasPressed()) {
 				Key.reiki_practice(client);
+			}
+
+			while(cultivation_item.wasPressed()) {
+				Key.cultivation_item(client);
+			}
+
+			if(cultivation_up.wasPressed()) {
+				Key.cultivation_up(client);
 			}
 			
 			if(cultivation_info.wasPressed()) {

@@ -10,12 +10,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public abstract class ManaSword extends SwordItem implements ManaItem {
-    protected ManaSettings manaSettings;
+public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
+    private ManaSkillSettings[] ManaSkillSettings;
 
-    public ManaSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSettings manaSettings) {
+    public ManaSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings ...manaSkillsSettings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
-        this.manaSettings = manaSettings;
+        ManaSkillSettings = manaSkillsSettings;
     }
 
     @Override
@@ -25,19 +25,16 @@ public abstract class ManaSword extends SwordItem implements ManaItem {
         }
 
         CultivationServerData cultivationData = ((IEntityDataSaver) user).getServerCultivationData();
-
-        if(!manaSettings.canUesSkill(cultivationData.getMana())){
+        
+        if(!tryUesSkill(ManaSkillSettings[0], user, cultivationData.getMana())){
             return super.use(world, user, hand);
         }
 
-        if(!activeSkill(world, user, hand, cultivationData)){
+        if(!ManaSkillSettings[0].Skill.function(world, user, hand, cultivationData)){
             return super.use(world, user, hand);
         }
         
-        cultivationData.consumeMana(manaSettings.getConsume());
+        cultivationData.consumeMana(ManaSkillSettings[0].Consume);
         return super.use(world, user, hand);
     }
-
-    @Override
-    public abstract boolean activeSkill(World world, PlayerEntity user, Hand hand, CultivationServerData cultivationData);
 }

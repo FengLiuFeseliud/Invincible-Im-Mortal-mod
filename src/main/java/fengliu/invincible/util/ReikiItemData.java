@@ -1,33 +1,54 @@
 package fengliu.invincible.util;
 
+import fengliu.invincible.invincibleMod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
 public class ReikiItemData {
 
     public static int getMaxReiki(ItemStack stack){
-        if(!stack.hasNbt()){
-            int maxReiki = ((ReikiItem) stack.getItem()).getMaxReiki();
-            NbtCompound nbt = new NbtCompound();
-            nbt.putInt("invincible.max_reiki", maxReiki);
+        return ((ReikiItem) stack.getItem()).getMaxReiki();
+    }
 
-            stack.setNbt(nbt);
-            return maxReiki;
-        }
+    public static int getInitialReiki(ItemStack stack){
+        return ((ReikiItem) stack.getItem()).getInitialReiki();
+    }
 
-        return stack.getNbt().getInt("invincible.max_reiki");
+    public static int getTargetReiki(ItemStack stack){
+        return ((ReikiItem) stack.getItem()).getTargetReiki();
+    }
+
+    public static int getMaxInjectionReiki(ItemStack stack){
+        return ((ReikiItem) stack.getItem()).getMaxInjectionReiki();
+    }
+
+    public static boolean canInjectionReiki(ItemStack stack){
+        return ((ReikiItem) stack.getItem()).canInjectionReiki();
     }
 
     public static int getReiki(ItemStack stack){
         NbtCompound nbt = stack.getOrCreateNbt();
-        if(!nbt.contains("invincible.reiki")){
-            int reiki = getMaxReiki(stack);
-            nbt.putInt("invincible.reiki", reiki);
-            
-            return reiki;
+        if(nbt.contains("invincible.reiki")){
+            return nbt.getInt("invincible.reiki");
         }
+        int reiki = getInitialReiki(stack);
+        nbt.putInt("invincible.reiki", reiki);
         
-        return nbt.getInt("invincible.reiki");
+        stack.setNbt(nbt);
+        return reiki;
+    }
+
+    public static int getInjectionReiki(ItemStack stack){
+        NbtCompound nbt = stack.getOrCreateNbt();
+        if(nbt.contains("invincible.injection_reiki")){
+            return nbt.getInt("invincible.injection_reiki");
+        }
+
+        int injectionReiki = getReiki(stack);
+        nbt.putInt("invincible.reiki", injectionReiki);
+        
+        stack.setNbt(nbt);
+        return injectionReiki;
     }
 
     public static boolean isConsumeReiki(ItemStack stack){
@@ -36,12 +57,22 @@ public class ReikiItemData {
         }
         return true;
     }
-    
-    public static boolean consume(int consume, ItemStack stack){
-        if(!stack.hasNbt()){
+
+    public static boolean isExceedTargetReiki(ItemStack stack){
+        if(getReiki(stack) < getTargetReiki(stack)){
             return false;
         }
+        return true;
+    }
 
+    public static boolean isMaxInjectionReiki(ItemStack stack){
+        if(getReiki(stack) < getMaxInjectionReiki(stack)){
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean consume(int consume, ItemStack stack){
         int maxReiki = getMaxReiki(stack);
         if(consume > maxReiki){
             return false;
@@ -72,5 +103,41 @@ public class ReikiItemData {
         }
 
         return residue;
+    }
+
+    public static void injection(int injection, ItemStack stack){
+        if(!canInjectionReiki(stack)){
+            return;
+        }
+
+        NbtCompound nbt = stack.getOrCreateNbt();
+        nbt.putInt("invincible.reiki", injection + getReiki(stack));
+
+        stack.setNbt(nbt);
+    }
+
+    public static int tryInjection(int injection, boolean exceedTargetInjection, ItemStack stack){
+        if(!canInjectionReiki(stack)){
+            return 0;
+        }
+        if(isMaxInjectionReiki(stack)){
+            return 0;
+        }
+
+        NbtCompound nbt = stack.getOrCreateNbt();
+        if(!nbt.contains("invincible.reach_target") && isExceedTargetReiki(stack)){
+            nbt.putInt("invincible.reach_target", 1);
+            stack.setNbt(nbt);
+            if(!exceedTargetInjection){
+                return 0;
+            }
+        }
+
+        int new_reiki = getReiki(stack) + injection;
+        if(new_reiki > getMaxInjectionReiki(stack)){
+            return new_reiki - getMaxInjectionReiki(stack);
+        }
+
+        return injection;
     }
 }

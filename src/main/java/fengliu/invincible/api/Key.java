@@ -33,5 +33,14 @@ public class Key {
         
         ClientPlayNetworking.send(ModMessage.CONSUME_MANA, pack);
     }
+
+    public static void cultivation_item(MinecraftClient client) {
+        if(spawn_reiki_sleep != 0){
+            spawn_reiki_sleep -= 1;
+            return;
+        }
+        spawn_reiki_sleep = 5;
+        ClientPlayNetworking.send(ModMessage.CULTIVATION_ITEM, PacketByteBufs.create());
+    }
     
 }

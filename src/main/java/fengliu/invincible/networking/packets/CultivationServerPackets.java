@@ -1,5 +1,6 @@
 package fengliu.invincible.networking.packets;
 
+import fengliu.invincible.invincibleMod;
 import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.ReikiItemData;
@@ -93,10 +94,33 @@ public class CultivationServerPackets {
         ), false);
     }
 
+    public static void cultivation_item (MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
+        ItemStack itemStack = player.getStackInHand(player.getActiveHand());
+        if(!ReikiItemData.canInjectionReiki(itemStack)){
+            player.sendMessage(new TranslatableText("info.invincible.not_can_injection_reiki_item", itemStack.getName().getString()), false);
+            return;
+        }
+
+        if(ReikiItemData.isExceedTargetReiki(itemStack)){
+            player.sendMessage(new TranslatableText("info.invincible.is_exceed_injection_target", itemStack.getName().getString()), false);
+            return;
+        }
+
+        CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
+        int injectionReiki = ReikiItemData.tryInjection(100, false, itemStack);
+        int consumeMana = Math.round(injectionReiki / 5);
+        if(!cultivationData.consumeMana(consumeMana)){
+            player.sendMessage(new TranslatableText("info.invincible.mana_injection_insufficient", consumeMana - cultivationData.getMana()), false);
+            return;
+        }
+
+        ReikiItemData.injection(injectionReiki, itemStack);
+    }
+
     public static void cultivation_info (MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
         CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
         CultivationLevel cultivationLevel = cultivationData.getCultivationLevel();
-        int mana = ((IEntityDataSaver) player).getPersistentData().getInt("mana");
+        int mana = cultivationData.getMana();
         player.sendMessage(new LiteralText("Lavel " + cultivationLevel.getLevel() + " LevelName " + cultivationLevel.getLevelName().getString() + " CultivationExp " + cultivationData.getCultivationExp() + " UpLevelExp " + cultivationLevel.getUpLevelExp() + " mana " + mana), false);
     }
 
