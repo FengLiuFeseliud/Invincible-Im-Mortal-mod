@@ -69,7 +69,7 @@ public class ReikiItemData {
      * @return 不存在灵气为 true
      */
     public static boolean isConsumeReiki(ItemStack stack){
-        if(getMaxReiki(stack) != 0 && getReiki(stack) != 0){
+        if(getMaxReiki(stack) == 0 && getReiki(stack) == 0){
             return false;
         }
         return true;
@@ -128,7 +128,7 @@ public class ReikiItemData {
      * @return 吸收成功多少灵气, 没有吸收到灵气为 0, 指定灵气量超过物品灵气剩余返回 物品灵气剩余量
      */
     public static int absord(int absord, ItemStack stack){
-        if(isConsumeReiki(stack)){
+        if(!isConsumeReiki(stack)){
             return 0;
         }
         

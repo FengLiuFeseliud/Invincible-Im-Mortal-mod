@@ -2,6 +2,7 @@ package fengliu.invincible.item;
 
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.item.ManaSkillsItem.ManaSkillSettings;
+import fengliu.invincible.item.ManaSkillsItem.PostHitManaSkillSettings;
 import fengliu.invincible.util.ReikiItem.ReikiSettings;
 import fengliu.invincible.util.ReikiItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -58,6 +59,11 @@ public class ModItems {
 		new FabricItemSettings()
 			.maxCount(1)
 	);
+	// 灵铁
+	public static final Reiki_iron REIKI_IRON = new Reiki_iron(
+		new FabricItemSettings()
+			.maxCount(64)
+	);
 	// 灵铁剑
 	public static final Reiki_iron_sword REIKI_IRON_SWORD = new Reiki_iron_sword(
 		ToolMaterials.IRON, 7, 1, 
@@ -67,6 +73,15 @@ public class ModItems {
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(100)
 				.setSkillCd(5)
+	);
+	// 灵铁匕首
+	public static final Reiki_iron_dagger REIKI_IRON_DAGGER = new Reiki_iron_dagger(
+		ToolMaterials.IRON, 3, 3, 
+			new FabricItemSettings()
+				.maxCount(1),
+			new PostHitManaSkillSettings(Reiki_iron_dagger::activeSkill)
+				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
+				.setConsume(20)
 	);
 
 	// public static final Item TEST = new MinecartItem(AbstractMinecartEntity.Type.COMMAND_BLOCK, new Settings().maxCount(1));
@@ -118,9 +133,12 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_5"), REIKI_STONE_5);
 		// 功法
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "kung_fu"), KUNG_FU);
+		// 灵铁
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron"), REIKI_IRON);
 		// 灵铁剑
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_sword"), REIKI_IRON_SWORD);
-
+		// 灵铁匕首
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_dagger"), REIKI_IRON_DAGGER);
 		// Registry.register(Registry.ITEM, new Identifier(MOD_ID, "test"), TEST);
     }
 }

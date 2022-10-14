@@ -15,7 +15,6 @@ public class ModItemGroup {
 			.icon(() -> new ItemStack(ModItems.REIKI_STONE_3))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModItems.JADE_ROUGH_STONE));
-				stacks.add(new ItemStack(ModItems.JADE));
 				stacks.add(new ItemStack(ModItems.REIKI_STONE_0));
 				stacks.add(new ItemStack(ModItems.REIKI_STONE_1));
 				stacks.add(new ItemStack(ModItems.REIKI_STONE_2));
@@ -64,6 +63,8 @@ public class ModItemGroup {
 			.icon(() -> new ItemStack(ModBlocks.ANGLE_GRINDER))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModBlocks.ANGLE_GRINDER));
+				stacks.add(new ItemStack(ModItems.JADE));
+				stacks.add(new ItemStack(ModItems.REIKI_IRON));
 			})
 			.build();
 
@@ -73,6 +74,7 @@ public class ModItemGroup {
 			.icon(() -> new ItemStack(ModItems.REIKI_IRON_SWORD))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModItems.REIKI_IRON_SWORD));
+				stacks.add(new ItemStack(ModItems.REIKI_IRON_DAGGER));
 			})
 			.build();
 

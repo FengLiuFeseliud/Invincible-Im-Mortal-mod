@@ -129,9 +129,16 @@
     "item.invincible.kung_fu": "功法",
     "item.invincible.kung_fu.tooltip": "学习修炼！",
 
+    "item.invincible.reiki_iron": "灵铁",
+    "item.invincible.reiki_iron.tooltip": "可以被注入真元，比一般的铁锭强",
+
     "item.invincible.reiki_iron_sword": "灵铁剑",
     "item.invincible.reiki_iron_sword.skill_1": "注元",
     "item.invincible.reiki_iron_sword.tooltip": "连一阶法器都算不上，不过可以注入真元强化",
     "item.invincible.reiki_iron_sword.tooltip_2": "注元: 右键使用，增加 2s 10 点伤害",
-    "item.invincible.reiki_iron_sword.tooltip_3": "消耗 50 点真元，CD 5s"
+    "item.invincible.reiki_iron_sword.tooltip_3": "消耗 50 点真元，CD 5s",
+
+    "item.invincible.reiki_iron_dagger": "灵铁匕首",
+    "item.invincible.reiki_iron_dagger.tooltip_2": "注元: 攻击命中触发，增加 2 点伤害",
+    "item.invincible.reiki_iron_dagger.tooltip_3": "消耗 20 点真元"
 }

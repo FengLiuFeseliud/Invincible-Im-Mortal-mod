@@ -34,7 +34,7 @@ public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if(world.isClient){
+        if(world.isClient || ManaSkillSettings == null){
             return super.use(world, user, hand);
         }
         ManaSkillSettings uesSkill = ManaSkillSettings[getUesSkill(user, ManaSkillSettings)];
@@ -47,6 +47,10 @@ public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
     }
 
     public void setManaSkillSettings(PlayerEntity user){
+        if(ManaSkillSettings == null){
+            return;
+        }
+        
         setUesSkill(user, ManaSkillSettings, getUesSkill(user, ManaSkillSettings) + 1);
     }
 
