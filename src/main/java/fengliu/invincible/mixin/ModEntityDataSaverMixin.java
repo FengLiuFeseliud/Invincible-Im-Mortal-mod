@@ -67,4 +67,5 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         }
         persistentData = nbt.getCompound("invincible.player_cultivation");
     }
+
 }

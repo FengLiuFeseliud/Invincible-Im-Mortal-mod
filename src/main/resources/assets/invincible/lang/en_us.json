@@ -16,13 +16,13 @@
     "info.invincible.successful_up_level": "成功提升至 %d 境界!!! 距离下一个 %d 境界，总需 %d 修为",
     "info.invincible.unsuccessful_up_level": "提升境界失败，修为跌落至 %d %d 修为... 需恢复至 %d",
     "info.invincible.item_reiki_residue": "灵气剩余：%d / %d",
-    "info.invincible.item_reiki_injection": "灵力注入：%d / %d",
+    "info.invincible.item_reiki_injection": "灵气注入：%d / %d",
     "info.invincible.skill_in_cd": "《%d》正在 CD 中...",
-    "info.invincible.mana_insufficient": "灵力不足以触发《%d》...",
+    "info.invincible.mana_insufficient": "真元不足以催动《%d》...",
     "info.skill_default_name": "技能",
-    "info.invincible.not_can_injection_reiki_item": "%d 不是可以注入灵力的物品",
-    "info.invincible.is_exceed_injection_target": "%d 达到灵力注入目标！！！",
-    "info.invincible.mana_injection_insufficient": "注入灵力不足，还需 %d",
+    "info.invincible.not_can_injection_reiki_item": "%d 不是可以注入灵气的物品",
+    "info.invincible.is_exceed_injection_target": "%d 达到灵气注入目标！！！",
+    "info.invincible.mana_injection_insufficient": "注入灵气不足，还需 %d",
 
     "invincible.cultivation_level.0": "凡人",
     "invincible.cultivation_level.1": "练气初期一重",
@@ -130,5 +130,8 @@
     "item.invincible.kung_fu.tooltip": "学习修炼！",
 
     "item.invincible.reiki_iron_sword": "灵铁剑",
-    "item.invincible.reiki_iron_sword.skill_1": "注灵"
+    "item.invincible.reiki_iron_sword.skill_1": "注元",
+    "item.invincible.reiki_iron_sword.tooltip": "连一阶法器都算不上，不过可以注入真元强化",
+    "item.invincible.reiki_iron_sword.tooltip_2": "注元: 右键使用，增加 2s 10 点伤害",
+    "item.invincible.reiki_iron_sword.tooltip_3": "消耗 50 点真元，CD 5s"
 }

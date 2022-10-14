@@ -1,6 +1,5 @@
 package fengliu.invincible.util;
 
-import fengliu.invincible.invincibleMod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 

@@ -12,6 +12,7 @@ import fengliu.invincible.event.ModServerTickEvent;
 import fengliu.invincible.item.ModItems;
 import fengliu.invincible.item.block.ModBlockItems;
 import fengliu.invincible.networking.ModMessage;
+import fengliu.invincible.particle.ModParticle;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
 import fengliu.invincible.world.ModWorlds;
 
@@ -29,13 +30,15 @@ public class invincibleMod implements ModInitializer {
 
 		ModEntitys.registryAllEntitys();
 
+		ModParticle.registerAllParticles();
+
 		ModScreenHandlers.registerAllScreenHandlers();
 
 		ModWorlds.registryAllWorlds();
 
 		ModItemGroup.allItemGroupBuild();
 
-		ModMessage.registerS2CPackets();
+		ModMessage.registerC2SPackets();
 
 		ModServerTickEvent.register();
 

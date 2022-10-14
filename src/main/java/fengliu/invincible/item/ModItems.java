@@ -62,7 +62,7 @@ public class ModItems {
 	public static final Reiki_iron_sword REIKI_IRON_SWORD = new Reiki_iron_sword(
 		ToolMaterials.IRON, 7, 1, 
 			new FabricItemSettings()
-				.maxCount(1), 
+				.maxCount(1),
 			new ManaSkillSettings(Reiki_iron_sword::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(100)

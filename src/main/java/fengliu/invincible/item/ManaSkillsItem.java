@@ -1,32 +1,66 @@
 package fengliu.invincible.item;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import fengliu.invincible.util.CultivationServerData;
+import fengliu.invincible.util.IEntityDataSaver;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public interface ManaSkillsItem{
-
-    default void skillInCD(PlayerEntity player, ManaSkillSettings skillsSettings){
-        player.sendMessage(new TranslatableText("info.invincible.skill_in_cd", skillsSettings.Name.getString()), true);
-    }
-
     default void manaInsufficient(PlayerEntity player, ManaSkillSettings skillsSettings){
         player.sendMessage(new TranslatableText("info.invincible.mana_insufficient", skillsSettings.Name.getString()), true);
     }
 
-    default boolean tryUesSkill(ManaSkillSettings skillsSettings, PlayerEntity player, int allMana){
-        switch (skillsSettings.canUesSkill(allMana)) {
+    default int getUesSkill(PlayerEntity user, ManaSkillSettings[] ManaSkillSettings){
+        NbtCompound nbt = user.getStackInHand(user.getActiveHand()).getNbt();
+
+        int skillIndex;
+        if(!nbt.contains("invincible.skill_index")){
+            skillIndex = 0;
+
+            nbt.putInt("invincible.skill_index", skillIndex);
+            user.getStackInHand(user.getActiveHand()).setNbt(nbt);
+        }else{
+            skillIndex = nbt.getInt("invincible.skill_index");
+        }
+
+        if(skillIndex < 0){
+            skillIndex = ManaSkillSettings.length - 1;
+        }
+
+        if(skillIndex > ManaSkillSettings.length - 1){
+            skillIndex = ManaSkillSettings.length - 1;
+        }
+
+        return skillIndex;
+    }
+
+    default void setUesSkill(PlayerEntity user, ManaSkillSettings[] ManaSkillSettings, int skillIndex){
+        ItemStack stack = user.getStackInHand(user.getActiveHand());
+
+        if(skillIndex < 0){
+            skillIndex = ManaSkillSettings.length - 1;
+        }
+
+        if(skillIndex > ManaSkillSettings.length - 1){
+            skillIndex = 0;
+        }
+        user.getItemCooldownManager().set(stack.getItem(), ManaSkillSettings[skillIndex].SkillCD);
+        stack.getNbt().putInt("invincible.skill_index", skillIndex);
+    }
+
+    default boolean tryUesSkill(ManaSkillSettings skillsSettings, Item item, PlayerEntity player){
+        CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
+        switch (skillsSettings.canUesSkill(cultivationData.getMana(), item, player)) {
             case SKILL_UES:
+                player.getItemCooldownManager().set(item, skillsSettings.SkillCD);
+                cultivationData.consumeMana(skillsSettings.Consume);
                 return true;
-            case SKILL_IN_CD:
-                skillInCD(player, skillsSettings);
-                return false;
             case MANA_INSUFFICIENT:
                 manaInsufficient(player, skillsSettings);
                 return false;
@@ -38,10 +72,8 @@ public interface ManaSkillsItem{
     public class ManaSkillSettings {
         public TranslatableText Name = new TranslatableText("info.skill_default_name");
         public int Consume = 0;
-        public float SkillCD = 0;
-        public boolean CanUse = true;
+        public int SkillCD = 0;
         public final Skill Skill;
-        public ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
     
         public ManaSkillSettings(Skill skillFunction){
             Skill = skillFunction;
@@ -58,38 +90,54 @@ public interface ManaSkillsItem{
         }
 
         public ManaSkillSettings setSkillCd(int skillCD){
-            SkillCD = skillCD;
+            SkillCD = skillCD * 20;
             return this;
         }
     
-        private void setCdIn(){
-            CanUse = true;
-        }
-    
-        public SkillState canUesSkill(int manaAll){
-            if(!CanUse){
-                return SkillState.SKILL_IN_CD;
-            }
-
+        public SkillState canUesSkill(int manaAll, Item item, PlayerEntity player){
             if(Consume > manaAll){
                 return SkillState.MANA_INSUFFICIENT;
             }
-
-            if(SkillCD == 0){
-                return SkillState.SKILL_UES;
-            }
-            CanUse = false;
     
-            scheduledExecutorService.schedule(() ->  setCdIn(), (long) SkillCD, TimeUnit.SECONDS);
             return SkillState.SKILL_UES;
         }
+    }
 
-        interface Skill {
-            boolean function(World world, PlayerEntity player, Hand hand, CultivationServerData cultivationServerData);
+    public class PostHitManaSkillSettings extends ManaSkillSettings{
+        public final PostHitSkill PostHitSkill;
+
+        public PostHitManaSkillSettings(PostHitSkill skillFunction) {
+            super(null);
+            PostHitSkill = skillFunction;
         }
 
-        enum SkillState {
-            SKILL_UES, SKILL_IN_CD, MANA_INSUFFICIENT
+        @Override
+        public PostHitManaSkillSettings setName(TranslatableText name){
+            Name = name;
+            return this;
         }
+        
+        @Override
+        public PostHitManaSkillSettings setConsume(int consume){
+            Consume = consume;
+            return this;
+        }
+
+        @Override
+        public PostHitManaSkillSettings setSkillCd(int skillCD) {
+            return (PostHitManaSkillSettings) super.setSkillCd(0);
+        }
+    }
+
+    enum SkillState {
+        SKILL_UES, MANA_INSUFFICIENT
+    }
+
+    interface Skill {
+        boolean function(World world, PlayerEntity player, Hand hand);
+    }
+
+    interface PostHitSkill {
+        boolean function(ItemStack stack, LivingEntity target, LivingEntity attacker);
     }
 }

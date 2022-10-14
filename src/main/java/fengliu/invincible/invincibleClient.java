@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFW;
 import fengliu.invincible.api.Key;
 import fengliu.invincible.block.ModBlocks;
 import fengliu.invincible.networking.ModMessage;
+import fengliu.invincible.particle.ModParticle;
 import fengliu.invincible.screen.Angle_Grinder_Screen;
 import fengliu.invincible.screen.Zhen_Yan_Screen;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
@@ -21,7 +22,8 @@ public class invincibleClient implements ClientModInitializer  {
 	
     @Override
 	public void onInitializeClient() {
-		ModMessage.registerC2SPackets();
+		ModMessage.registerS2CPackets();
+		ModParticle.registerClientAllParticles();
 
 
 		// 角磨机 UI
@@ -44,6 +46,7 @@ public class invincibleClient implements ClientModInitializer  {
 		KeyBinding cultivation_info  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_info", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.invincible"));
 		// !测试! 消耗所有灵力
 		KeyBinding clear_mana = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.clear_mana", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.invincible"));
+		KeyBinding set_ues_skill = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.set_ues_skill", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_T, "key.invincible"));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if(client.world == null){
@@ -69,6 +72,10 @@ public class invincibleClient implements ClientModInitializer  {
 
 			if(clear_mana.wasPressed()) {
 				Key.clear_mana(client);
+			}
+
+			if(set_ues_skill.wasPressed()) {
+				Key.set_ues_skill(client);
 			}
 			
 		});

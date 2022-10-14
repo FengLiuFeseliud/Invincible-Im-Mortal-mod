@@ -114,10 +114,10 @@ public class ClearHubMixin {
         int mana = cultivationData.getMana();
         int maxMana = cultivationData.getCultivationLevel().getBaseMana();
 
-        // 渲染空灵力值条
+        // 渲染空真元值条
         DrawableHelper.drawTexture(matrices, x + 101, y, 0, 27, 81, 9, TEXTURE_X, TEXTURE_Y);
 
-        // 渲染灵力值条
+        // 渲染真元值条
         int manaBarWidth = Math.round((81 / (float) maxMana) * mana);
         if(manaBarWidth > 20){
             DrawableHelper.drawTexture(matrices, x + 101, y, 0, 9, manaBarWidth, 9, TEXTURE_X, TEXTURE_Y);
@@ -232,10 +232,10 @@ public class ClearHubMixin {
         }
 
         String mana_str = "" + mana;
-        // 渲染灵力值
+        // 渲染真元值
         renderer.draw(matrices, mana_str, x + 142 - (float) (mana_str.length() / 2 * 2.5), y + 1,  0x009FCC);
 
-        // 渲染灵力值减少数字
+        // 渲染真元值减少数字
         if(!oldMana_show_end){
             renderer.draw(matrices, "-" + (oldMana - mana), x + 167, y + 1, 0x009FCC);
         }else{

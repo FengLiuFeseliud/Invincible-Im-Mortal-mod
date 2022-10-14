@@ -10,7 +10,9 @@ import fengliu.invincible.util.IEntityDataSaver;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 /*
@@ -38,5 +40,13 @@ public abstract class ModPlayerDataSaveMixin extends LivingEntity {
         invincibleMod.LOGGER.info(data.toString());
 
         ((IEntityDataSaver) this).writePersistentData(nbt);
+    }
+
+    @Override
+    public ItemStack getStackInHand(Hand hand) {
+        ItemStack stack = super.getStackInHand(hand);
+        stack.getOrCreateNbt().putFloat("invincible.player_base_attack_damage", ((IEntityDataSaver) this).getCilentCultivationData().getCultivationLevel().getBaseAttack());
+        
+        return stack;
     }
 }

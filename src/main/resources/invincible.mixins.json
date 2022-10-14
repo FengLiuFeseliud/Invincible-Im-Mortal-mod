@@ -6,6 +6,7 @@
   "mixins": [
     "ModEntityDataSaverMixin",
     "ModPlayerDataSaveMixin",
+    "EnchantmentMixin",
     "ItemMixin"
   ],
   "client": [

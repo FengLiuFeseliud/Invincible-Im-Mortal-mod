@@ -1,7 +1,6 @@
 package fengliu.invincible.item;
 
-import fengliu.invincible.util.CultivationServerData;
-import fengliu.invincible.util.IEntityDataSaver;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -12,9 +11,21 @@ import net.minecraft.world.World;
 
 public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
     private ManaSkillSettings[] ManaSkillSettings;
+    private PostHitManaSkillSettings PostHitManaSkillSettings;
 
     public ManaSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings ...manaSkillsSettings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
+        ManaSkillSettings = manaSkillsSettings;
+    }
+
+    public ManaSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostHitManaSkillSettings postHitManaSkillSettings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
+        PostHitManaSkillSettings = postHitManaSkillSettings;
+    }
+
+    public ManaSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostHitManaSkillSettings postHitManaSkillSettings, ManaSkillSettings ...manaSkillsSettings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
+        PostHitManaSkillSettings = postHitManaSkillSettings;
         ManaSkillSettings = manaSkillsSettings;
     }
 
@@ -23,18 +34,31 @@ public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
         if(world.isClient){
             return super.use(world, user, hand);
         }
+        ManaSkillSettings uesSkill = ManaSkillSettings[getUesSkill(user, ManaSkillSettings)];
 
-        CultivationServerData cultivationData = ((IEntityDataSaver) user).getServerCultivationData();
-        
-        if(!tryUesSkill(ManaSkillSettings[0], user, cultivationData.getMana())){
+        if(!tryUesSkill(uesSkill, this, user)){
             return super.use(world, user, hand);
         }
-
-        if(!ManaSkillSettings[0].Skill.function(world, user, hand, cultivationData)){
-            return super.use(world, user, hand);
-        }
-        
-        cultivationData.consumeMana(ManaSkillSettings[0].Consume);
+        uesSkill.Skill.function(world, user, hand);
         return super.use(world, user, hand);
+    }
+
+    public void setManaSkillSettings(PlayerEntity user){
+        setUesSkill(user, ManaSkillSettings, getUesSkill(user, ManaSkillSettings) + 1);
+    }
+
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if(PostHitManaSkillSettings == null){
+            return super.postHit(stack, target, attacker);
+        }
+        
+        if(!tryUesSkill(PostHitManaSkillSettings, this, (PlayerEntity) attacker)){
+            attacker.getStackInHand(attacker.getActiveHand()).getNbt().remove("invincible.player_attack_damage");
+            return super.postHit(stack, target, attacker);
+        }
+
+        PostHitManaSkillSettings.PostHitSkill.function(stack, target, attacker);
+        return super.postHit(stack, target, attacker);
     }
 }

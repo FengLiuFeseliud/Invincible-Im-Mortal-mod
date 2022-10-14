@@ -3,6 +3,7 @@ package fengliu.invincible.api;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import fengliu.invincible.networking.ModMessage;
+import fengliu.invincible.util.SpawnParticle;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 
@@ -15,6 +16,8 @@ public class Key {
     }
 
     public static void reiki_practice(MinecraftClient client){
+        SpawnParticle.absordRaiki(client.player);
+        
         if(spawn_reiki_sleep != 0){
             spawn_reiki_sleep -= 1;
             return;
@@ -43,4 +46,7 @@ public class Key {
         ClientPlayNetworking.send(ModMessage.CULTIVATION_ITEM, PacketByteBufs.create());
     }
     
+    public static void set_ues_skill(MinecraftClient client){
+        ClientPlayNetworking.send(ModMessage.SET_SKILL, PacketByteBufs.create());
+    }
 }
