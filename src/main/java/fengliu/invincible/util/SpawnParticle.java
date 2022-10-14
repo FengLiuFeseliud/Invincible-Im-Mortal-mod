@@ -7,6 +7,10 @@ import net.minecraft.world.World;
 
 public class SpawnParticle {
     
+    /**
+     * 在玩家身边生成吸收灵气的粒子效果
+     * @param player 玩家
+     */
     public static void absordRaiki(PlayerEntity player){
         World world =  player.getWorld();
         Vec3d pos = player.getPos();

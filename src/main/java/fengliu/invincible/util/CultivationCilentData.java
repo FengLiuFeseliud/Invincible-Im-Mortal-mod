@@ -2,10 +2,15 @@ package fengliu.invincible.util;
 
 import net.minecraft.text.TranslatableText;
 
+/**
+ *  客户端修为数据 (只可获取)
+ */
 public class CultivationCilentData {
 
-    // 境界
-    protected static CultivationLevel[] CultivationLevelAll = {
+    /**
+     * 可用的所有境界
+     */
+    protected static final CultivationLevel[] CultivationLevelAll = {
         new CultivationLevel(0, "invincible.cultivation_level.0", 0, 10000, 100, 0, 0, 0),
         // 练气
         new CultivationLevel(1, "invincible.cultivation_level.1", 10000, 20000, 99, 1, 0, 100),
@@ -40,22 +45,43 @@ public class CultivationCilentData {
         this.EntityData = EntityData;
     }
 
+    /**
+     * 获取所有境界
+     * @return CultivationLevel 列表
+     */
     public static CultivationLevel[] getAllCultivationLevel(){
         return CultivationLevelAll;
     }
 
+    /**
+     * 获取当前修为值
+     * @return 当前修为值
+     */
     public int getCultivationExp(){
         return EntityData.getPersistentData().getInt("cultivation_exp");
     }
 
+    /**
+     * 获取当前境界
+     * @return 当前境界
+     */
     public CultivationLevel getCultivationLevel(){
         return CultivationLevelAll[EntityData.getPersistentData().getInt("cultivation_level")];
     }
 
+    /**
+     * 获取当前真元值
+     * @return 当前真元值
+     */
     public int getMana(){
         return EntityData.getPersistentData().getInt("mana");
     }
 
+    /**
+     * 获取可升级到的境界的需增加的索引
+     * @param maxCultivationExp 最大修为值
+     * @return 可升级到的境界需增加的索引
+     */
     public int getUpLevelIndex(int maxCultivationExp){
         CultivationLevel in_level = getCultivationLevel();
         if(in_level.getLevel() >= CultivationLevelAll.length - 1){
@@ -79,6 +105,10 @@ public class CultivationCilentData {
         return upInUpLevel - getCultivationLevel().getLevel();
     }
 
+    /**
+     * 获取下个升级到的境界
+     * @return 下个升级到的境界 CultivationLevel
+     */
     public CultivationLevel getUpLevel(){
         CultivationLevel in_level = getCultivationLevel();
         if(in_level.getLevel() >= CultivationLevelAll.length -1){
@@ -93,6 +123,10 @@ public class CultivationCilentData {
         return CultivationLevelAll[upIndex];
     }
 
+    /**
+     * 获取升级到下一个境界的所需修为
+     * @return 升级所需修为
+     */
     public int getNeedCultivationExp(){
         int index = getUpLevelIndex(getCultivationExp());
 
@@ -107,6 +141,9 @@ public class CultivationCilentData {
         return CultivationLevelAll[index].getNeedCultivationExp();
     }
     
+    /**
+     * 境界对象
+     */
     public static class CultivationLevel {
         private int Level;
         private String LevelName;
@@ -116,7 +153,18 @@ public class CultivationCilentData {
         private float BaseAttack;
         private float BaseHealth;
         private int BaseMana;
-
+        
+        /**
+         * 境界数值
+         * @param Level 境界等级
+         * @param LevelName 境界名称 (TranslatableText)
+         * @param CultivationExp 境界初始修为
+         * @param UpLevelExp 突破下一个境界初始修为
+         * @param UpLevelRate 突破下一个境界的成功率
+         * @param BaseAttack 境界的基础攻击力
+         * @param BaseHealth 境界的基础血量
+         * @param BaseMana 境界的基础真元
+         */
         public CultivationLevel(int Level, String LevelName, int CultivationExp, int UpLevelExp, double UpLevelRate, 
                 double BaseAttack, double BaseHealth, int BaseMana){
             this.Level = Level;
@@ -149,6 +197,10 @@ public class CultivationCilentData {
             return UpLevelRate;
         }
 
+        /**
+         * 计算突破失败率
+         * @return 突破失败率
+         */
         public double getUpLevelFailureRate(){
             return 100 - UpLevelRate;
         }
@@ -165,14 +217,28 @@ public class CultivationCilentData {
             return BaseMana;
         }
 
+        /**
+         * 计算升级所需修为
+         * @return 升级所需修为
+         */
         public int getNeedCultivationExp(){
             return UpLevelExp - CultivationExp;
         }
 
+        /**
+         * 判断指定修为是否可以升级这个境界
+         * @param cultivationExp 修为
+         * @return 可以时为 true
+         */
         public boolean canUpLevel(int cultivationExp){
             return cultivationExp >= UpLevelExp;
         }
 
+        /**
+         * 判断指定修为是否可以下降这个境界
+         * @param cultivationExp 修为
+         * @return 可以时为 true
+         */
         public boolean canDownLevel(int cultivationExp){
             return CultivationExp - cultivationExp < 0;
         }

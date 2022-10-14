@@ -37,7 +37,9 @@ public class Jade extends Item {
         }
     }
 
-    // 玉石等级和概率
+    /**
+     * 玉石等级和概率
+     */
     public static final Random_Item[] JADE_LV_LIST = {
         new Random_Item(0, new Jade_Lv(0, "item.invincible.jade.Lv0.tooltip")),
         // 95% Lv1 > Lv4
@@ -61,6 +63,7 @@ public class Jade extends Item {
         }
         jadeItemStack.decrement(1);
         
+        // 随机玉石等级
         Random_Item random_jade_lv = Probability_Random.random(JADE_LV_LIST);
         NbtCompound jade_nbt = new NbtCompound();
         for(int index = 0; index < JADE_LV_LIST.length; index++){

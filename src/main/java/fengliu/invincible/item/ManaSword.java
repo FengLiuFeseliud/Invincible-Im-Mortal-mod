@@ -9,6 +9,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
+/**
+ * 基础真元技能剑
+ */
 public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
     private ManaSkillSettings[] ManaSkillSettings;
     private PostHitManaSkillSettings PostHitManaSkillSettings;

@@ -1,5 +1,8 @@
 package fengliu.invincible.util;
 
+/**
+ * 灵气物品
+ */
 public interface ReikiItem{
     public int getReiki();
     public int getMaxReiki();
@@ -9,6 +12,9 @@ public interface ReikiItem{
     public boolean canInjectionReiki();
     public void settings(ReikiSettings settings);
 
+    /*
+     * 物品灵气设置
+     */
     public class ReikiSettings {
         public int MaxReiki = 0;
         public int InitialReiki = -1;
