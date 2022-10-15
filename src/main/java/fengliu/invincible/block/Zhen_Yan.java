@@ -1,11 +1,14 @@
 package fengliu.invincible.block;
 
 import fengliu.invincible.api.Ui_Block;
+import fengliu.invincible.entity.block.ModBlockEntitys;
 import fengliu.invincible.entity.block.Zhen_Yan_Entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.ItemScatterer;
@@ -20,6 +23,14 @@ public class Zhen_Yan{
 
         public Lv1(Settings settings) {
             super(settings);
+        }
+
+        @Override
+        public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
+                BlockEntityType<T> type) {
+            return checkType(type, ModBlockEntitys.ZHEN_YAN_1_ENTITY, 
+                (world1, pos, state1, be) -> Zhen_Yan_Entity.Lv1.tick(world1, pos, state1, be)
+            );
         }
 
         @Override
