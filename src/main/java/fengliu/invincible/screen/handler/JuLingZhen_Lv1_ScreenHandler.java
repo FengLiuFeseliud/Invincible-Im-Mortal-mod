@@ -6,15 +6,15 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 
-public class Zhen_Yan_Lv1_ScreenHandler extends BaseScreenHandler{
+public class JuLingZhen_Lv1_ScreenHandler extends BaseScreenHandler{
     public Inventory inventory;
 
-    public Zhen_Yan_Lv1_ScreenHandler(int syncId, PlayerInventory playerInventory) {
+    public JuLingZhen_Lv1_ScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(6));
     }
 
-    public Zhen_Yan_Lv1_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(ModScreenHandlers.ZHEN_YAN_Lv1_SCREENHANDLER, syncId);
+    public JuLingZhen_Lv1_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        super(ModScreenHandlers.JU_LING_ZHEN_LV1_SCREENHANDLER, syncId);
         this.inventory = inventory;
         checkSize(inventory, 6);
 

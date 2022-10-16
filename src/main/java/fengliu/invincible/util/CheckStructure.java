@@ -206,7 +206,9 @@ public class CheckStructure {
 
         /**
          * 获取范围区块盒子
+         * @param world 世界
          * @param pos 中心点方块坐标
+         * @param highly 盒子高度
          * @return 结构盒子
          */
         public Box getChunkScopeBox(World world, BlockPos pos, int highly){
@@ -222,6 +224,7 @@ public class CheckStructure {
          * 获取范围区块中的玩家
          * @param world 世界
          * @param pos 中心点方块坐标
+         * @param highly 盒子高度
          * @return 玩家列表
          */
         public List<PlayerEntity> getChunkScopeAllPlayer(World world, BlockPos pos, int highly){

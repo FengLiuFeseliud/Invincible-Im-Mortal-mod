@@ -3,14 +3,18 @@ package fengliu.invincible.util;
 import java.util.List;
 
 import fengliu.invincible.api.Ui_Block;
+import fengliu.invincible.entity.block.Zhen_Yan_Lv1_Entity;
 import fengliu.invincible.item.ModItems;
+import fengliu.invincible.screen.handler.NotZhenFu_ScreenHandler;
 import fengliu.invincible.util.CheckStructure.Structure;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -33,10 +37,48 @@ public class ZhenFuData {
     }
 
     /**
+     * 执行阵法效果 skill
+     * @param settings 阵法设置
+     * @param world 世界
+     * @param pos 阵眼方块坐标 (中心点方块坐标)
+     * @param state 阵眼方块状态
+     * @param be 阵眼方块实体
+     * @return 在阵法中的玩家列表
+     */
+    public static List<PlayerEntity> onPlayerUes(ZhenFuSettings settings, World world, BlockPos pos, BlockState state, Ui_Block.Entity be){
+        List<PlayerEntity> players = settings.getInAllPlayer(world, pos);
+        for(PlayerEntity player: players){
+            settings.effect(world, pos, state, be, player);
+        }
+        
+        return players;
+    }
+
+    /**
+     * 检查玩家是否从阵法中出去并执行阵法离开效果 endSkill
+     * @param settings 阵法设置
+     * @param oldOnPlayerUes 上一 tick 在阵法中的玩家列表
+     * @param newOnPlayerUes 当前 tick 在阵法中的玩家列表
+     * @param world 世界
+     * @param pos 阵眼方块坐标 (中心点方块坐标)
+     * @param state 阵眼方块状态
+     * @param be 阵眼方块实体
+     */
+    public static void onPlayerEndUes(ZhenFuSettings settings, List<PlayerEntity> oldOnPlayerUes, List<PlayerEntity> newOnPlayerUes, World world, BlockPos pos, BlockState state, Zhen_Yan_Lv1_Entity be) {
+        for(PlayerEntity player: oldOnPlayerUes){
+            if(newOnPlayerUes.contains(player)){
+                continue;
+            }
+            settings.endEffect(world, pos, state, be, player);
+        }
+    }
+
+    /**
      * 阵法设置
      */
     public static abstract class ZhenFuSettings {
         private final Structure Structure;
+        public Class<? extends ScreenHandler> screenHandler;
         public TranslatableText Name;
         public int Highly = 0;
         public int NeedJadeNumber = 0;
@@ -44,6 +86,11 @@ public class ZhenFuData {
         public ZhenFuSettings(Structure structure){
             Structure = structure;
             Highly = structure.y;
+        }
+
+        public ZhenFuSettings setScreenHandler(Class<? extends ScreenHandler> screenHandler){
+            this.screenHandler = screenHandler;
+            return this;
         }
 
         public ZhenFuSettings setName(TranslatableText name){
@@ -59,6 +106,17 @@ public class ZhenFuData {
         public ZhenFuSettings setNeedJadeNumber(int needJadeNumber){
             NeedJadeNumber = needJadeNumber;
             return this;
+        }
+
+        /**
+         * 动态实例化 ScreenHandler
+         */
+        public ScreenHandler getScreenHandler(int syncId, PlayerInventory inventory){
+            try {
+                return screenHandler.getConstructor(int.class, PlayerInventory.class).newInstance(syncId, inventory);
+            } catch (Exception e) {
+                return new NotZhenFu_ScreenHandler(syncId, inventory);
+            }
         }
 
         public boolean checkZhenFu(World world, BlockPos pos){
@@ -110,27 +168,13 @@ public class ZhenFuData {
         }
 
         /**
-         * 执行阵法效果 skill
-         * @param world 世界
-         * @param pos 阵眼方块坐标 (中心点方块坐标)
-         * @param state 阵眼方块状态
-         * @param be 阵眼方块实体
-         * @return 玩家超过 0 返回 ture
+         * 将在每 tick 玩家存在于阵法中执行
          */
-        public boolean onPlayerUes(World world, BlockPos pos, BlockState state, Ui_Block.Entity be){
-            List<PlayerEntity> players = getInAllPlayer(world, pos);
-            for(PlayerEntity player: players){
-                skill(world, pos, state, be, player);
-            }
-            
-            if(players.size() == 0){
-                return false;
-            }else{
-                return true;
-            }
-        }
-
-        public abstract boolean skill(World world, BlockPos pos, BlockState state, Ui_Block.Entity be, PlayerEntity player);
+        public abstract void effect(World world, BlockPos pos, BlockState state, Ui_Block.Entity be, PlayerEntity player);
+        /**
+         * 将在玩家从阵法中出去时执行
+         */
+        public abstract void endEffect(World world, BlockPos pos, BlockState state, Ui_Block.Entity be, PlayerEntity player);
     }
 
     public interface ZhenFus {

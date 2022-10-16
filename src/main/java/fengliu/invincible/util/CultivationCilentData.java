@@ -77,6 +77,10 @@ public class CultivationCilentData {
         return EntityData.getPersistentData().getInt("mana");
     }
 
+    public float getGain(){
+        return EntityData.getPersistentData().getInt("gain");
+    }
+
     /**
      * 获取可升级到的境界的需增加的索引
      * @param maxCultivationExp 最大修为值

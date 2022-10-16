@@ -23,8 +23,9 @@ public class CultivationServerPackets {
     public static void reiki_practice(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
         CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
         ItemStack itemStack = player.getStackInHand(player.getActiveHand());
-        
-        cultivationData.addCultivationExpInUpLevel(10 + ReikiItemData.absord(1000, itemStack));
+
+        int reiki = Math.round(10 * cultivationData.getGain());
+        cultivationData.addCultivationExpInUpLevel(reiki + ReikiItemData.absord(1000, itemStack));
     }
 
     public static void cultivation_up(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){

@@ -9,11 +9,11 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 
 public abstract class BaseScreenHandler extends ScreenHandler{
-    public Inventory inventory;
-
     protected BaseScreenHandler(ScreenHandlerType<?> type, int syncId) {
         super(type, syncId);
     }
+
+    public Inventory inventory;
 
     /**
      * 绘制物品栏与背包

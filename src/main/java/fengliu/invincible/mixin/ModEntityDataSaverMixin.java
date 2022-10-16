@@ -29,6 +29,7 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         persistent_data.putInt("cultivation_level", 0);
         persistent_data.putInt("cultivation_exp", 0);
         persistent_data.putInt("mana", 0);
+        persistent_data.putFloat("gain", 1f);
         this.persistentData = persistent_data;
         return this.persistentData;
     }

@@ -70,7 +70,24 @@ public class CultivationServerData extends CultivationCilentData {
             return level.getBaseMana();
         }
         
-        return EntityData.getPersistentData().getInt("mana");
+        return mana;
+    }
+
+    @Override
+    public float getGain() {
+        NbtCompound nbt = EntityData.getPersistentData();
+        float gain = nbt.getFloat("gain");
+
+        if(gain < 0){
+            nbt.putFloat("gain", 100f);
+            syncData(EntityData);
+            return 100f;
+        }
+        return gain;
+    }
+
+    public void setGain(float gain) {
+        EntityData.getPersistentData().putFloat("gain", gain);
     }
 
     /**

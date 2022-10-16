@@ -1,8 +1,10 @@
 package fengliu.invincible.entity.block;
 
-import fengliu.invincible.invincibleMod;
+import java.util.ArrayList;
+import java.util.List;
+
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.screen.handler.Zhen_Yan_Lv1_ScreenHandler;
+import fengliu.invincible.screen.handler.NotZhenFu_ScreenHandler;
 import fengliu.invincible.structure.Zhen_Fu_Lv1;
 import fengliu.invincible.util.ZhenFuData;
 import fengliu.invincible.util.ZhenFuData.ZhenFuSettings;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 
 public class Zhen_Yan_Lv1_Entity extends Ui_Block.Entity{
     private ZhenFuSettings zhenFuType;
+    private List<PlayerEntity> oldOnPlayerUes = new ArrayList<>();
 
     public Zhen_Yan_Lv1_Entity(BlockPos pos, BlockState state) {
         super(ModBlockEntitys.ZHEN_YAN_1_ENTITY, pos, state);
@@ -34,7 +37,10 @@ public class Zhen_Yan_Lv1_Entity extends Ui_Block.Entity{
 
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new Zhen_Yan_Lv1_ScreenHandler(syncId, inventory, this);
+        if(zhenFuType == null){
+            return new NotZhenFu_ScreenHandler(syncId, inventory);
+        }
+        return zhenFuType.getScreenHandler(syncId, inventory);
     }
 
     public void setZhenFuType(ZhenFuSettings zhenFuType){
@@ -43,6 +49,14 @@ public class Zhen_Yan_Lv1_Entity extends Ui_Block.Entity{
 
     public ZhenFuSettings getZhenFuType(){
         return zhenFuType;
+    }
+
+    public void setOldOnPlayerUes(List<PlayerEntity> oldOnPlayerUes){
+        this.oldOnPlayerUes = oldOnPlayerUes;
+    }
+
+    public List<PlayerEntity> getOldOnPlayerUes(){
+        return oldOnPlayerUes;
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, Zhen_Yan_Lv1_Entity be) {
@@ -61,7 +75,9 @@ public class Zhen_Yan_Lv1_Entity extends Ui_Block.Entity{
             return;
         }
 
-        settings.onPlayerUes(world, pos, state, be);
+        List<PlayerEntity> newOnPlayerUes = ZhenFuData.onPlayerUes(settings, world, pos, state, be);
+        ZhenFuData.onPlayerEndUes(settings, be.getOldOnPlayerUes(), newOnPlayerUes, world, pos, state, be);
+        be.setOldOnPlayerUes(newOnPlayerUes);
         return;
     }
 }
