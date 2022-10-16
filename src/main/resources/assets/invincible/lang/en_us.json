@@ -140,5 +140,7 @@
 
     "item.invincible.reiki_iron_dagger": "灵铁匕首",
     "item.invincible.reiki_iron_dagger.tooltip_2": "注元: 攻击命中触发，增加 2 点伤害",
-    "item.invincible.reiki_iron_dagger.tooltip_3": "消耗 20 点真元"
+    "item.invincible.reiki_iron_dagger.tooltip_3": "消耗 20 点真元",
+
+    "zhen_fu.invincible.ju_ling_zhen.1": "一阶聚灵阵"
 }

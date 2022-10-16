@@ -5,9 +5,14 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.WorldChunk;
 
 public class CheckStructure {
     
@@ -48,6 +53,23 @@ public class CheckStructure {
     }
 
     /**
+     * 获取指定中心点的指定范围区块对角两区块
+     * @param world 世界
+     * @param pos 中心点方块坐标
+     * @param x 从中心点区块开始 x 方向半径
+     * @param z 从中心点区块开始 z 方向半径
+     * @return 指定范围区块对角两区块
+     */
+    public static WorldChunk[] getAllChunkScope(World world, BlockPos pos, int x, int z){
+        ChunkPos chunkPos = world.getChunk(pos).getPos();
+        WorldChunk[] chunks = {
+            world.getChunk(chunkPos.x - x, chunkPos.z - z),
+            world.getChunk(chunkPos.x + x, chunkPos.z + z)
+        };
+        return chunks;
+    }
+
+    /**
      * 自定义结构
      */
     public static class Structure {
@@ -64,6 +86,8 @@ public class CheckStructure {
         public final int x;
         public final int y;
         public final int z;
+        public int chunkScopeX = 0;
+        public int chunkScopeZ = 0;
 
         /**
          * 自定义结构
@@ -79,6 +103,12 @@ public class CheckStructure {
             this.x = x;
             this.y = y;
             this.z = z;
+        }
+
+        public Structure setChunkScope(int chunkScopeX, int chunkScopeZ){
+            this.chunkScopeX = chunkScopeX;
+            this.chunkScopeZ = chunkScopeZ;
+            return this;
         }
 
         /**
@@ -160,6 +190,42 @@ public class CheckStructure {
             }
 
             return true;
+        }
+
+        /**
+         * 获取结构盒子
+         * @param pos 中心点方块坐标
+         * @return 结构盒子
+         */
+        public Box getStructureBox(BlockPos pos){
+            return new Box(
+                pos.getX() - x, pos.getY(), pos.getZ() + z + 1, 
+                pos.getX() + x, pos.getY() + y, pos.getZ() - z + 1
+            );
+        }
+
+        /**
+         * 获取范围区块盒子
+         * @param pos 中心点方块坐标
+         * @return 结构盒子
+         */
+        public Box getChunkScopeBox(World world, BlockPos pos, int highly){
+            WorldChunk[] chunks = getAllChunkScope(world, pos, chunkScopeX, chunkScopeZ);
+
+            return new Box(
+                chunks[0].getPos().getStartX(), pos.getY(), chunks[0].getPos().getStartZ(), 
+                chunks[1].getPos().getEndX() + 1, pos.getY() + highly, chunks[1].getPos().getEndZ() + 1
+            );
+        }
+
+        /**
+         * 获取范围区块中的玩家
+         * @param world 世界
+         * @param pos 中心点方块坐标
+         * @return 玩家列表
+         */
+        public List<PlayerEntity> getChunkScopeAllPlayer(World world, BlockPos pos, int highly){
+            return world.getEntitiesByClass(PlayerEntity.class, getChunkScopeBox(world, pos, highly), EntityPredicates.VALID_ENTITY);
         }
     }
 }

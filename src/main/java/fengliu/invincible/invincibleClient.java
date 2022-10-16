@@ -7,7 +7,7 @@ import fengliu.invincible.block.ModBlocks;
 import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.particle.ModParticle;
 import fengliu.invincible.screen.Angle_Grinder_Screen;
-import fengliu.invincible.screen.Zhen_Yan_Screen;
+import fengliu.invincible.screen.Zhen_Yan_Lv1_Screen;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -29,7 +29,7 @@ public class invincibleClient implements ClientModInitializer  {
 		// 角磨机 UI
 		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, Angle_Grinder_Screen::new);
 		// 一阶阵眼 UI
-		HandledScreens.register(ModScreenHandlers.ZHEN_YAN_1_SCREENHANDLER, Zhen_Yan_Screen.Lv1::new);
+		HandledScreens.register(ModScreenHandlers.ZHEN_YAN_Lv1_SCREENHANDLER, Zhen_Yan_Lv1_Screen::new);
 		
 		
 		// 角磨机 渲染层设置

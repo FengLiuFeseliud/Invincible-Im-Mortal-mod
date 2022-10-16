@@ -70,7 +70,7 @@ public class ModBlocks {
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
 	// 一阶阵眼
-	public static final Block ZHEN_YAN_1 = new Zhen_Yan.Lv1(
+	public static final Block ZHEN_YAN_1 = new Zhen_Yan_Lv1(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
 

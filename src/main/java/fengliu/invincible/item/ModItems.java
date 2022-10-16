@@ -86,6 +86,11 @@ public class ModItems {
 
 	// public static final Item TEST = new MinecartItem(AbstractMinecartEntity.Type.COMMAND_BLOCK, new Settings().maxCount(1));
 	public static void setAllItemReiki(){
+		// 灵铁
+		((ReikiItem) REIKI_IRON).settings(
+			new ReikiSettings()
+				.maxReiki(6500)
+		);
 		// 灵石
 		((ReikiItem) REIKI_STONE_0).settings(
 			new ReikiSettings()

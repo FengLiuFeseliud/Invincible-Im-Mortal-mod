@@ -15,9 +15,9 @@ public class ModBlockEntitys {
         FabricBlockEntityTypeBuilder.create(Angle_Grinder_Entity::new, ModBlocks.ANGLE_GRINDER).build(null)
     );
     // 一阶阵眼
-    public static BlockEntityType<Zhen_Yan_Entity.Lv1> ZHEN_YAN_1_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
-        new Identifier(MOD_ID, "zhen_yan_1_entity"), 
-        FabricBlockEntityTypeBuilder.create(Zhen_Yan_Entity.Lv1::new, ModBlocks.ZHEN_YAN_1).build(null)
+    public static BlockEntityType<Zhen_Yan_Lv1_Entity> ZHEN_YAN_1_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
+        new Identifier(MOD_ID, "zhen_yan_lv1_entity"), 
+        FabricBlockEntityTypeBuilder.create(Zhen_Yan_Lv1_Entity::new, ModBlocks.ZHEN_YAN_1).build(null)
     );
     
     public static void registryAllBlockEntitys(){

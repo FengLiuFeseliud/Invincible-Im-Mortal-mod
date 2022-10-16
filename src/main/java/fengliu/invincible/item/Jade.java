@@ -58,7 +58,7 @@ public class Jade extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack jadeItemStack = user.getStackInHand(hand);
-        if(jadeItemStack.hasNbt()){
+        if(jadeItemStack.getOrCreateNbt().contains("invincible.jade_lv")){
             return super.use(world, user, hand);
         }
         jadeItemStack.decrement(1);
@@ -103,7 +103,7 @@ public class Jade extends Item {
             stack.setNbt(new NbtCompound());
             return;
         }
-        
         tooltip.add(new TranslatableText(((Jade_Lv) JADE_LV_LIST[jadeLv].getItem()).getTooltipKey()));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }
