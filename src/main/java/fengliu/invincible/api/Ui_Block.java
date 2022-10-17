@@ -7,7 +7,6 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -37,7 +36,7 @@ public class Ui_Block {
 
     public static abstract class Block extends BlockWithEntity {
 
-        protected Class<? extends LootableContainerBlockEntity> BLOCK_ENTITY;
+        public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
         public Block(Settings settings) {
             super(settings);
@@ -100,19 +99,6 @@ public class Ui_Block {
             return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
         }
 
-    }
-
-    public static abstract class Model_Block extends Ui_Block.Block {
-
-        public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-
-        public Model_Block(Settings settings) {
-            super(settings);
-        }
-
-        @Override
-        public abstract VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context);
-
         @Override
         public BlockState getPlacementState(ItemPlacementContext ctx) {
             return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
@@ -132,6 +118,17 @@ public class Ui_Block {
         protected void appendProperties(Builder<net.minecraft.block.Block, BlockState> builder) {
             builder.add(FACING);
         }
+
+    }
+
+    public static abstract class Model_Block extends Ui_Block.Block {
+
+        public Model_Block(Settings settings) {
+            super(settings);
+        }
+
+        @Override
+        public abstract VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context);
     }
     
     public static abstract class Entity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory{

@@ -59,6 +59,11 @@ public class ModItems {
 		new FabricItemSettings()
 			.maxCount(1)
 	);
+	// 未注灵的灵铁
+	public static final ReikiIronEmpty REIKI_IRON_EMPTY = new ReikiIronEmpty(
+		new FabricItemSettings()
+			.maxCount(64)
+	);
 	// 灵铁
 	public static final ReikiIron REIKI_IRON = new ReikiIron(
 		new FabricItemSettings()
@@ -86,6 +91,14 @@ public class ModItems {
 
 	// public static final Item TEST = new MinecartItem(AbstractMinecartEntity.Type.COMMAND_BLOCK, new Settings().maxCount(1));
 	public static void setAllItemReiki(){
+		// 未注灵的灵铁
+		((ReikiItem) REIKI_IRON_EMPTY).settings(
+			new ReikiSettings()
+				.maxReiki(0)
+				.injectionReikTarget(6500)
+				.maxInjectionReiki(7000)
+				.canInjectionReiki(true)
+		);
 		// 灵铁
 		((ReikiItem) REIKI_IRON).settings(
 			new ReikiSettings()
@@ -138,6 +151,8 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_5"), REIKI_STONE_5);
 		// 功法
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "kung_fu"), KUNG_FU);
+		// 未注灵的灵铁
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_empty"), REIKI_IRON_EMPTY);
 		// 灵铁
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron"), REIKI_IRON);
 		// 灵铁剑

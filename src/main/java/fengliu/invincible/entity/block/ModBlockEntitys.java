@@ -14,6 +14,11 @@ public class ModBlockEntitys {
         new Identifier(MOD_ID, "angle_grinder_entity"), 
         FabricBlockEntityTypeBuilder.create(AngleGrinderEntity::new, ModBlocks.ANGLE_GRINDER).build(null)
     );
+    // 注灵台
+    public static BlockEntityType<InjectionReikiStandsEntity> INJECTION_REIKI_STANDS_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
+        new Identifier(MOD_ID, "injection_reiki_stands_entity"), 
+        FabricBlockEntityTypeBuilder.create(InjectionReikiStandsEntity::new, ModBlocks.INJECTION_REIKI_STANDS).build(null)
+    );
     // 一阶阵眼
     public static BlockEntityType<ZhenYanLv1Entity> ZHEN_YAN_1_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
         new Identifier(MOD_ID, "zhen_yan_lv1_entity"), 

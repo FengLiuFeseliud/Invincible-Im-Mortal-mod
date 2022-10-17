@@ -81,6 +81,12 @@ public class ModBlockItems {
 		new FabricItemSettings()
 			.maxCount(64)
 	);
+	// 注灵台
+	public static final BlockItem INJECTION_REIKI_STANDS_ITEM = new InjectionReikiStandsItem(
+		ModBlocks.INJECTION_REIKI_STANDS,
+		new FabricItemSettings()
+			.maxCount(64)
+	);
 	// 一阶阵眼
 	public static final BlockItem ZHEN_YAN_1_ITEM = new ZhenYanItem.Lv1(
 		ModBlocks.ZHEN_YAN_1,
@@ -113,6 +119,8 @@ public class ModBlockItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4_ITEM);
 		// 角磨机
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER_ITEM);
+		// 注灵台
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "injection_reiki_stands"), INJECTION_REIKI_STANDS_ITEM);
 		// 一阶阵眼
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "zhen_yan_1"), ZHEN_YAN_1_ITEM);
     }

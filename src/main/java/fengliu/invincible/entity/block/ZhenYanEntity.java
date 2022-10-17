@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.screen.handler.NotZhenFu_ScreenHandler;
+import fengliu.invincible.screen.handler.NotZhenFuScreenHandler;
 import fengliu.invincible.util.ReikiItemData;
 import fengliu.invincible.util.ZhenFuData;
 import fengliu.invincible.util.ZhenFuData.ZhenFuSettings;
@@ -87,9 +87,11 @@ public abstract class ZhenYanEntity extends Ui_Block.Entity{
             if(be.oldOnPlayerUes.size() != 0){
                 ZhenFuData.onZhenFuEnd(settings, world, pos, state, be);
             }
+            settings.unusable(world, pos, state, be);
             return;
         }
         ReikiItemData.absord(be.settings.Consume, stack1);
+        settings.usable(world, pos, state, be);
 
         List<PlayerEntity> newOnPlayerUes = ZhenFuData.onPlayerUes(settings, world, pos, state, be);
         ZhenFuData.onPlayerEndUes(settings, newOnPlayerUes, world, pos, state, be);
@@ -110,7 +112,7 @@ public abstract class ZhenYanEntity extends Ui_Block.Entity{
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
         if(settings == null){
-            return new NotZhenFu_ScreenHandler(syncId, inventory, this);
+            return new NotZhenFuScreenHandler(syncId, inventory, this);
         }
         return settings.getScreenHandler(syncId, inventory, this, propertyDelegate);
     }

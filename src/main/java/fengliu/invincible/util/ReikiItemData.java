@@ -1,7 +1,13 @@
 package fengliu.invincible.util;
 
+import java.util.Optional;
+
+import fengliu.invincible.entity.block.ImplementedInventory;
+import fengliu.invincible.recipe.InjectionReikiRecipe;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.world.World;
 
 /**
  * 灵气物品
@@ -61,6 +67,13 @@ public class ReikiItemData {
         
         stack.setNbt(nbt);
         return injectionReiki;
+    }
+
+    public static int getTargetNeedReiki(ItemStack stack){
+        if(!canInjectionReiki(stack)){
+            return 0;
+        }
+        return getTargetReiki(stack) - getInitialReiki(stack);
     }
 
     /**
@@ -191,5 +204,49 @@ public class ReikiItemData {
         }
 
         return injection;
+    }
+
+    /**
+     * 注入物品指定灵气量, 完成目标进行配方合成并将物品移至新物品格 (物品栏的一个格子)
+     * @param world 世界
+     * @param injection 灵气量
+     * @param fromStack 从这个物品格移动至新物品格
+     * @param toSlot 移动至的物品格序号
+     * @param be 块存储实体
+     * @return 成功合成为 true
+     */
+    public static boolean injectionToNewItemStack(World world, int injection,  ItemStack fromStack, int toSlot, ImplementedInventory be){
+        ItemStack toStack = be.getStack(toSlot);
+        if(toStack.getCount() == toStack.getMaxCount() || fromStack.isEmpty()){
+            return false;
+        }
+
+        if(!isExceedTargetReiki(fromStack)){
+            injection(tryInjection(injection, false, fromStack), fromStack);
+            return false;
+        }
+
+        SimpleInventory inventory = new SimpleInventory(1);
+        inventory.setStack(0, fromStack);
+        Optional<InjectionReikiRecipe> match = world.getRecipeManager().getFirstMatch(InjectionReikiRecipe.Type.INSTANCE, inventory, world);
+
+        if(!match.isPresent()){
+            return false;
+        }
+
+        ItemStack matchStack  = match.get().getOutput().copy();
+        if(toStack.isEmpty()){
+            be.setStack(toSlot, matchStack);
+        }else if(!toStack.isOf(matchStack.getItem())){
+            return false;
+        }else{
+            be.getStack(toSlot).increment(match.get().getCount());
+        }
+        fromStack.decrement(1);
+
+        NbtCompound nbt = fromStack.getOrCreateNbt();
+        nbt.remove("invincible.reach_target");
+        nbt.putInt("invincible.reiki", getInitialReiki(fromStack));
+        return true;
     }
 }

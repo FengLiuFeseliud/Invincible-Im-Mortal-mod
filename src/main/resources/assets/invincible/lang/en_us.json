@@ -82,6 +82,10 @@
     "block.invincible.angle_grinder.name": "角磨机",
     "block.invincible.angle_grinder.tooltip": "能将玉石原石打磨出来，不过玉石品质全看运气...",
 
+    "block.invincible.injection_reiki_stands": "注灵台",
+    "block.invincible.injection_reiki_stands.name": "注灵台",
+    "block.invincible.injection_reiki_stands.tooltip": "吸收附近灵气注入至物品，节省了注入灵气的人力",
+
     "block.invincible.zhen_yan_1": "一阶阵眼",
     "block.invincible.zhen_yan_1.name": "一阶阵眼",
     "block.invincible.zhen_yan_1.tooltip": "一阶阵法的核心",
@@ -129,8 +133,11 @@
     "item.invincible.kung_fu": "功法",
     "item.invincible.kung_fu.tooltip": "学习修炼！",
 
+    "item.invincible.reiki_iron_empty": "未注入灵气的灵铁",
+    "item.invincible.reiki_iron_empty.tooltip": "虽然可以被注入灵气了，但是现在还没有灵气",
+    
     "item.invincible.reiki_iron": "灵铁",
-    "item.invincible.reiki_iron.tooltip": "可以被注入真元，比一般的铁锭强",
+    "item.invincible.reiki_iron.tooltip": "被注入了灵气可以容纳真元，比一般的铁锭强",
 
     "item.invincible.reiki_iron_sword": "灵铁剑",
     "item.invincible.reiki_iron_sword.skill_1": "注元",

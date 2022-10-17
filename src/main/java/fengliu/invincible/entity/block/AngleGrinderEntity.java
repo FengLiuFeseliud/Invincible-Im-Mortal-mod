@@ -1,6 +1,9 @@
 package fengliu.invincible.entity.block;
 
+import org.jetbrains.annotations.Nullable;
+
 import fengliu.invincible.api.Ui_Block;
+import fengliu.invincible.block.AngleGrinder;
 import fengliu.invincible.item.ModItems;
 import fengliu.invincible.screen.handler.AngleGrinderScreenHandler;
 import net.minecraft.block.BlockState;
@@ -13,6 +16,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class AngleGrinderEntity extends Ui_Block.Entity {
@@ -75,6 +79,37 @@ public class AngleGrinderEntity extends Ui_Block.Entity {
         }
         stack1.decrement(1);
         be.tick_count = 0;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
+        // 漏斗只能从背后输入至第一个格子
+        if(side == Direction.UP || side == Direction.DOWN || slot == 1) {
+            return false;
+        }
+
+        return switch (this.getWorld().getBlockState(this.pos).get(AngleGrinder.FACING)){
+            case EAST ->
+                side == Direction.WEST;
+            case WEST ->
+                side == Direction.EAST;
+            case NORTH ->
+                side == Direction.SOUTH;
+            case SOUTH ->
+                side == Direction.NORTH;
+            default ->
+                false;
+            
+        };
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        // 漏斗只能从产出格并且在下面才能输出
+        if(side == Direction.DOWN && slot == 1) {
+            return true;
+        }
+        return false;
     }
 
     @Override

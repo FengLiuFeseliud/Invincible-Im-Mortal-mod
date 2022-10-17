@@ -5,9 +5,11 @@ import java.util.List;
 import fengliu.invincible.api.Ui_Block;
 import fengliu.invincible.entity.block.ZhenYanEntity;
 import fengliu.invincible.item.ModItems;
-import fengliu.invincible.screen.handler.NotZhenFu_ScreenHandler;
+import fengliu.invincible.screen.handler.NotZhenFuScreenHandler;
 import fengliu.invincible.util.CheckStructure.Structure;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -130,7 +132,7 @@ public class ZhenFuData {
             try {
                 return screenHandler.getConstructor(int.class, PlayerInventory.class, Inventory.class).newInstance(syncId, playerInventory, inventory);
             } catch (Exception e) {
-                return new NotZhenFu_ScreenHandler(syncId, playerInventory, inventory);
+                return new NotZhenFuScreenHandler(syncId, playerInventory, inventory);
             }
         }
 
@@ -138,7 +140,7 @@ public class ZhenFuData {
             try {
                 return screenHandler.getConstructor(int.class, PlayerInventory.class, Inventory.class, PropertyDelegate.class).newInstance(syncId, playerInventory, inventory, propertyDelegate);
             } catch (Exception e) {
-                return new NotZhenFu_ScreenHandler(syncId, playerInventory, inventory);
+                return new NotZhenFuScreenHandler(syncId, playerInventory, inventory);
             }
         }
 
@@ -154,6 +156,10 @@ public class ZhenFuData {
          */
         public List<PlayerEntity> getInAllPlayer(World world, BlockPos pos){
             return Structure.getChunkScopeAllPlayer(world, pos, Highly);
+        }
+
+        public List<BlockEntity> getInAllBlockEntity(Block block, World world, BlockPos pos){
+            return Structure.getChunkScopeBlockEntity(block, world, pos, Highly);
         }
 
         /**
@@ -198,6 +204,14 @@ public class ZhenFuData {
          * 将在玩家从阵法中出去时执行
          */
         public abstract void endEffect(World world, BlockPos pos, BlockState state, Ui_Block.Entity be, PlayerEntity player);
+        /**
+         * 将在每 tick 阵法可用时执行
+         */
+        public abstract void usable(World world, BlockPos pos, BlockState state, Ui_Block.Entity be);
+        /**
+         * 将在阵法不可用时执行
+         */
+        public abstract void unusable(World world, BlockPos pos, BlockState state, Ui_Block.Entity be);
     }
 
     public interface ZhenFus {

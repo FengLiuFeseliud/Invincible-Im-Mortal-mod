@@ -5,11 +5,13 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
@@ -67,6 +69,28 @@ public class CheckStructure {
             world.getChunk(chunkPos.x + x, chunkPos.z + z)
         };
         return chunks;
+    }
+
+    /**
+     * 获取指定中心点的指定范围所有区块
+     * @param world 世界
+     * @param pos 中心点方块坐标
+     * @param x 从中心点区块开始 x 方向半径
+     * @param z 从中心点区块开始 z 方向半径
+     * @return 区块列表
+     */
+    public static List<WorldChunk> getAllChunk(World world, BlockPos pos, int x, int z){
+        ChunkPos chunkPos = world.getChunk(pos).getPos();
+        List<WorldChunk> worldChunks = new ArrayList<>();
+        for(int xindex = x * 2 + 1; 0 < xindex; --xindex){
+            for(int zindex = z * 2 + 1; 0 < zindex; --zindex){
+                worldChunks.add(world.getChunk(
+                    chunkPos.x - (x - xindex + 1),
+                    chunkPos.z - (z - zindex + 1)
+                ));
+            }
+        }
+        return worldChunks;
     }
 
     /**
@@ -229,6 +253,28 @@ public class CheckStructure {
          */
         public List<PlayerEntity> getChunkScopeAllPlayer(World world, BlockPos pos, int highly){
             return world.getEntitiesByClass(PlayerEntity.class, getChunkScopeBox(world, pos, highly), EntityPredicates.VALID_ENTITY);
+        }
+
+        /**
+         * 获取范围区块中的所有指定类型块实体
+         * @param block 方块
+         * @param world 世界
+         * @param pos 中心点方块坐标
+         * @param highly 盒子高度
+         * @return 块实体列表
+         */
+        public List<BlockEntity> getChunkScopeBlockEntity(Block block, World world, BlockPos pos, int highly){
+            List<BlockEntity> blockEntitys = new ArrayList<>();
+            Box box = getChunkScopeBox(world, pos, highly);
+
+            for(WorldChunk chunk: getAllChunk(world, pos, chunkScopeX, chunkScopeZ)){
+                chunk.getBlockEntities().forEach((blockEntityPos, blockEntity) -> {
+                    if(blockEntity.getCachedState().isOf(block) && box.contains(new Vec3d(blockEntityPos.getX(), blockEntityPos.getY(), blockEntityPos.getZ()))){
+                        blockEntitys.add(blockEntity);
+                    }
+                });
+            }
+            return blockEntitys;
         }
     }
 }

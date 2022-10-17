@@ -13,6 +13,7 @@ import fengliu.invincible.item.ModItems;
 import fengliu.invincible.item.block.ModBlockItems;
 import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.particle.ModParticle;
+import fengliu.invincible.recipe.ModRecipes;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
 import fengliu.invincible.world.ModWorlds;
 
@@ -31,6 +32,8 @@ public class invincibleMod implements ModInitializer {
 		ModEntitys.registryAllEntitys();
 
 		ModParticle.registerAllParticles();
+
+		ModRecipes.registerAllRecipe();
 
 		ModScreenHandlers.registerAllScreenHandlers();
 

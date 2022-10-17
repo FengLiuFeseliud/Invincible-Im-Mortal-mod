@@ -69,6 +69,10 @@ public class ModBlocks {
 	public static final Block ANGLE_GRINDER = new AngleGrinder(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
+	// 注灵台
+	public static final Block INJECTION_REIKI_STANDS = new InjectionReikiStands(
+		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
+	);
 	// 一阶阵眼
 	public static final Block ZHEN_YAN_1 = new ZhenYanLv1(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
@@ -99,6 +103,8 @@ public class ModBlocks {
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4);
 		// 角磨机
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER);
+		// 注灵台
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "injection_reiki_stands"), INJECTION_REIKI_STANDS);
 		// 一阶阵眼
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "zhen_yan_1"), ZHEN_YAN_1);
     }

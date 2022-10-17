@@ -7,6 +7,7 @@ import fengliu.invincible.block.ModBlocks;
 import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.particle.ModParticle;
 import fengliu.invincible.screen.AngleGrinderScreen;
+import fengliu.invincible.screen.InjectionReikiStandsScreen;
 import fengliu.invincible.screen.JuLingZhenLv1Screen;
 import fengliu.invincible.screen.NotZhenFuScreen;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
@@ -29,6 +30,8 @@ public class invincibleClient implements ClientModInitializer  {
 
 		// 角磨机 UI
 		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, AngleGrinderScreen::new);
+		// 注灵台 UI
+		HandledScreens.register(ModScreenHandlers.INJECTION_REIKI_STANDS_SCREENHANDLER, InjectionReikiStandsScreen::new);
 		// 错误阵法 UI
 		HandledScreens.register(ModScreenHandlers.NOT_ZHEN_FU_SCREENHANDLER, NotZhenFuScreen::new);
 		// 一阶聚灵阵 UI

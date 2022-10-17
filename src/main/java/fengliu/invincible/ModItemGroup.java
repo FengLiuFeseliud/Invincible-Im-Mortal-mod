@@ -63,7 +63,9 @@ public class ModItemGroup {
 			.icon(() -> new ItemStack(ModBlocks.ANGLE_GRINDER))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModBlocks.ANGLE_GRINDER));
+				stacks.add(new ItemStack(ModBlocks.INJECTION_REIKI_STANDS));
 				stacks.add(new ItemStack(ModItems.JADE));
+				stacks.add(new ItemStack(ModItems.REIKI_IRON_EMPTY));
 				stacks.add(new ItemStack(ModItems.REIKI_IRON));
 			})
 			.build();

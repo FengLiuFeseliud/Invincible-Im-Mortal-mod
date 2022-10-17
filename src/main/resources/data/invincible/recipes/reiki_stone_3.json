@@ -1,8 +1,8 @@
 {
     "type": "invincible:injection_reiki_recipe",
     "input": {
-        "item": "invincible:reiki_iron_empty"
+        "item": "invincible:reiki_stone_2"
     },
-    "result": "invincible:reiki_iron",
+    "result": "invincible:reiki_stone_3",
     "count": 1
 }
