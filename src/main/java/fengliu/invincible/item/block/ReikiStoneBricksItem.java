@@ -10,9 +10,9 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 
-public class Reiki_Stone_Bricks_Item extends BlockItem {
+public class ReikiStoneBricksItem extends BlockItem {
 
-    public Reiki_Stone_Bricks_Item(Block block, Settings settings) {
+    public ReikiStoneBricksItem(Block block, Settings settings) {
         super(block, settings);
     }
     

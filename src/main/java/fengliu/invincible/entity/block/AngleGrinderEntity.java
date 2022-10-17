@@ -2,7 +2,7 @@ package fengliu.invincible.entity.block;
 
 import fengliu.invincible.api.Ui_Block;
 import fengliu.invincible.item.ModItems;
-import fengliu.invincible.screen.handler.Angle_Grinder_ScreenHandler;
+import fengliu.invincible.screen.handler.AngleGrinderScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,7 +15,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Angle_Grinder_Entity extends Ui_Block.Entity {
+public class AngleGrinderEntity extends Ui_Block.Entity {
 
     private int tick_count;
 
@@ -40,14 +40,14 @@ public class Angle_Grinder_Entity extends Ui_Block.Entity {
         
     };
 
-    public Angle_Grinder_Entity(BlockPos blockPos, BlockState blockState) {
+    public AngleGrinderEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntitys.ANGLE_GRINDER_ENTITY, blockPos, blockState);
 
         this.setMaxItemStack(2);
     }
 
     // 10秒 (200 tick) 生成一个玉石
-    public static void tick(World world, BlockPos pos, BlockState state, Angle_Grinder_Entity be){
+    public static void tick(World world, BlockPos pos, BlockState state, AngleGrinderEntity be){
         if(world.isClient){
             return;
         }
@@ -96,7 +96,7 @@ public class Angle_Grinder_Entity extends Ui_Block.Entity {
 
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new Angle_Grinder_ScreenHandler(syncId, inventory, this, propertyDelegate);
+        return new AngleGrinderScreenHandler(syncId, inventory, this, propertyDelegate);
     }
     
 }

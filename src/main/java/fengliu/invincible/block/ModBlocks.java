@@ -66,11 +66,11 @@ public class ModBlocks {
 		UniformIntProvider.create(12, 24)
 	);
 	// 角磨机
-	public static final Block ANGLE_GRINDER = new Angle_Grinder(
+	public static final Block ANGLE_GRINDER = new AngleGrinder(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
 	// 一阶阵眼
-	public static final Block ZHEN_YAN_1 = new Zhen_Yan_Lv1(
+	public static final Block ZHEN_YAN_1 = new ZhenYanLv1(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
 

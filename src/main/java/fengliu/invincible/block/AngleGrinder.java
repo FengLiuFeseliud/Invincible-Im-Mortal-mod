@@ -1,7 +1,7 @@
 package fengliu.invincible.block;
 
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.entity.block.Angle_Grinder_Entity;
+import fengliu.invincible.entity.block.AngleGrinderEntity;
 import fengliu.invincible.entity.block.ModBlockEntitys;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -17,32 +17,32 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class Angle_Grinder extends Ui_Block.Model_Block{
+public class AngleGrinder extends Ui_Block.Model_Block{
 
-    public Angle_Grinder(Settings settings) {
+    public AngleGrinder(Settings settings) {
         super(settings);
     }
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntitys.ANGLE_GRINDER_ENTITY, Angle_Grinder_Entity::tick);
+        return checkType(type, ModBlockEntitys.ANGLE_GRINDER_ENTITY, AngleGrinderEntity::tick);
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new Angle_Grinder_Entity(pos, state);
+        return new AngleGrinderEntity(pos, state);
     }
 
     @Override
     public void openHandledScreen(BlockEntity entity, PlayerEntity player){
-        if(entity instanceof Angle_Grinder_Entity){
-            player.openHandledScreen((Angle_Grinder_Entity) entity);
+        if(entity instanceof AngleGrinderEntity){
+            player.openHandledScreen((AngleGrinderEntity) entity);
         }
     }
 
     @Override
     public void updateComparators(BlockEntity entity, BlockPos pos, World world){
-        if(entity instanceof Angle_Grinder_Entity){
+        if(entity instanceof AngleGrinderEntity){
             ItemScatterer.spawn(world, pos, (Inventory)((Object) entity));
             world.updateComparators(pos, this);
         }

@@ -9,16 +9,16 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.slot.Slot;
 
-public class Angle_Grinder_ScreenHandler extends BaseScreenHandler {
+public class AngleGrinderScreenHandler extends BaseScreenHandler {
 
     public Inventory inventory;
     private final PropertyDelegate propertyDelegate;
 
-    public Angle_Grinder_ScreenHandler(int syncId, PlayerInventory playerInventory) {
+    public AngleGrinderScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(1));
     }
 
-    public Angle_Grinder_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
+    public AngleGrinderScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
         super(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, syncId);
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;

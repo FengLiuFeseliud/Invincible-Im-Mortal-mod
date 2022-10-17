@@ -9,16 +9,15 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 
-public class Jade_Rough_Stone extends Item {
+public class ReikiIron extends Item {
 
-    public Jade_Rough_Stone(Settings settings) {
+    public ReikiIron(Settings settings) {
         super(settings);
     }
-
+    
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(new TranslatableText("item.invincible.jade_rough_stone.tooltip"));
+        tooltip.add(new TranslatableText("item.invincible.reiki_iron.tooltip"));
         super.appendTooltip(stack, world, tooltip, context);
     }
-    
 }

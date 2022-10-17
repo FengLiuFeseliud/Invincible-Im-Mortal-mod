@@ -3,7 +3,7 @@ package fengliu.invincible.util;
 import java.util.List;
 
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.entity.block.Zhen_Yan_Lv1_Entity;
+import fengliu.invincible.entity.block.ZhenYanEntity;
 import fengliu.invincible.item.ModItems;
 import fengliu.invincible.screen.handler.NotZhenFu_ScreenHandler;
 import fengliu.invincible.util.CheckStructure.Structure;
@@ -11,9 +11,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
@@ -50,8 +52,14 @@ public class ZhenFuData {
         for(PlayerEntity player: players){
             settings.effect(world, pos, state, be, player);
         }
-        
         return players;
+    }
+
+    public static void onZhenFuEnd(ZhenFuSettings settings, World world, BlockPos pos, BlockState state, ZhenYanEntity be) {
+        for(PlayerEntity player: settings.getInAllPlayer(world, pos)){
+            settings.endEffect(world, pos, state, be, player);
+        }
+        be.oldOnPlayerUes.clear();
     }
 
     /**
@@ -64,13 +72,14 @@ public class ZhenFuData {
      * @param state 阵眼方块状态
      * @param be 阵眼方块实体
      */
-    public static void onPlayerEndUes(ZhenFuSettings settings, List<PlayerEntity> oldOnPlayerUes, List<PlayerEntity> newOnPlayerUes, World world, BlockPos pos, BlockState state, Zhen_Yan_Lv1_Entity be) {
-        for(PlayerEntity player: oldOnPlayerUes){
+    public static void onPlayerEndUes(ZhenFuSettings settings, List<PlayerEntity> newOnPlayerUes, World world, BlockPos pos, BlockState state, ZhenYanEntity be) {
+        for(PlayerEntity player: be.oldOnPlayerUes){
             if(newOnPlayerUes.contains(player)){
                 continue;
             }
             settings.endEffect(world, pos, state, be, player);
         }
+        be.oldOnPlayerUes = newOnPlayerUes;
     }
 
     /**
@@ -81,6 +90,7 @@ public class ZhenFuData {
         public Class<? extends ScreenHandler> screenHandler;
         public TranslatableText Name;
         public int Highly = 0;
+        public int Consume = 10;
         public int NeedJadeNumber = 0;
 
         public ZhenFuSettings(Structure structure){
@@ -103,6 +113,11 @@ public class ZhenFuData {
             return this;
         }
 
+        public ZhenFuSettings setConsume(int consume){
+            Consume = consume;
+            return this;
+        }
+
         public ZhenFuSettings setNeedJadeNumber(int needJadeNumber){
             NeedJadeNumber = needJadeNumber;
             return this;
@@ -111,11 +126,19 @@ public class ZhenFuData {
         /**
          * 动态实例化 ScreenHandler
          */
-        public ScreenHandler getScreenHandler(int syncId, PlayerInventory inventory){
+        public ScreenHandler getScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory){
             try {
-                return screenHandler.getConstructor(int.class, PlayerInventory.class).newInstance(syncId, inventory);
+                return screenHandler.getConstructor(int.class, PlayerInventory.class, Inventory.class).newInstance(syncId, playerInventory, inventory);
             } catch (Exception e) {
-                return new NotZhenFu_ScreenHandler(syncId, inventory);
+                return new NotZhenFu_ScreenHandler(syncId, playerInventory, inventory);
+            }
+        }
+
+        public ScreenHandler getScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate){
+            try {
+                return screenHandler.getConstructor(int.class, PlayerInventory.class, Inventory.class, PropertyDelegate.class).newInstance(syncId, playerInventory, inventory, propertyDelegate);
+            } catch (Exception e) {
+                return new NotZhenFu_ScreenHandler(syncId, playerInventory, inventory);
             }
         }
 

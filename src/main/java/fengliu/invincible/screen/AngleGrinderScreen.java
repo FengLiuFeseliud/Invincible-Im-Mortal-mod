@@ -3,7 +3,7 @@ package fengliu.invincible.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import fengliu.invincible.invincibleMod;
-import fengliu.invincible.screen.handler.Angle_Grinder_ScreenHandler;
+import fengliu.invincible.screen.handler.AngleGrinderScreenHandler;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -11,11 +11,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class Angle_Grinder_Screen extends HandledScreen<Angle_Grinder_ScreenHandler>{
+public class AngleGrinderScreen extends HandledScreen<AngleGrinderScreenHandler>{
 
     private static final Identifier TEXTTURE = new Identifier(invincibleMod.MOD_ID, "textures/gui/angle_grinder.png");
 
-    public Angle_Grinder_Screen(Angle_Grinder_ScreenHandler handler, PlayerInventory inventory, Text title) {
+    public AngleGrinderScreen(AngleGrinderScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         this.passEvents = false;
         this.backgroundHeight = 167;

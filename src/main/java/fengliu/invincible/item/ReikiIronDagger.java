@@ -10,9 +10,9 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 
-public class Reiki_iron_dagger extends ManaSword {
+public class ReikiIronDagger extends ManaSword {
 
-    public Reiki_iron_dagger(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings,
+    public ReikiIronDagger(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings,
             fengliu.invincible.item.ManaSkillsItem.PostHitManaSkillSettings postHitManaSkillSettings) {
         super(toolMaterial, attackDamage, attackSpeed, settings, postHitManaSkillSettings);
     }

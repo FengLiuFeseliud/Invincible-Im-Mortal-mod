@@ -9,7 +9,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 
-public class Reiki_Stone{
+public class ReikiStone{
 
     public static class Lv0 extends Item {
 

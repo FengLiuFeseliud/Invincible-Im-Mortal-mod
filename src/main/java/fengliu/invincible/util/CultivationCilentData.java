@@ -78,6 +78,10 @@ public class CultivationCilentData {
     }
 
     public float getGain(){
+        if(!EntityData.getPersistentData().contains("gain")){
+            return 1.0f;
+        }
+        
         return EntityData.getPersistentData().getInt("gain");
     }
 

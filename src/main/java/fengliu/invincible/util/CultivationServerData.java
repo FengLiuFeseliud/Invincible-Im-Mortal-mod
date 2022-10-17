@@ -76,12 +76,16 @@ public class CultivationServerData extends CultivationCilentData {
     @Override
     public float getGain() {
         NbtCompound nbt = EntityData.getPersistentData();
-        float gain = nbt.getFloat("gain");
+        float gain = 1.0f;
+
+        if(nbt.contains("gain")){
+            gain = nbt.getFloat("gain");
+        }
 
         if(gain < 0){
-            nbt.putFloat("gain", 100f);
+            nbt.putFloat("gain", 1.0f);
             syncData(EntityData);
-            return 100f;
+            return 1.0f;
         }
         return gain;
     }

@@ -1,10 +1,8 @@
 package fengliu.invincible.structure;
 
-
-import fengliu.invincible.invincibleMod;
 import fengliu.invincible.api.Ui_Block;
 import fengliu.invincible.block.ModBlocks;
-import fengliu.invincible.screen.handler.JuLingZhen_Lv1_ScreenHandler;
+import fengliu.invincible.screen.handler.JuLingZhenLv1ScreenHandler;
 import fengliu.invincible.util.ZhenFuData.ZhenFus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,7 +14,7 @@ import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.CheckStructure.Structure;
 import fengliu.invincible.util.ZhenFuData.ZhenFuSettings;
 
-public class Zhen_Fu_Lv1 implements ZhenFus {
+public class ZhenFuLv1 implements ZhenFus {
     private static final String[][] juLingZhen = {
         {
             "0   0",
@@ -59,7 +57,7 @@ public class Zhen_Fu_Lv1 implements ZhenFus {
             };
         }
             .setName(new TranslatableText("zhen_fu.invincible.ju_ling_zhen.1"))
-            .setScreenHandler(JuLingZhen_Lv1_ScreenHandler.class)
+            .setScreenHandler(JuLingZhenLv1ScreenHandler.class)
             .setNeedJadeNumber(4)
             .setHighly(10)
         

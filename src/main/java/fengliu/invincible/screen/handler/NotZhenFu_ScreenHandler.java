@@ -11,7 +11,7 @@ public class NotZhenFu_ScreenHandler extends BaseScreenHandler{
         this(syncId, playerInventory, new SimpleInventory(0));
     }
 
-    public NotZhenFu_ScreenHandler(int syncId, PlayerInventory playerInventory, SimpleInventory inventory) {
+    public NotZhenFu_ScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(ModScreenHandlers.NOT_ZHEN_FU_SCREENHANDLER, syncId);
         this.inventory = inventory;
         checkSize(inventory, 0);

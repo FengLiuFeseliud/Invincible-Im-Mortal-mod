@@ -1,23 +1,25 @@
-package fengliu.invincible.item;
+package fengliu.invincible.item.block;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.Item;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 
-public class Reiki_iron extends Item {
+public class JadeRoughStoneOre extends BlockItem {
 
-    public Reiki_iron(Settings settings) {
-        super(settings);
+    public JadeRoughStoneOre(Block block, Settings settings) {
+        super(block, settings);
     }
-    
+
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(new TranslatableText("item.invincible.reiki_iron.tooltip"));
+        tooltip.add(new TranslatableText("block.invincible.jade_rough_stone_ore.tooltip"));
         super.appendTooltip(stack, world, tooltip, context);
     }
+    
 }

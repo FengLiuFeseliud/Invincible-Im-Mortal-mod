@@ -2,7 +2,7 @@ package fengliu.invincible.block;
 
 import fengliu.invincible.api.Ui_Block;
 import fengliu.invincible.entity.block.ModBlockEntitys;
-import fengliu.invincible.entity.block.Zhen_Yan_Lv1_Entity;
+import fengliu.invincible.entity.block.ZhenYanLv1Entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -14,44 +14,49 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class Zhen_Yan_Lv1 extends Ui_Block.Model_Block{
-    public Zhen_Yan_Lv1(Settings settings) {
+public class ZhenYanLv1 extends Ui_Block.Model_Block{
+    public ZhenYanLv1(Settings settings) {
         super(settings);
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
-            BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntitys.ZHEN_YAN_1_ENTITY, 
-            (world1, pos, state1, be) -> Zhen_Yan_Lv1_Entity.tick(world1, pos, state1, be)
-        );
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, ModBlockEntitys.ZHEN_YAN_1_ENTITY,  ZhenYanLv1Entity::tick);
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new Zhen_Yan_Lv1_Entity(pos, state);
+        return new ZhenYanLv1Entity(pos, state);
     }
 
     @Override
     public void openHandledScreen(BlockEntity entity, PlayerEntity player){
-        if(entity instanceof Zhen_Yan_Lv1_Entity){
-            player.openHandledScreen((Zhen_Yan_Lv1_Entity) entity);
+        if(entity instanceof ZhenYanLv1Entity){
+            player.openHandledScreen((ZhenYanLv1Entity) entity);
         }
     }
 
     @Override
     public void updateComparators(BlockEntity entity, BlockPos pos, World world){
-        if(entity instanceof Zhen_Yan_Lv1_Entity){
+        if(entity instanceof ZhenYanLv1Entity){
             ItemScatterer.spawn(world, pos, (Inventory)((Object) entity));
             world.updateComparators(pos, this);
         }
     }
 
+    public VoxelShape makeShape(){
+        VoxelShape shape = VoxelShapes.empty();
+        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.16874999999999996, 0.1875, 0.19375, 0.8125, 0.25, 0.81875));
+    
+        return shape;
+    }
+
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return Block.createCuboidShape(0, 0, 0, 16, 5, 16);
+        return makeShape();
     }
 }

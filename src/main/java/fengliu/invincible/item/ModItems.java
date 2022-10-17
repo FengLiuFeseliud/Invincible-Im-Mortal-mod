@@ -15,37 +15,37 @@ import net.minecraft.text.TranslatableText;
 public class ModItems {
     private static final String MOD_ID = invincibleMod.MOD_ID;
     // 灵石
-	public static final Item REIKI_STONE_0 = new Reiki_Stone.Lv0(
+	public static final Item REIKI_STONE_0 = new ReikiStone.Lv0(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 一级灵石
-	public static final Item REIKI_STONE_1 = new Reiki_Stone.Lv1(
+	public static final Item REIKI_STONE_1 = new ReikiStone.Lv1(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 二级灵石
-	public static final Item REIKI_STONE_2 = new Reiki_Stone.Lv2(
+	public static final Item REIKI_STONE_2 = new ReikiStone.Lv2(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 三级灵石
-	public static final Item REIKI_STONE_3 = new Reiki_Stone.Lv3(
+	public static final Item REIKI_STONE_3 = new ReikiStone.Lv3(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 四级灵石
-	public static final Item REIKI_STONE_4= new Reiki_Stone.Lv4(
+	public static final Item REIKI_STONE_4= new ReikiStone.Lv4(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 五级灵石
-	public static final Item REIKI_STONE_5= new Reiki_Stone.Lv5(
+	public static final Item REIKI_STONE_5= new ReikiStone.Lv5(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 玉石原石
-	public static final Item JADE_ROUGH_STONE= new Jade_Rough_Stone(
+	public static final Item JADE_ROUGH_STONE= new JadeRoughStone(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
@@ -55,31 +55,31 @@ public class ModItems {
 			.maxCount(64)
 	);
 	// 功法
-	public static final Kung_Fu KUNG_FU = new Kung_Fu(
+	public static final KungFu KUNG_FU = new KungFu(
 		new FabricItemSettings()
 			.maxCount(1)
 	);
 	// 灵铁
-	public static final Reiki_iron REIKI_IRON = new Reiki_iron(
+	public static final ReikiIron REIKI_IRON = new ReikiIron(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 灵铁剑
-	public static final Reiki_iron_sword REIKI_IRON_SWORD = new Reiki_iron_sword(
+	public static final ReikiIron_sword REIKI_IRON_SWORD = new ReikiIron_sword(
 		ToolMaterials.IRON, 7, 1, 
 			new FabricItemSettings()
 				.maxCount(1),
-			new ManaSkillSettings(Reiki_iron_sword::activeSkill)
+			new ManaSkillSettings(ReikiIron_sword::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(100)
 				.setSkillCd(5)
 	);
 	// 灵铁匕首
-	public static final Reiki_iron_dagger REIKI_IRON_DAGGER = new Reiki_iron_dagger(
+	public static final ReikiIronDagger REIKI_IRON_DAGGER = new ReikiIronDagger(
 		ToolMaterials.IRON, 3, 3, 
 			new FabricItemSettings()
 				.maxCount(1),
-			new PostHitManaSkillSettings(Reiki_iron_dagger::activeSkill)
+			new PostHitManaSkillSettings(ReikiIronDagger::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(20)
 	);

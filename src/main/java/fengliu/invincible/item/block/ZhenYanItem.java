@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 
-public class Zhen_Yan_Item {
+public class ZhenYanItem {
     
     public static class Lv1 extends BlockItem {
 

@@ -6,9 +6,9 @@ import fengliu.invincible.api.Key;
 import fengliu.invincible.block.ModBlocks;
 import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.particle.ModParticle;
-import fengliu.invincible.screen.Angle_Grinder_Screen;
-import fengliu.invincible.screen.JuLingZhen_Lv1_Screen;
-import fengliu.invincible.screen.NotZhenFu_Screen;
+import fengliu.invincible.screen.AngleGrinderScreen;
+import fengliu.invincible.screen.JuLingZhenLv1Screen;
+import fengliu.invincible.screen.NotZhenFuScreen;
 import fengliu.invincible.screen.handler.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -28,11 +28,11 @@ public class invincibleClient implements ClientModInitializer  {
 
 
 		// 角磨机 UI
-		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, Angle_Grinder_Screen::new);
+		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, AngleGrinderScreen::new);
 		// 错误阵法 UI
-		HandledScreens.register(ModScreenHandlers.NOT_ZHEN_FU_SCREENHANDLER, NotZhenFu_Screen::new);
+		HandledScreens.register(ModScreenHandlers.NOT_ZHEN_FU_SCREENHANDLER, NotZhenFuScreen::new);
 		// 一阶聚灵阵 UI
-		HandledScreens.register(ModScreenHandlers.JU_LING_ZHEN_LV1_SCREENHANDLER, JuLingZhen_Lv1_Screen::new);
+		HandledScreens.register(ModScreenHandlers.JU_LING_ZHEN_LV1_SCREENHANDLER, JuLingZhenLv1Screen::new);
 		
 		
 		// 角磨机 渲染层设置
