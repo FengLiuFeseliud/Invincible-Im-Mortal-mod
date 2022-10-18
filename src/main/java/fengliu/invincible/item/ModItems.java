@@ -3,6 +3,7 @@ package fengliu.invincible.item;
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.item.ManaSkillsItem.ManaSkillSettings;
 import fengliu.invincible.item.ManaSkillsItem.PostHitManaSkillSettings;
+import fengliu.invincible.item.ManaSkillsItem.PostMineManaSkillSettings;
 import fengliu.invincible.util.ReikiItem.ReikiSettings;
 import fengliu.invincible.util.ReikiItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -70,11 +71,11 @@ public class ModItems {
 			.maxCount(64)
 	);
 	// 灵铁剑
-	public static final ReikiIron_sword REIKI_IRON_SWORD = new ReikiIron_sword(
+	public static final ReikiIronSword REIKI_IRON_SWORD = new ReikiIronSword(
 		ToolMaterials.IRON, 7, 1, 
 			new FabricItemSettings()
 				.maxCount(1),
-			new ManaSkillSettings(ReikiIron_sword::activeSkill)
+			new ManaSkillSettings(ReikiIronSword::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(100)
 				.setSkillCd(5)
@@ -85,6 +86,15 @@ public class ModItems {
 			new FabricItemSettings()
 				.maxCount(1),
 			new PostHitManaSkillSettings(ReikiIronDagger::activeSkill)
+				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
+				.setConsume(20)
+	);
+	// 灵铁镐
+	public static final ReikiIronPickaxe REIKI_IRON_PICKAXE = new ReikiIronPickaxe(
+		ToolMaterials.IRON, 1, 1,
+			new FabricItemSettings()
+					.maxCount(1),
+			new PostMineManaSkillSettings(ReikiIronPickaxe::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(20)
 	);
@@ -159,6 +169,8 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_sword"), REIKI_IRON_SWORD);
 		// 灵铁匕首
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_dagger"), REIKI_IRON_DAGGER);
+		// 灵铁镐
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_pickaxe"), REIKI_IRON_PICKAXE);
 		// Registry.register(Registry.ITEM, new Identifier(MOD_ID, "test"), TEST);
     }
 }

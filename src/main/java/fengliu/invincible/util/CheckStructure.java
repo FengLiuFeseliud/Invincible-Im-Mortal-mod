@@ -1,11 +1,14 @@
 package fengliu.invincible.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.BlockPos;
@@ -52,6 +55,60 @@ public class CheckStructure {
             allBlocks.add(zBlocks);
         }
         return allBlocks;
+    }
+
+    /**
+     * 获取指定中心点范围方块 (没有层次)
+     * @param world 世界
+     * @param pos 中心点方块坐标
+     * @param x 从中心点开始 x 方向半径
+     * @param y 范围层数
+     * @param z 从中心点开始 z 方向半径
+     * @return 范围所有方块 (块坐标, 块状态)
+     */
+    public static Map<BlockPos, BlockState> getScopeAllBlockToMap(World world, BlockPos pos, int x, int y, int z){
+        Map<BlockPos, BlockState> allBlocks = new HashMap<>();
+        for(int yindex = y - 1; 0 <= yindex; --yindex){
+            for(int zindex = z * 2 + 1; 0 < zindex; --zindex){
+                for(int xindex = x * 2 + 1; 0 < xindex; --xindex){
+                    BlockPos blockPos = new BlockPos(
+                        pos.getX() - (x - xindex + 1), 
+                        pos.getY() + yindex, 
+                        pos.getZ() - (z - zindex + 1)
+                    );
+                    allBlocks.put(blockPos, world.getBlockState(blockPos));
+                }
+            }
+        }
+        return allBlocks;
+    }
+
+    /**
+     * 按实体面向获取指定中心点范围所有方块, 并调整范围至原中心点在范围高度中间
+     * @param world 世界
+     * @param livingEntity 实体
+     * @param pos 中心点方块坐标
+     * @param x 从中心点开始 x 方向半径
+     * @param y 范围层数
+     * @param z 从中心点开始 z 方向半径
+     * @return 范围所有方块 (块坐标, 块状态)
+     */
+    public static Map<BlockPos, BlockState> getLivingEntityLookFacingScopeAllBlock(World world, LivingEntity livingEntity, BlockPos pos, int x, int y, int z){
+        // 移动原中心点至范围高度中间
+        BlockPos newPos = new BlockPos(pos.getX(), pos.getY() - y / 2, pos.getZ());
+
+        return switch (LivingEntityInfo.facing(livingEntity)) {
+            case EAST ->
+                getScopeAllBlockToMap(world, newPos, x, y, z);
+            case NORTH ->
+                getScopeAllBlockToMap(world, newPos, z, y, x);
+            case SOUTH ->
+                getScopeAllBlockToMap(world, newPos, z, y, x);
+            case WEST ->
+                getScopeAllBlockToMap(world, newPos, x, y, z);
+            default ->
+                new HashMap<>();
+        };
     }
 
     /**

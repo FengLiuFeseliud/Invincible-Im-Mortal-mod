@@ -1,29 +1,28 @@
 package fengliu.invincible.item;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-/**
- * 基础真元技能剑
- */
-public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
+public class ManaPickaxe extends PickaxeItem implements ManaSkillsItem {
     private ManaSkillSettings[] ManaSkillSettings;
-    private PostHitManaSkillSettings PostHitManaSkillSettings;
+    private PostMineManaSkillSettings PostMineManaSkillSettings;
 
-    public ManaSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings ...manaSkillsSettings) {
+    public ManaPickaxe(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings ...manaSkillsSettings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         ManaSkillSettings = manaSkillsSettings;
     }
 
-    public ManaSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostHitManaSkillSettings postHitManaSkillSettings, ManaSkillSettings ...manaSkillsSettings) {
+    public ManaPickaxe(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostMineManaSkillSettings postMineManaSkillSettings, ManaSkillSettings ...manaSkillsSettings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
-        PostHitManaSkillSettings = postHitManaSkillSettings;
+        PostMineManaSkillSettings = postMineManaSkillSettings;
         ManaSkillSettings = manaSkillsSettings;
     }
 
@@ -53,19 +52,18 @@ public abstract class ManaSword extends SwordItem implements ManaSkillsItem {
     }
 
     @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if(PostHitManaSkillSettings == null){
-            return super.postHit(stack, target, attacker);
+    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
+        if(PostMineManaSkillSettings == null){
+            return super.postMine(stack, world, state, pos, miner);
         }
         
-        if(!tryUesSkill(PostHitManaSkillSettings, this, (PlayerEntity) attacker)){
-            attacker.getStackInHand(attacker.getActiveHand()).getNbt().remove("invincible.player_attack_damage");
-            return super.postHit(stack, target, attacker);
+        if(!tryUesSkill(PostMineManaSkillSettings, this, (PlayerEntity) miner)){
+            return super.postMine(stack, world, state, pos, miner);
         }
 
-        if(PostHitManaSkillSettings.PostHitSkill.function(stack, target, attacker)){
-            consumeMana(PostHitManaSkillSettings, (PlayerEntity) attacker);
+        if(PostMineManaSkillSettings.PostMineSkill.function(stack, world, state, pos, miner)){
+            consumeMana(PostMineManaSkillSettings, (PlayerEntity) miner);
         }
-        return super.postHit(stack, target, attacker);
+        return super.postMine(stack, world, state, pos, miner);
     }
 }

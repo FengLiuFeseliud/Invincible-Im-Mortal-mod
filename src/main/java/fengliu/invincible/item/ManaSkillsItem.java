@@ -2,6 +2,7 @@ package fengliu.invincible.item;
 
 import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -89,7 +91,6 @@ public interface ManaSkillsItem{
                 if(skillsSettings.SkillCD != 0){
                     player.getItemCooldownManager().set(item, skillsSettings.SkillCD);
                 }
-                cultivationData.consumeMana(skillsSettings.Consume);
                 return true;
             case MANA_INSUFFICIENT:
                 manaInsufficient(player, skillsSettings);
@@ -97,6 +98,10 @@ public interface ManaSkillsItem{
             default:
                 return false;
         }
+    }
+
+    default void consumeMana(ManaSkillSettings skillsSettings, PlayerEntity player){
+        ((IEntityDataSaver) player).getServerCultivationData().consumeMana(skillsSettings.Consume);
     }
 
     /**
@@ -185,6 +190,40 @@ public interface ManaSkillsItem{
         }
     }
 
+    /**
+     * 破坏方块真元技能
+     * 不能设置冷却
+     */
+    public class PostMineManaSkillSettings extends ManaSkillSettings{
+        public final PostMineSkill PostMineSkill;
+
+        /**
+         * 设置技能效果
+         * @param skillFunction 技能函数
+         */
+        public PostMineManaSkillSettings(PostMineSkill skillFunction) {
+            super(null);
+            PostMineSkill = skillFunction;
+        }
+
+        @Override
+        public PostMineManaSkillSettings setName(TranslatableText name){
+            Name = name;
+            return this;
+        }
+        
+        @Override
+        public PostMineManaSkillSettings setConsume(int consume){
+            Consume = consume;
+            return this;
+        }
+
+        @Override
+        public PostMineManaSkillSettings setSkillCd(int skillCD) {
+            return (PostMineManaSkillSettings) super.setSkillCd(0);
+        }
+    }
+
     enum SkillState {
         SKILL_UES, MANA_INSUFFICIENT
     }
@@ -215,5 +254,21 @@ public interface ManaSkillsItem{
          * @return
          */
         boolean function(ItemStack stack, LivingEntity target, LivingEntity attacker);
+    }
+
+    /**
+     * 破坏方块真元技能函数
+     */
+    interface PostMineSkill {
+        /**
+         * 技能函数
+         * @param stack 物品格 (物品栏的一个格子)
+         * @param world 当前维度
+         * @param state 被破坏方块状态
+         * @param pos 被破坏方块坐标
+         * @param miner 破坏方块的实体
+         * @return
+         */
+        boolean function(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner);
     }
 }

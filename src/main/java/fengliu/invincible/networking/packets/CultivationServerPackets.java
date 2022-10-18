@@ -1,6 +1,7 @@
 package fengliu.invincible.networking.packets;
 
 import fengliu.invincible.invincibleMod;
+import fengliu.invincible.item.ManaPickaxe;
 import fengliu.invincible.item.ManaSword;
 import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
@@ -102,6 +103,11 @@ public class CultivationServerPackets {
 
         if(item instanceof ManaSword){
             ((ManaSword) item).setManaSkillSettings(player);
+            return;
+        }
+
+        if(item instanceof ManaPickaxe){
+            ((ManaPickaxe) item).setManaSkillSettings(player);
             return;
         }
 

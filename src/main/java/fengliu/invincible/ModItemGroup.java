@@ -75,6 +75,7 @@ public class ModItemGroup {
 		new Identifier(MOD_ID, "fa_qi_group"))
 			.icon(() -> new ItemStack(ModItems.REIKI_IRON_SWORD))
 			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ModItems.REIKI_IRON_PICKAXE));
 				stacks.add(new ItemStack(ModItems.REIKI_IRON_SWORD));
 				stacks.add(new ItemStack(ModItems.REIKI_IRON_DAGGER));
 			})

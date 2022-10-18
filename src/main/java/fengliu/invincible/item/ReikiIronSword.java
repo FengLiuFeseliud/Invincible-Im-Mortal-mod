@@ -13,8 +13,8 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class ReikiIron_sword extends ManaSword{
-    public ReikiIron_sword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings ...manaSkillsSettings) {
+public class ReikiIronSword extends ManaSword{
+    public ReikiIronSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings ...manaSkillsSettings) {
         super(toolMaterial, attackDamage, attackSpeed, settings, manaSkillsSettings);
     }
 

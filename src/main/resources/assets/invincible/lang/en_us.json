@@ -2,7 +2,9 @@
     "key.invincible":"逆天修仙",
     "key.invincible.cultivation_up":"突破",
     "key.invincible.reiki_practice":"修炼",
+    "key.invincible.cultivation_item": "炼化物品",
     "key.invincible.cultivation_info":"查看修为",
+    "key.invincible.set_ues_skill": "切换技能 / 切换物品技能",
     
     "itemGroup.invincible.item_group": "逆天修仙 - 材料",
     "itemGroup.invincible.block_group": "逆天修仙 - 方块",
@@ -148,6 +150,11 @@
     "item.invincible.reiki_iron_dagger": "灵铁匕首",
     "item.invincible.reiki_iron_dagger.tooltip_2": "注元: 攻击命中触发，增加 2 点伤害",
     "item.invincible.reiki_iron_dagger.tooltip_3": "消耗 20 点真元",
+
+    "item.invincible.reiki_iron_pickaxe": "灵铁镐",
+    "item.invincible.reiki_iron_pickaxe.tooltip": "连一阶法器都算不上，不过可以注入真元强化",
+    "item.invincible.reiki_iron_pickaxe.tooltip_2": "注元: 破坏 3x1x3 的范围",
+    "item.invincible.reiki_iron_pickaxe.tooltip_3": "消耗 20 点真元",
 
     "zhen_fu.invincible.ju_ling_zhen.1": "一阶聚灵阵"
 }

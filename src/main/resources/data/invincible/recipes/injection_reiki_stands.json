@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "RIR",
+        "IPI",
+        "RIR"
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:iron_block"
+        },
+        "R": {
+            "item": "invincible:reiki_stone_0"
+        },
+        "P": {
+            "item": "minecraft:polished_basalt"
+        }
+    },
+    "result": {
+        "item": "invincible:injection_reiki_stands",
+        "count": 1
+    }
+}
