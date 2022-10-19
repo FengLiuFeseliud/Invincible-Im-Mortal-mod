@@ -13,11 +13,6 @@ group = project.maven_group
 repositories {
 	maven { url = "https://maven.blamejared.com" }
 	maven { url = "https://maven.kyrptonaught.dev" }
-
-	maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
-    }
 }
 
 dependencies {
@@ -34,9 +29,6 @@ dependencies {
 
 	// Customportalapi 维度传送门
 	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta51-1.18'
-
-	// LibGui
-	modImplementation "io.github.cottonmc:LibGui:5.4.2+1.18.2"
 }
 
 processResources {
