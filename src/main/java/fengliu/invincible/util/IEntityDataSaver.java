@@ -7,4 +7,6 @@ public interface IEntityDataSaver {
     void writePersistentData(NbtCompound nbt);
     CultivationCilentData getCilentCultivationData();
     CultivationServerData getServerCultivationData();
+    KungFuCilentData getKungFuCilentData();
+    KungFuServerData getKungFuServerData();
 }

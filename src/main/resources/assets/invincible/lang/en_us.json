@@ -4,7 +4,8 @@
     "key.invincible.reiki_practice":"修炼",
     "key.invincible.cultivation_item": "炼化物品",
     "key.invincible.cultivation_info":"查看修为",
-    "key.invincible.set_ues_skill": "切换技能 / 切换物品技能",
+    "key.invincible.set_ues_skill": "切换物品技能",
+    "key.invincible.set_ues_kung_fu": "切换功法",
     
     "itemGroup.invincible.item_group": "逆天修仙 - 材料",
     "itemGroup.invincible.block_group": "逆天修仙 - 方块",

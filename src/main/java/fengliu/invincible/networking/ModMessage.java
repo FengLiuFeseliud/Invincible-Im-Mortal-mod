@@ -16,8 +16,11 @@ public class ModMessage {
     public static final Identifier CULTIVATION_ITEM = new Identifier(MOD_ID, "cultivation_item");
     public static final Identifier CONSUME_MANA = new Identifier(MOD_ID, "consume_mana");
     public static final Identifier SYNC_DATA = new Identifier(MOD_ID, "sync_data");
-
+    
     public static final Identifier SET_SKILL = new Identifier(MOD_ID, "set_skill");
+    public static final Identifier SET_UES_KUNG_FU = new Identifier(MOD_ID, "set_ues_kung_fu");
+    public static final Identifier SET_UES_KUNG_FU_GROUP = new Identifier(MOD_ID, "set_ues_kung_fu_group");
+    public static final Identifier UES_KUNG_FU = new Identifier(MOD_ID, "ues_kung_fu");
 
     public static void registerC2SPackets(){
         ServerPlayNetworking.registerGlobalReceiver(REIKI_PRACTICE, CultivationServerPackets::reiki_practice);
@@ -26,6 +29,9 @@ public class ModMessage {
         ServerPlayNetworking.registerGlobalReceiver(CULTIVATION_INFO, CultivationServerPackets::cultivation_info);
         ServerPlayNetworking.registerGlobalReceiver(CONSUME_MANA, CultivationServerPackets::consumeMana);
         ServerPlayNetworking.registerGlobalReceiver(SET_SKILL, CultivationServerPackets::setUesSkill);
+        ServerPlayNetworking.registerGlobalReceiver(SET_UES_KUNG_FU, CultivationServerPackets::setUesKungFu);
+        ServerPlayNetworking.registerGlobalReceiver(SET_UES_KUNG_FU_GROUP, CultivationServerPackets::setUesKungFuGroup);
+        ServerPlayNetworking.registerGlobalReceiver(UES_KUNG_FU, CultivationServerPackets::uesKungFu);
     }
 
     public static void registerS2CPackets(){

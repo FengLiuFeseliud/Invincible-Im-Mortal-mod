@@ -18,5 +18,8 @@ public class CultivationClientPackets {
         ((IEntityDataSaver) client.player).getPersistentData().putInt("cultivation_level", nbt.getInt("cultivation_level"));
         ((IEntityDataSaver) client.player).getPersistentData().putInt("cultivation_exp", nbt.getInt("cultivation_exp"));
         ((IEntityDataSaver) client.player).getPersistentData().putInt("mana", nbt.getInt("mana"));
+        ((IEntityDataSaver) client.player).getPersistentData().putInt("kung_fu_ues_in", nbt.getInt("kung_fu_ues_in"));
+        ((IEntityDataSaver) client.player).getPersistentData().putInt("kung_fu_group_ues_in", nbt.getInt("kung_fu_group_ues_in"));
+        ((IEntityDataSaver) client.player).getPersistentData().put("can_ues_kung_fu", nbt.get("can_ues_kung_fu"));
     }
 }

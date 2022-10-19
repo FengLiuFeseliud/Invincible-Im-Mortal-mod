@@ -52,8 +52,15 @@ public class invincibleClient implements ClientModInitializer  {
 		KeyBinding cultivation_info  = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.cultivation_info", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.invincible"));
 		// !测试! 消耗所有灵力
 		KeyBinding clear_mana = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.clear_mana", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_U, "key.invincible"));
+		// T键切换物品技能
 		KeyBinding set_ues_skill = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.set_ues_skill", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_T, "key.invincible"));
+		// R键切换功法
+		KeyBinding set_ues_kung_fu = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.set_ues_kung_fu", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.invincible"));
 
+		KeyBinding set_ues_kung_fu_group = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.set_ues_kung_fu_group", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.invincible"));
+
+		KeyBinding ues_kung_fu = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.invincible.ues_kung_fu", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "key.invincible"));
+		
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if(client.world == null){
 				// 不在游戏中
@@ -82,6 +89,18 @@ public class invincibleClient implements ClientModInitializer  {
 
 			if(set_ues_skill.wasPressed()) {
 				Key.set_ues_skill(client);
+			}
+
+			if(set_ues_kung_fu.wasPressed()) {
+				Key.set_ues_kung_fu(client);
+			}
+
+			if(set_ues_kung_fu_group.wasPressed()) {
+				Key.set_ues_kung_fu_group(client);
+			}
+
+			if(ues_kung_fu.wasPressed()) {
+				Key.ues_kung_fu(client);
 			}
 			
 		});

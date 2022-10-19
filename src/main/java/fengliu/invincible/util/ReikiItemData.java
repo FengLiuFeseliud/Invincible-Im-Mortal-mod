@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import fengliu.invincible.entity.block.ImplementedInventory;
 import fengliu.invincible.recipe.InjectionReikiRecipe;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -206,6 +208,14 @@ public class ReikiItemData {
         return injection;
     }
 
+    public static void decrementItem(ItemStack stack){
+        stack.decrement(1);
+
+        NbtCompound nbt = stack.getOrCreateNbt();
+        nbt.remove("invincible.reach_target");
+        nbt.putInt("invincible.reiki", getInitialReiki(stack));
+    }
+
     /**
      * 注入物品指定灵气量, 完成目标进行配方合成并将物品移至新物品格 (物品栏的一个格子)
      * @param world 世界
@@ -242,11 +252,36 @@ public class ReikiItemData {
         }else{
             be.getStack(toSlot).increment(match.get().getCount());
         }
-        fromStack.decrement(1);
+        decrementItem(fromStack);
+        return true;
+    }
 
-        NbtCompound nbt = fromStack.getOrCreateNbt();
-        nbt.remove("invincible.reach_target");
-        nbt.putInt("invincible.reiki", getInitialReiki(fromStack));
+    /**
+     * 注入物品指定灵气量, 完成目标进行配方合成并掉落
+     * @param world 世界
+     * @param injection 灵气量
+     * @param stack 物品格 (物品栏的一个格子)
+     * @return 成功合成为 true
+     */
+    public static boolean injectionToNewItemEntity(World world, PlayerEntity player, int injection,  ItemStack stack){
+        if(stack.isEmpty()){
+            return false;
+        }
+
+        if(!isExceedTargetReiki(stack)){
+            injection(tryInjection(injection, false, stack), stack);
+            return false;
+        }
+
+        SimpleInventory inventory = new SimpleInventory(1);
+        inventory.setStack(0, stack);
+        Optional<InjectionReikiRecipe> match = world.getRecipeManager().getFirstMatch(InjectionReikiRecipe.Type.INSTANCE, inventory, world);
+        
+        if(!match.isPresent()){
+            return false;
+        }
+        world.spawnEntity(new ItemEntity(world, player.getX(), player.getY(), player.getZ(), match.get().getOutput()));
+        decrementItem(stack);
         return true;
     }
 }

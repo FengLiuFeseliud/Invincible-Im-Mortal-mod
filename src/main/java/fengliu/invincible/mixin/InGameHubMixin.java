@@ -9,6 +9,7 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.client.font.TextRenderer;
 
@@ -22,7 +23,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.util.CultivationCilentData;
 import fengliu.invincible.util.IEntityDataSaver;
+import fengliu.invincible.util.KungFuCilentData;
 import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
+import fengliu.invincible.util.KungFuCilentData.KungFuSettings;
 
 /*
  * 重写原版状态条 以更好显示上千血量
@@ -30,7 +33,7 @@ import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
 
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
-public class ClearHubMixin {
+public class InGameHubMixin {
     private int maxAbsorption = 0;
 
     private int oldAbsorption = 0;
@@ -164,6 +167,37 @@ public class ClearHubMixin {
         }
         TextRenderer renderer = client.textRenderer;
 
+        /**
+         * 功法格
+         */
+        KungFuCilentData kungFuCilentData = ((IEntityDataSaver) player).getKungFuCilentData();
+        // 渲染空功法格
+        DrawableHelper.drawTexture(matrices, 5,  y - 5, 81, 0, 37, 37, TEXTURE_X, TEXTURE_Y);
+        // 渲染空功法 combo 条
+        DrawableHelper.drawTexture(matrices, 47,  y + 22, 118, 0, 60, 5, TEXTURE_X, TEXTURE_Y);
+
+        int comboBarWidth;
+        NbtCompound uesKungFu = kungFuCilentData.getUesKungFu();
+
+        // 计算功法 combo 条
+        if(uesKungFu == null){
+            comboBarWidth = 0;
+        }else{
+            comboBarWidth = Math.round((60 / (float) uesKungFu.getInt("combo_end")) * uesKungFu.getInt("combo_in"));
+        }
+        KungFuSettings settings = kungFuCilentData.getUesKungFuSettings();
+
+        if(kungFuCilentData.getCanUesKungFu().size() != 0){
+            // 渲染功法 combo 条
+            DrawableHelper.drawTexture(matrices, 47,  y + 22, 118, 5, comboBarWidth, 5, TEXTURE_X, TEXTURE_Y);
+
+            RenderSystem.setShaderTexture(0, settings.Texture);
+            // 渲染功法图标
+            DrawableHelper.drawTexture(matrices, 8,  y - 5, 0, 0, 32, 32, 32, 32);
+            // 渲染功法名称
+            renderer.draw(matrices, kungFuCilentData.getUesKungFuSettings().Name.getString(), 47, y + 10,  0xffffff);
+        }
+
         
         if(absorption > oldAbsorption){
             oldAbsorption = absorption;
@@ -247,6 +281,8 @@ public class ClearHubMixin {
         levelName = levelName + " " + cultivationExp + "/" + level.getUpLevelExp();
         // 渲染修为境界
         renderer.draw(matrices, levelName, x + 20, 2, 0xffffff);
+
+
     }
 
     @Overwrite

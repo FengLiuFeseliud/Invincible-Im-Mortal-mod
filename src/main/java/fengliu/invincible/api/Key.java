@@ -49,4 +49,16 @@ public class Key {
     public static void set_ues_skill(MinecraftClient client){
         ClientPlayNetworking.send(ModMessage.SET_SKILL, PacketByteBufs.create());
     }
+
+    public static void set_ues_kung_fu(MinecraftClient client){
+        ClientPlayNetworking.send(ModMessage.SET_UES_KUNG_FU, PacketByteBufs.create());
+    }
+
+    public static void set_ues_kung_fu_group(MinecraftClient client){
+        ClientPlayNetworking.send(ModMessage.SET_UES_KUNG_FU_GROUP, PacketByteBufs.create());
+    }
+
+    public static void ues_kung_fu(MinecraftClient client){
+        ClientPlayNetworking.send(ModMessage.UES_KUNG_FU, PacketByteBufs.create());
+    }
 }

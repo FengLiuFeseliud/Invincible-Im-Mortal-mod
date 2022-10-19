@@ -8,9 +8,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import fengliu.invincible.util.CultivationCilentData;
 import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
+import fengliu.invincible.util.KungFuCilentData;
+import fengliu.invincible.util.KungFuServerData;
 
 /*
  * 为每个实体添加修为数据
@@ -29,6 +32,10 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         persistent_data.putInt("cultivation_level", 0);
         persistent_data.putInt("cultivation_exp", 0);
         persistent_data.putInt("mana", 0);
+        persistent_data.putInt("kung_fu_ues_in", 0);
+        persistent_data.putInt("kung_fu_group_ues_in", 0);
+        persistent_data.put("combo_in", new NbtCompound());
+        persistent_data.put("can_ues_kung_fu", new NbtList());
         this.persistentData = persistent_data;
         return this.persistentData;
     }
@@ -43,29 +50,39 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         return new CultivationServerData(this);
     }
 
+    @Override
+    public KungFuCilentData getKungFuCilentData() {
+        return new KungFuCilentData(this);
+    }
+
+    @Override
+    public KungFuServerData getKungFuServerData() {
+        return new KungFuServerData(this);
+    }
+
     @Inject(method = "writeNbt", at = @At("HEAD"))
     protected void injectWriteNbt(NbtCompound nbt, CallbackInfoReturnable<CallbackInfo> info){
         NbtCompound persistent_data = getPersistentData();
         if(persistent_data != null){
             return;
         }
-        nbt.put("invincible.player_cultivation", persistent_data);
+        nbt.put("invincible.cultivation", persistent_data);
     }
 
     @Inject(method = "readNbt", at = @At("HEAD"))
     protected void injectReadNbt(NbtCompound nbt, CallbackInfo info){
-        if(nbt.contains("invincible.player_cultivation", 10)){
+        if(nbt.contains("invincible.cultivation", 10)){
             return;
         }
-        persistentData = nbt.getCompound("invincible.player_cultivation");
+        persistentData = nbt.getCompound("invincible.cultivation");
     }
 
     @Override
     public void writePersistentData(NbtCompound nbt) {
-        if(!nbt.contains("invincible.player_cultivation", 10)){
+        if(!nbt.contains("invincible.cultivation", 10)){
             return;
         }
-        persistentData = nbt.getCompound("invincible.player_cultivation");
+        persistentData = nbt.getCompound("invincible.cultivation");
     }
 
 }

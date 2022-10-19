@@ -31,12 +31,12 @@ public abstract class ModPlayerDataSaveMixin extends LivingEntity {
         IEntityDataSaver data = (IEntityDataSaver) this;
         NbtCompound cultivationNbtData = data.getPersistentData();
 
-        nbt.put("invincible.player_cultivation", cultivationNbtData);
+        nbt.put("invincible.cultivation", cultivationNbtData);
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("RETURN"))
     public void readCultivationDataFromNbt(NbtCompound nbt, CallbackInfo info) {
-        NbtCompound data = nbt.getCompound("invincible.player_cultivation");
+        NbtCompound data = nbt.getCompound("invincible.cultivation");
         invincibleMod.LOGGER.info(data.toString());
 
         ((IEntityDataSaver) this).writePersistentData(nbt);

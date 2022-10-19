@@ -12,7 +12,7 @@
   ],
   "client": [
     "invincibleMixin",
-    "ClearHubMixin"
+    "InGameHubMixin"
   ],
   "injectors": {
     "defaultRequire": 1

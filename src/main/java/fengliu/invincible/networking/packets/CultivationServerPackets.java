@@ -1,12 +1,13 @@
 package fengliu.invincible.networking.packets;
 
-import fengliu.invincible.invincibleMod;
 import fengliu.invincible.item.ManaPickaxe;
 import fengliu.invincible.item.ManaSword;
 import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
+import fengliu.invincible.util.KungFuServerData;
 import fengliu.invincible.util.ReikiItemData;
 import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
+import fengliu.invincible.util.KungFuCilentData.KungFuTiek;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,6 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.entity.LivingEntity;
 
 
 public class CultivationServerPackets {
@@ -62,25 +62,21 @@ public class CultivationServerPackets {
 
     public static void cultivation_item (MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
         ItemStack itemStack = player.getStackInHand(player.getActiveHand());
+        if(itemStack.isEmpty()){
+            return;
+        }
+        
         if(!ReikiItemData.canInjectionReiki(itemStack)){
             player.sendMessage(new TranslatableText("info.invincible.not_can_injection_reiki_item", itemStack.getName().getString()), false);
             return;
         }
 
-        if(ReikiItemData.isExceedTargetReiki(itemStack)){
-            player.sendMessage(new TranslatableText("info.invincible.is_exceed_injection_target", itemStack.getName().getString()), false);
-            return;
-        }
-
         CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
-        int injectionReiki = ReikiItemData.tryInjection(100, false, itemStack);
-        int consumeMana = Math.round(injectionReiki / 5);
-        if(!cultivationData.consumeMana(consumeMana)){
-            player.sendMessage(new TranslatableText("info.invincible.mana_injection_insufficient", consumeMana - cultivationData.getMana()), false);
+        if(!cultivationData.consumeMana(20)){
+            player.sendMessage(new TranslatableText("info.invincible.mana_injection_insufficient", 20 - cultivationData.getMana()), false);
             return;
         }
-
-        ReikiItemData.injection(injectionReiki, itemStack);
+        ReikiItemData.injectionToNewItemEntity(player.getWorld(), player, 100, itemStack);
     }
 
     public static void cultivation_info (MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
@@ -91,10 +87,8 @@ public class CultivationServerPackets {
     }
 
     public static void consumeMana(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
-        CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
-        cultivationData.consumeMana(buf.readInt());
-        invincibleMod.LOGGER.info("" + ((LivingEntity) player).getMaxHealth());
-        ((LivingEntity) player).setHealth(100);
+        // player.sendMessage(new LiteralText(KungFuData.test()), false);
+        ((IEntityDataSaver) player).getKungFuServerData().upKungFuTiek();
     }
 
     public static void setUesSkill(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
@@ -111,5 +105,28 @@ public class CultivationServerPackets {
             return;
         }
 
+    }
+
+    public static void setUesKungFu(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
+        ((IEntityDataSaver) player).getKungFuServerData().setNextUesKungFu();
+    }
+
+    public static void setUesKungFuGroup(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
+        ((IEntityDataSaver) player).getKungFuServerData().setNextUesKungFuGroup();
+    }
+
+    public static void uesKungFu(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
+        KungFuServerData kungFuServerData = ((IEntityDataSaver) player).getKungFuServerData();
+        KungFuTiek tiek = kungFuServerData.ues();
+        if(tiek == null){
+            return;
+        }   
+        
+        if(!kungFuServerData.consume()){
+            return;
+        }
+
+        tiek.function(server, player);
+        kungFuServerData.comboUes();
     }
 }
