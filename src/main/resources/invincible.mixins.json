@@ -6,13 +6,15 @@
   "mixins": [
     "ModEntityDataSaverMixin",
     "ModPlayerDataSaveMixin",
+    "BookServerPlayerEntityMixin",
     "EnchantmentMixin",
     "ItemStackMixin",
     "ItemMixin"
   ],
   "client": [
     "invincibleMixin",
-    "InGameHubMixin"
+    "InGameHubMixin",
+    "BookClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

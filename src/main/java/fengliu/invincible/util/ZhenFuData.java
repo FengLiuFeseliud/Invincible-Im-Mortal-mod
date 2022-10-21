@@ -3,7 +3,7 @@ package fengliu.invincible.util;
 import java.util.List;
 
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.entity.block.ZhenYanEntity;
+import fengliu.invincible.block.entity.ZhenYanEntity;
 import fengliu.invincible.item.ModItems;
 import fengliu.invincible.screen.handler.NotZhenFuScreenHandler;
 import fengliu.invincible.util.CheckStructure.Structure;
@@ -212,6 +212,10 @@ public class ZhenFuData {
          * 将在阵法不可用时执行
          */
         public abstract void unusable(World world, BlockPos pos, BlockState state, Ui_Block.Entity be);
+        /**
+         * 将在阵法被破坏时执行
+         */
+        public abstract void onBreak(World world, BlockPos pos, BlockState state, Ui_Block.Entity be);
     }
 
     public interface ZhenFus {

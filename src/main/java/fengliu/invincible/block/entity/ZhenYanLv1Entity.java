@@ -1,4 +1,4 @@
-package fengliu.invincible.entity.block;
+package fengliu.invincible.block.entity;
 
 import fengliu.invincible.structure.ZhenFuLv1;
 import fengliu.invincible.util.ZhenFuData.ZhenFus;

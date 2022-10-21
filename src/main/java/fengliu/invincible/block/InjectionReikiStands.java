@@ -1,8 +1,8 @@
 package fengliu.invincible.block;
 
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.entity.block.InjectionReikiStandsEntity;
-import fengliu.invincible.entity.block.ModBlockEntitys;
+import fengliu.invincible.block.entity.InjectionReikiStandsEntity;
+import fengliu.invincible.block.entity.ModBlockEntitys;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

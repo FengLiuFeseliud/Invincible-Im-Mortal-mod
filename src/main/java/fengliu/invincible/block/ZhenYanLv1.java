@@ -1,8 +1,11 @@
 package fengliu.invincible.block;
 
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.entity.block.ModBlockEntitys;
-import fengliu.invincible.entity.block.ZhenYanLv1Entity;
+import fengliu.invincible.block.entity.ModBlockEntitys;
+import fengliu.invincible.block.entity.ZhenYanEntity;
+import fengliu.invincible.block.entity.ZhenYanLv1Entity;
+import fengliu.invincible.util.ZhenFuData;
+import fengliu.invincible.util.ZhenFuData.ZhenFuSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
@@ -16,6 +19,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 
 public class ZhenYanLv1 extends Ui_Block.Model_Block{
     public ZhenYanLv1(Settings settings) {
@@ -26,6 +30,46 @@ public class ZhenYanLv1 extends Ui_Block.Model_Block{
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return checkType(type, ModBlockEntitys.ZHEN_YAN_1_ENTITY,  ZhenYanLv1Entity::tick);
     }
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if(world.isClient){
+            super.onBreak(world, pos, state, player);
+            return;
+        }
+
+        ZhenYanEntity entity = (ZhenYanEntity) world.getBlockEntity(pos);
+        ZhenFuSettings settings = entity.settings;
+        if(settings == null){
+            super.onBreak(world, pos, state, player);
+            return;
+        }
+        // 阵眼被破坏
+        ZhenFuData.onZhenFuEnd(entity.settings, world, pos, state, entity);
+        entity.settings.onBreak(world, pos, state, entity);
+        super.onBreak(world, pos, state, player);
+    }
+
+    @Override
+    public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
+        if(world.isClient){
+            super.onDestroyedByExplosion(world, pos, explosion);
+            return;
+        }
+        // ZhenYanEntity entity = (ZhenYanEntity) world.getBlockEntity(pos);
+        // ZhenFuSettings settings = entity.settings;
+        // if(settings == null){
+        //     super.onDestroyedByExplosion(world, pos, explosion);
+        //     return;
+        // }
+
+        // BlockState state = world.getBlockState(pos);
+        // // 阵眼被破坏
+        // ZhenFuData.onZhenFuEnd(entity.settings, world, pos, state, entity);
+        // entity.settings.onBreak(world, pos, state, entity);
+        super.onDestroyedByExplosion(world, pos, explosion);
+    }
+
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -49,8 +93,8 @@ public class ZhenYanLv1 extends Ui_Block.Model_Block{
 
     public VoxelShape makeShape(){
         VoxelShape shape = VoxelShapes.empty();
-        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.16874999999999996, 0.1875, 0.19375, 0.8125, 0.25, 0.81875));
-    
+        shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0, 0, 0, 1, 0.25, 1));
+        
         return shape;
     }
 

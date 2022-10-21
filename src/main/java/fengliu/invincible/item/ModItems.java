@@ -4,6 +4,7 @@ import fengliu.invincible.invincibleMod;
 import fengliu.invincible.item.ManaSkillsItem.ManaSkillSettings;
 import fengliu.invincible.item.ManaSkillsItem.PostHitManaSkillSettings;
 import fengliu.invincible.item.ManaSkillsItem.PostMineManaSkillSettings;
+import fengliu.invincible.item.kungfu.JuQiKung;
 import fengliu.invincible.util.ReikiItem.ReikiSettings;
 import fengliu.invincible.util.ReikiItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -55,8 +56,8 @@ public class ModItems {
 		new FabricItemSettings()
 			.maxCount(64)
 	);
-	// 功法
-	public static final KungFu KUNG_FU = new KungFu(
+	// 聚气功
+	public static final JuQiKung JU_QI_KUNG = new JuQiKung(
 		new FabricItemSettings()
 			.maxCount(1)
 	);
@@ -159,8 +160,8 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_4"), REIKI_STONE_4);
 		// 五级灵石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_5"), REIKI_STONE_5);
-		// 功法
-		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "kung_fu"), KUNG_FU);
+		// 聚气功
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "ju_qi_kung"), JU_QI_KUNG);
 		// 未注灵的灵铁
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_empty"), REIKI_IRON_EMPTY);
 		// 灵铁

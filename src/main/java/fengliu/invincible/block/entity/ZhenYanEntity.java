@@ -1,4 +1,4 @@
-package fengliu.invincible.entity.block;
+package fengliu.invincible.block.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +76,11 @@ public abstract class ZhenYanEntity extends Ui_Block.Entity{
         }
 
         if(!settings.checkZhenFu(world, pos)){
+            if(settings != null){
+                // 阵法结构被破坏
+                ZhenFuData.onZhenFuEnd(settings, world, pos, state, be);
+                settings.onBreak(world, pos, state, be);
+            }
             be.settings = null;
             return;
         }
@@ -84,12 +89,14 @@ public abstract class ZhenYanEntity extends Ui_Block.Entity{
         be.item_max_reiki = ReikiItemData.getMaxReiki(stack1);
         be.item_reiki = ReikiItemData.getReiki(stack1);
         if(stack1.isEmpty()){
+            // 阵法灵气不足
             if(be.oldOnPlayerUes.size() != 0){
                 ZhenFuData.onZhenFuEnd(settings, world, pos, state, be);
             }
             settings.unusable(world, pos, state, be);
             return;
         }
+        // 阵法正常运行
         ReikiItemData.absord(be.settings.Consume, stack1);
         settings.usable(world, pos, state, be);
 

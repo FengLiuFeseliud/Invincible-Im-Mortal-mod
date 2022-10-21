@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "invincible:block/dan_lu"
+        },
+        "facing=east": {
+            "model": "invincible:block/dan_lu",
+            "y": 90
+        },
+        "facing=south": {
+            "model": "invincible:block/dan_lu",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "invincible:block/dan_lu",
+            "y": 270
+        }
+    }
+}

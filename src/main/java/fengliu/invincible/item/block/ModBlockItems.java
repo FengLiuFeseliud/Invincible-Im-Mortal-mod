@@ -87,6 +87,12 @@ public class ModBlockItems {
 		new FabricItemSettings()
 			.maxCount(64)
 	);
+	// 丹炉
+	public static final BlockItem DAN_LU = new BlockItem(
+		ModBlocks.DAN_LU,
+		new FabricItemSettings()
+			.maxCount(64)
+	);
 	// 一阶阵眼
 	public static final BlockItem ZHEN_YAN_1_ITEM = new ZhenYanItem.Lv1(
 		ModBlocks.ZHEN_YAN_1,
@@ -121,6 +127,8 @@ public class ModBlockItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER_ITEM);
 		// 注灵台
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "injection_reiki_stands"), INJECTION_REIKI_STANDS_ITEM);
+		// 丹炉
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "dan_lu"), DAN_LU);
 		// 一阶阵眼
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "zhen_yan_1"), ZHEN_YAN_1_ITEM);
     }

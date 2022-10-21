@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fengliu.invincible.block.ModBlocks;
+import fengliu.invincible.block.entity.ModBlockEntitys;
 import fengliu.invincible.entity.ModEntitys;
-import fengliu.invincible.entity.block.ModBlockEntitys;
 import fengliu.invincible.event.ModServerTickEvent;
 import fengliu.invincible.item.ModItems;
 import fengliu.invincible.item.block.ModBlockItems;

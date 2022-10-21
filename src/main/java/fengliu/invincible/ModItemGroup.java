@@ -44,9 +44,9 @@ public class ModItemGroup {
 	// 功法组
 	public static final ItemGroup KUNG_FU_GROUP = FabricItemGroupBuilder.create(
 		new Identifier(MOD_ID, "kung_fu_group"))
-			.icon(() -> new ItemStack(ModItems.KUNG_FU))
+			.icon(() -> new ItemStack(ModItems.JU_QI_KUNG))
 			.appendItems(stacks -> {
-				stacks.add(new ItemStack(ModItems.KUNG_FU));
+				stacks.add(new ItemStack(ModItems.JU_QI_KUNG));
 			})
 			.build();
 	// 阵法组

@@ -1,4 +1,4 @@
-package fengliu.invincible.entity.block;
+package fengliu.invincible.block.entity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

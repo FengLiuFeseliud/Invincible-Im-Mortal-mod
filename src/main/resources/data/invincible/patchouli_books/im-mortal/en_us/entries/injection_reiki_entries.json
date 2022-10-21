@@ -1,0 +1,40 @@
+{
+    "name": "注灵",
+    "icon": "invincible:injection_reiki_stands",
+    "category": "invincible:cultivation_categories",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "如果没有设置按键并且没有冲突使用 I 键进行注灵, 要进行注灵必须要达到练气初期, 这样才能控制周边灵气. 注灵也就是向物品注入灵气, 一些物品在注入了一定的灵气会转变为其它物品. 每消耗 20 真元将向物品注入 100 点灵气. 人力注灵十分费力, 我们也可以借助外力, 也就是注灵台"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "minecraft:polished_basalt",
+            "recipe2": "invincible:injection_reiki_stands"
+        },
+        {
+            "type": "patchouli:image",
+            "border": true,
+            "title": "使用注灵台注入",
+            "images": [
+                "invincible:textures/patchouli/injection_reiki_stands.png"
+            ],
+            "text": "自制灵石, 向不包含灵气的灵石注入灵气即可, 会转化为一级灵石. 一级灵石也可以继续注入灵气, 不过更加费时"
+        },
+        {
+            "type": "patchouli:crafting",
+            "text": "了解了基础的注灵就可以制作一些东西了, 比如这个灵铁, 使用不包含灵气的灵石制作不包含灵气的灵铁, 向其中注入灵气即可完成真正的灵铁. 虽说连一阶法器的材料也比不上, 但是在主世界的材料中算是顶尖了",
+            "recipe": "invincible:reiki_iron_empty"
+        },
+        {
+            "type": "patchouli:crafting",
+            "text": "转换完成的灵铁可以制作一些工具武器, 虽然耐久只比铁高些, 但是有可以消耗真元来催动的技能",
+            "recipe": "invincible:reiki_iron_sword"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "invincible:reiki_iron_dagger",
+            "recipe2": "invincible:reiki_iron_pickaxe"
+        }
+    ]
+}

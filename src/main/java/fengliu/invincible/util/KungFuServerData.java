@@ -67,14 +67,6 @@ public class KungFuServerData extends KungFuCilentData{
         syncData(EntityData);
         return 0;
     }
-
-    public NbtCompound getComboIn(){
-        NbtCompound nbt = EntityData.getPersistentData();
-        if(nbt.contains("combo_in")){
-            return nbt.getCompound("combo_in");
-        }
-        return null;
-    }
     
     /**
      * 设置功法格至下一本功法, 如果为最后一本功法, 返回至第一本
@@ -97,6 +89,9 @@ public class KungFuServerData extends KungFuCilentData{
         syncData(EntityData);
     }
 
+    /**
+     * 设置功法组至下一功法组, 如果为最后一功法组, 返回至第一功法组
+     */
     public void setNextUesKungFuGroup(){
         NbtList canUes = getCanUesKungFu();
         if(canUes.size() == 0){
@@ -115,6 +110,9 @@ public class KungFuServerData extends KungFuCilentData{
         syncData(EntityData);
     }
 
+    /**
+     * 设置当前 combo 功法标记
+     */
     public void setComboIn(){
         NbtCompound nbt = new NbtCompound();
         nbt.putInt("group_ues_in", getKungFuGroupUesIn());
@@ -123,6 +121,10 @@ public class KungFuServerData extends KungFuCilentData{
         EntityData.getPersistentData().put("combo_in", nbt);
     }
 
+    /**
+     * 消耗当前功法需要真元
+     * @return 成功消耗 true
+     */
     public boolean consume(){
         KungFuSettings settings = getUesKungFuSettings();
         if(settings == null){
@@ -130,7 +132,7 @@ public class KungFuServerData extends KungFuCilentData{
         }
 
         CultivationServerData cultivationData = EntityData.getServerCultivationData();
-        if(!cultivationData.consumeMana(settings.Consume * (getUesKungFu().getInt("tieks") + 1))){
+        if(!cultivationData.consumeMana(settings.Consume * (getUesKungFu().getInt("tieks") + 1)) && settings.Consume != 0){
             ((PlayerEntity) EntityData).sendMessage(
                 new TranslatableText("info.invincible.mana_insufficient", settings.Name.getString()), true);
             return false;
@@ -138,6 +140,10 @@ public class KungFuServerData extends KungFuCilentData{
         return true;
     }
 
+    /**
+     * 获取功法当前重天的效果接口
+     * @return
+     */
     public KungFuTiek ues(){
         KungFuSettings settings = getUesKungFuSettings();
         if(settings == null){
@@ -158,9 +164,12 @@ public class KungFuServerData extends KungFuCilentData{
         syncData(EntityData);
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean upKungFuTiek(){
         kungFuSettings[0].initialNbt(EntityData);
-        kungFuSettings[1].initialNbt(EntityData);
 
         syncData(EntityData);
         return true;

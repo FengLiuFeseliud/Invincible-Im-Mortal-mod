@@ -1,0 +1,29 @@
+{
+    "name": "修炼",
+    "icon": "invincible:reiki_stone_1",
+    "category": "invincible:cultivation_categories",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "如果没有设置按键并且没有冲突使用 O 键进行修炼. 主世界 \\ 地狱 \\ 末地 灵气十分稀少, 修炼速度有限. 不过我们可以吸收包含灵气的物品上的灵气来进行修炼, 比如灵石. 不过在灵气稀少的主世界只能找到一二级灵石"
+        },
+        {
+            "type": "patchouli:image",
+            "border": true,
+            "title": "包含灵气的物品",
+            "images": [
+                "invincible:textures/patchouli/reiki_item.png"
+            ],
+            "text": "手持包含灵气的物品进行修炼就可以吸收物品上的灵气, 不过物品吸收完灵气将消失"
+        },
+        {
+            "type": "patchouli:crafting",
+            "text": "虽然灵石在主世界十分稀少, 不过总是有办法. 我们可以自己制作灵石, 制造灵石首先需要找到紫水晶, 使用紫水晶制作不包含灵气的灵石. 并向灵石注入灵气即可, 怎么注入灵气可以查看'注灵'",
+            "recipe": "invincible:reiki_stone_0"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "除了外力, 我们还可以在修炼中使用功法, 不过功法获取全靠能力, 哈哈哈"
+        }
+    ]
+}

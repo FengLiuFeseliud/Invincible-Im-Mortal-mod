@@ -1,11 +1,11 @@
 package fengliu.invincible.util;
 
 import fengliu.invincible.invincibleMod;
+import fengliu.invincible.item.kungfu.JuQiKung.JuQiKungSettings;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
@@ -13,35 +13,15 @@ public class KungFuCilentData {
     private static final String MOD_ID = invincibleMod.MOD_ID;
     private final IEntityDataSaver EntityData;
 
-    public static void text(MinecraftServer server, ServerPlayerEntity player){
-        player.sendMessage(new LiteralText("text1"), false);
-    }
-
-    public static void text1(MinecraftServer server, ServerPlayerEntity player){
-        player.sendMessage(new LiteralText("text11"), false);
-    }
-
-    public static void text2(MinecraftServer server, ServerPlayerEntity player){
-        player.sendMessage(new LiteralText("text2"), false);
-    }
-
     protected static final KungFuSettings[] kungFuSettings = {
-        new KungFuSettings(
-            KungFuServerData::text,
-            KungFuServerData::text1,
-            KungFuServerData::text2
+        new JuQiKungSettings(
+            JuQiKungSettings::tiek1,
+            JuQiKungSettings::tiek2,
+            JuQiKungSettings::tiek3
         )
-            .setName(new TranslatableText("item.invincible.kung_fu"))
+            .setName(new TranslatableText("item.invincible.ju_qi_kung"))
             .setTexture(new Identifier(MOD_ID, "textures/kung_fu/test.png"))
-            .setConsume(0),
-        new KungFuSettings(
-            KungFuServerData::text,
-            KungFuServerData::text1,
-            KungFuServerData::text2
-        )
-            .setName(new TranslatableText("kung_fu.invincible.ju_ling_zhen.1"))
-            .setTexture(new Identifier(MOD_ID, "textures/kung_fu/test2.png"))
-            .setConsume(5),
+            .setConsume(15)
     };
 
     public KungFuCilentData(IEntityDataSaver player){
@@ -60,6 +40,10 @@ public class KungFuCilentData {
         return new NbtList();
     }
 
+    /**
+     * 获取当前功法组
+     * @return 功法组 (nbt list)
+     */
     public NbtList getCanUesKungFuGroup(){
         NbtList nbtListCanUesKungFu = (NbtList) getCanUesKungFu();
 
@@ -73,6 +57,10 @@ public class KungFuCilentData {
         return nbtList;
     }
     
+    /**
+     * 获取当前功法组下标
+     * @return 功法组下标
+     */
     public int getKungFuGroupUesIn(){
         NbtCompound nbt = EntityData.getPersistentData();
         if(nbt.contains("kung_fu_group_ues_in")){
@@ -110,6 +98,10 @@ public class KungFuCilentData {
         return canUesGroup.getCompound(getKungFuUesIn());
     }
 
+    /**
+     * 通过 combo_in nbt 获取正在 combo 的功法 nbt
+     * @return 功法 nbt
+     */
     public NbtCompound getUesKungFuFromComboIn(){
         NbtCompound nbt = EntityData.getPersistentData().getCompound("combo_in");
 
@@ -137,12 +129,51 @@ public class KungFuCilentData {
 
         return kungFuSettings[nbt.getInt("index")];
     }
+
+    public NbtCompound getComboIn(){
+        NbtCompound nbt = EntityData.getPersistentData();
+        if(nbt.contains("combo_in")){
+            return nbt.getCompound("combo_in");
+        }
+        return null;
+    }
+
+    public String getUesKungFuTiekName(){
+        NbtCompound nbt = getUesKungFu();
+        if(nbt == null){
+            return "";
+        }
+
+        int tiek = nbt.getInt("tieks") - 1;
+        KungFuSettings settings = getUesKungFuSettings();
+
+        if(tiek < 0){
+            if(getComboIn() != null){
+                return settings.Names[settings.getKungFuTiekIndex()].getString();
+            }
+
+            return "";
+        }
+
+        return settings.Names[tiek].getString();
+    }
     
-    public static class KungFuSettings{
+    public abstract static class KungFuSettings{
         private KungFuTiek[] kungFuTieks;
         public Identifier Texture;
         public int Consume;
         public TranslatableText Name;
+        public TranslatableText[] Names = {
+            new TranslatableText("kung_fu.tiek.1"),
+            new TranslatableText("kung_fu.tiek.2"),
+            new TranslatableText("kung_fu.tiek.3"),
+            new TranslatableText("kung_fu.tiek.4"),
+            new TranslatableText("kung_fu.tiek.5"),
+            new TranslatableText("kung_fu.tiek.6"),
+            new TranslatableText("kung_fu.tiek.7"),
+            new TranslatableText("kung_fu.tiek.8"),
+            new TranslatableText("kung_fu.tiek.9")
+        };
 
         public KungFuSettings(KungFuTiek ...kungFuTieks){
             this.kungFuTieks = kungFuTieks;
@@ -160,6 +191,11 @@ public class KungFuCilentData {
 
         public KungFuSettings setConsume(int consume){
             Consume = consume;
+            return this;
+        }
+
+        public KungFuSettings setTiekNames(TranslatableText ...names){
+            Names = names;
             return this;
         }
 
@@ -182,8 +218,8 @@ public class KungFuCilentData {
             }
 
             nbt = new NbtCompound();
-            nbt.putInt("combo_end", 25);
-            nbt.putInt("combo_in", 25);
+            nbt.putInt("combo_end", 250);
+            nbt.putInt("combo_in", 250);
             nbt.putInt("tieks", 0);
             nbt.putString("name", Name.getKey());
             for(int index = 0; index < kungFuSettings.length; index++){
@@ -198,6 +234,10 @@ public class KungFuCilentData {
 
         public KungFuTiek getKungFuTiek(int index){
             return kungFuTieks[index];
+        }
+
+        public int getKungFuTiekIndex(){
+            return kungFuTieks.length -1;
         }
 
         /**
@@ -215,6 +255,9 @@ public class KungFuCilentData {
             return 0;
         }
 
+        public abstract void comboStart(MinecraftServer server, ServerPlayerEntity player);
+        public abstract void comboToNext(MinecraftServer server, ServerPlayerEntity player);
+        public abstract void comboEnd(MinecraftServer server, ServerPlayerEntity player);
     }
 
     public interface KungFuTiek{

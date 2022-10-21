@@ -22,6 +22,9 @@ public class ModServerTickEvent{
         });
     }
 
+    /**
+     * 每 20 tick 恢复玩家真元
+     */
     public static void recoverPlayerMana(MinecraftServer server){
         if(playerTick_count < 20){
             playerTick_count += 1;
@@ -37,6 +40,9 @@ public class ModServerTickEvent{
         
     }
 
+    /**
+     * 每 tick 计算玩家功法 combo 
+     */
     public static void comboKungFu(MinecraftServer server){
         for(ServerPlayerEntity player: server.getPlayerManager().getPlayerList()){
             IEntityDataSaver iplayer = (IEntityDataSaver) player;
@@ -58,7 +64,8 @@ public class ModServerTickEvent{
                 KungFuServerData.syncData(iplayer);
                 continue;
             }
-
+            
+            KungFuServerData.getUesKungFuSettings().comboEnd(server, player);
             nbt.putInt("tieks", 0);
             nbt.putInt("combo_in", nbt.getInt("combo_end"));
             iplayer.getPersistentData().remove("combo_in");

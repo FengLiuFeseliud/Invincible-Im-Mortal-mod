@@ -69,6 +69,10 @@ public class ModBlocks {
 	public static final Block ANGLE_GRINDER = new AngleGrinder(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
+	// 丹炉
+	public static final Block DAN_LU = new DanLu(
+		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
+	);
 	// 注灵台
 	public static final Block INJECTION_REIKI_STANDS = new InjectionReikiStands(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
@@ -105,6 +109,8 @@ public class ModBlocks {
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER);
 		// 注灵台
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "injection_reiki_stands"), INJECTION_REIKI_STANDS);
+		// 丹炉
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "dan_lu"), DAN_LU);
 		// 一阶阵眼
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "zhen_yan_1"), ZHEN_YAN_1);
     }

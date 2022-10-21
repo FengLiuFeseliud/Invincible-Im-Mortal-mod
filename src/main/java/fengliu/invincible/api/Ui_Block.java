@@ -1,6 +1,6 @@
 package fengliu.invincible.api;
 
-import fengliu.invincible.entity.block.ImplementedInventory;
+import fengliu.invincible.block.entity.ImplementedInventory;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

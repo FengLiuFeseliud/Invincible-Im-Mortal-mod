@@ -1,8 +1,8 @@
 package fengliu.invincible.block;
 
 import fengliu.invincible.api.Ui_Block;
-import fengliu.invincible.entity.block.AngleGrinderEntity;
-import fengliu.invincible.entity.block.ModBlockEntitys;
+import fengliu.invincible.block.entity.AngleGrinderEntity;
+import fengliu.invincible.block.entity.ModBlockEntitys;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;

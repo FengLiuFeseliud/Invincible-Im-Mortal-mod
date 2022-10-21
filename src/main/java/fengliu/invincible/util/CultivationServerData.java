@@ -6,6 +6,7 @@ import fengliu.invincible.networking.ModMessage;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 /**
@@ -73,26 +74,50 @@ public class CultivationServerData extends CultivationCilentData {
         return mana;
     }
 
+    public NbtCompound getGainList(){
+        NbtCompound nbt = EntityData.getPersistentData();
+        if(!nbt.contains("gain")){
+            NbtCompound nbtList = new NbtCompound();
+            nbt.put("gain", nbtList);
+            return nbtList;
+        }
+
+        return nbt.getCompound("gain");
+    }
+
     @Override
     public float getGain() {
-        NbtCompound nbt = EntityData.getPersistentData();
         float gain = 1.0f;
 
-        if(nbt.contains("gain")){
-            gain = nbt.getFloat("gain");
+        NbtCompound nbt = getGainList();
+        for(String key: nbt.getKeys()){
+            gain += nbt.getFloat(key);
         }
 
-        if(gain < 0){
-            nbt.putFloat("gain", 1.0f);
-            syncData(EntityData);
-            return 1.0f;
-        }
         return gain;
     }
 
-    public void setGain(float gain) {
-        EntityData.getPersistentData().putFloat("gain", gain);
+    public boolean inGain(String key) {
+        if(getGainList().contains(key)){
+            return true;
+        }
+
+        return false;
     }
+
+    public void setGain(String key, float gain) {
+        getGainList().putFloat(key, gain);
+    }
+
+    public void addGain(String key, float gain) {
+        NbtCompound nbt = getGainList();
+        nbt.putFloat(key, nbt.getFloat(key) + gain);
+    }
+
+    public void minusGain(String key) {
+        getGainList().remove(key);
+    }
+
 
     /**
      * 增加指定量的修为, 并返回可升级到的境界的需增加的索引

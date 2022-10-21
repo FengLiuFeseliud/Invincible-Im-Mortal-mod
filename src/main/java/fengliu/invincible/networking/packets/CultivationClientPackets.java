@@ -21,5 +21,10 @@ public class CultivationClientPackets {
         ((IEntityDataSaver) client.player).getPersistentData().putInt("kung_fu_ues_in", nbt.getInt("kung_fu_ues_in"));
         ((IEntityDataSaver) client.player).getPersistentData().putInt("kung_fu_group_ues_in", nbt.getInt("kung_fu_group_ues_in"));
         ((IEntityDataSaver) client.player).getPersistentData().put("can_ues_kung_fu", nbt.get("can_ues_kung_fu"));
+        if(nbt.contains("combo_in")){
+            ((IEntityDataSaver) client.player).getPersistentData().put("combo_in", nbt.get("combo_in"));
+        }else{
+            ((IEntityDataSaver) client.player).getPersistentData().remove("combo_in");
+        }
     }
 }

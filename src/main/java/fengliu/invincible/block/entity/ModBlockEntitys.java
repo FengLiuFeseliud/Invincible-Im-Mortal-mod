@@ -1,4 +1,4 @@
-package fengliu.invincible.entity.block;
+package fengliu.invincible.block.entity;
 
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.block.ModBlocks;
@@ -18,6 +18,11 @@ public class ModBlockEntitys {
     public static BlockEntityType<InjectionReikiStandsEntity> INJECTION_REIKI_STANDS_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
         new Identifier(MOD_ID, "injection_reiki_stands_entity"), 
         FabricBlockEntityTypeBuilder.create(InjectionReikiStandsEntity::new, ModBlocks.INJECTION_REIKI_STANDS).build(null)
+    );
+    // 注灵台
+    public static BlockEntityType<DanLuEntity> DAN_LU_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
+        new Identifier(MOD_ID, "dan_lu_entity"), 
+        FabricBlockEntityTypeBuilder.create(DanLuEntity::new, ModBlocks.DAN_LU).build(null)
     );
     // 一阶阵眼
     public static BlockEntityType<ZhenYanLv1Entity> ZHEN_YAN_1_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 

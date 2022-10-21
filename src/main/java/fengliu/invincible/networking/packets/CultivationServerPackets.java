@@ -128,5 +128,6 @@ public class CultivationServerPackets {
 
         tiek.function(server, player);
         kungFuServerData.comboUes();
+        kungFuServerData.getUesKungFuSettings().comboToNext(server, player);
     }
 }

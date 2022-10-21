@@ -2,7 +2,7 @@ package fengliu.invincible.util;
 
 import java.util.Optional;
 
-import fengliu.invincible.entity.block.ImplementedInventory;
+import fengliu.invincible.block.entity.ImplementedInventory;
 import fengliu.invincible.recipe.InjectionReikiRecipe;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

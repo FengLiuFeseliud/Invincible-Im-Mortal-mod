@@ -89,6 +89,9 @@
     "block.invincible.injection_reiki_stands.name": "注灵台",
     "block.invincible.injection_reiki_stands.tooltip": "吸收附近灵气注入至物品，节省了注入灵气的人力",
 
+    "block.invincible.dan_lu": "丹炉",
+    "block.invincible.dan_lu.name": "丹炉",
+
     "block.invincible.zhen_yan_1": "一阶阵眼",
     "block.invincible.zhen_yan_1.name": "一阶阵眼",
     "block.invincible.zhen_yan_1.tooltip": "一阶阵法的核心",
@@ -133,8 +136,23 @@
     "item.invincible.jade.Lv8.tooltip": "品质：极品",
     "item.invincible.jade.Lv9.tooltip": "品质：传说",
 
-    "item.invincible.kung_fu": "功法",
-    "item.invincible.kung_fu.tooltip": "学习修炼！",
+    "kung_fu.tiek.1": "第一式",
+    "kung_fu.tiek.2": "第二式",
+    "kung_fu.tiek.3": "第三式",
+    "kung_fu.tiek.4": "第四式",
+    "kung_fu.tiek.5": "第五式",
+    "kung_fu.tiek.6": "第六式",
+    "kung_fu.tiek.7": "第七式",
+    "kung_fu.tiek.8": "第八式",
+    "kung_fu.tiek.9": "第九式",
+
+    "item.invincible.ju_qi_kung": "聚气功",
+    "item.invincible.ju_qi_kung.tooltip": "最基础的修炼功法，并没有什么高深之处",
+    "item.invincible.ju_qi_kung.text": "聚气功, 消耗真元换取修炼灵气吸收效率. 总三层每出一式增加 5% 修炼灵气加成, 回至第一式重新从加 5% 修炼灵气增加",
+    "item.invincible.ju_qi_kung.text_2": "聚气功 - 第一式: 消耗 15 真元增加 5% 修炼灵气加成",
+    "item.invincible.ju_qi_kung.text_3": "聚气功 - 第二式: 消耗 30 真元再增加 5% 修炼灵气加成, 也就是一共 10% 修炼灵气加成",
+    "item.invincible.ju_qi_kung.text_4": "聚气功 - 第三式: 消耗 45 真元再增加 5% 修炼灵气加成, 也就是一共 15% 修炼灵气加成",
+    "item.invincible.ju_qi_kung.text_5": "聚气功 - 第三式至第一式: 重新从加 5% 修炼灵气增加",
 
     "item.invincible.reiki_iron_empty": "未注入灵气的灵铁",
     "item.invincible.reiki_iron_empty.tooltip": "虽然可以被注入灵气了，但是现在还没有灵气",
