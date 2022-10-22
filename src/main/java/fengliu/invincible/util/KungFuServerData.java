@@ -1,9 +1,12 @@
 package fengliu.invincible.util;
 
+import fengliu.invincible.item.KungFuItem;
 import fengliu.invincible.networking.ModMessage;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -66,6 +69,17 @@ public class KungFuServerData extends KungFuCilentData{
         nbt.putInt("kung_fu_ues_in", 0);
         syncData(EntityData);
         return 0;
+    }
+
+    @Override
+    public int getKungFuProficiency(){
+        NbtCompound nbt = getUesKungFu();
+        if(!nbt.contains("proficiency")){
+            nbt.putInt("proficiency", 0);
+            return 0;
+        }
+
+        return nbt.getInt("proficiency");
     }
     
     /**
@@ -141,7 +155,7 @@ public class KungFuServerData extends KungFuCilentData{
     }
 
     /**
-     * 获取功法当前重天的效果接口
+     * 获取功法当前功法层的效果接口
      * @return
      */
     public KungFuTiek ues(){
@@ -149,11 +163,11 @@ public class KungFuServerData extends KungFuCilentData{
         if(settings == null){
             return null;
         }
-        return settings.getKungFuTiek(getUesKungFu().getInt("tieks"));
+        return settings.getKungFuTiek(getUesKungFu().getInt("tieks")).kungFuTiek;
     }
 
     /**
-     * 连击使用功法, 下一次使用功法下一重天, 如果为最后一重天, 返回至第一重天
+     * 连击使用功法, 下一次使用功法下一功法层, 如果为最后一功法层, 返回至第一功法层
      */
     public void comboUes(){
         NbtCompound uesKungFu = getUesKungFu();
@@ -165,14 +179,118 @@ public class KungFuServerData extends KungFuCilentData{
     }
 
     /**
-     * 
-     * @return
+     * 判断功法是否可以学习 (是否存在)
      */
-    public boolean upKungFuTiek(){
-        kungFuSettings[0].initialNbt(EntityData);
+    public boolean isKungFuInLearn(KungFuSettings settings){
+        NbtList nbtList = getCanUesKungFu();
+        for(int kungFuGroupIndex = 0; kungFuGroupIndex < nbtList.size(); kungFuGroupIndex++){
+            NbtList kungFuGroup = nbtList.getList(kungFuGroupIndex);
+            for(int kungFuIndex = 0; kungFuIndex < kungFuGroup.size(); kungFuIndex++){
+                NbtCompound nbt = kungFuGroup.getCompound(kungFuIndex);
+                if(nbt.getString("name") != settings.Name.getKey()){
+                    continue;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 学习功法 初始化功法 nbt
+     * @param stack 功法
+     */
+    public boolean learnKungFu(ItemStack stack){
+        Item kungFu = stack.getItem();
+        if(!(kungFu instanceof KungFuItem)){
+            return false;
+        }
+
+        KungFuSettings settings = ((KungFuItem) kungFu).getKungFuSettings();
+        PlayerEntity player = (PlayerEntity) EntityData;
+        if(isKungFuInLearn(settings)){
+            player.sendMessage(new TranslatableText("info.invincible.kung_fu_in_learn",
+                settings.Name.getString()
+            ), false);
+            return false;
+        }
+
+        settings.initialNbt(EntityData);
+        syncData(EntityData);
+
+        player.sendMessage(new TranslatableText("info.invincible.kung_fu_learn",
+            settings.Name.getString()
+        ), false);
+        return true;
+    }
+
+    /**
+     * 增加功法熟练度
+     * @return 可以升级返回 true
+     */
+    public boolean addKungFuProficiency(){
+        int proficiency = getKungFuProficiency();
+        KungFuTiekSettings KungFuTiekSettings = getKungFuNotUesTiek();
+        if(KungFuTiekSettings == null){
+            return false;
+        }
+        
+        proficiency++;
+        getUesKungFu().putInt("proficiency", proficiency);
 
         syncData(EntityData);
-        return true;
+        if(proficiency >= KungFuTiekSettings.Proficiency){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 增加功法物品的功法领悟度
+     * @param stack 功法
+     * @return 可以学习返回 true
+     */
+    public boolean addKungFuProficiencyFromItemStack(ItemStack stack){
+        Item kungFu = stack.getItem();
+        if(!(kungFu instanceof KungFuItem)){
+            return false;
+        }
+
+        NbtCompound nbt = stack.getOrCreateNbt();
+        KungFuTiekSettings KungFuTiekSettings =  ((KungFuItem) kungFu).getKungFuSettings().getKungFuTiek(0);
+
+        int proficiency = getKungFuItemProficiency(stack);
+        if(proficiency >= KungFuTiekSettings.Proficiency){
+            return true;
+        }
+
+        proficiency++;
+        nbt.putInt("proficiency", proficiency);
+        return proficiency >= KungFuTiekSettings.Proficiency;
+    }
+
+    /**
+     * 增加当前功法格的功法可用层
+     */
+    public void upKungFuTiek(){
+        NbtCompound nbt = getUesKungFu();
+        NbtList nbtList = (NbtList) nbt.get("can_ues_tieks");
+        for(int index = 0; index < nbtList.size(); index++){
+            NbtCompound nbtTiek = (NbtCompound) nbtList.get(index);
+            if(nbtTiek.getBoolean(index+"")){
+                continue;
+            }
+
+            nbtTiek.putBoolean(index+"", true);
+            nbtList.set(index, nbtTiek);
+            syncData(EntityData);
+
+            ((PlayerEntity) EntityData).sendMessage(new TranslatableText("info.invincible.kung_fu_up_level",
+                getUesKungFuSettings().Name.getString()
+            ), false);
+            return;
+        }
     }
 
     /**

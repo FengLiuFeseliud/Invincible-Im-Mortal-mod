@@ -35,6 +35,11 @@
             "type": "patchouli:crafting",
             "recipe": "invincible:reiki_iron_dagger",
             "recipe2": "invincible:reiki_iron_pickaxe"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe2": "invincible:reiki_iron_hammer",
+            "recipe": "invincible:reiki_iron_shield"
         }
     ]
 }

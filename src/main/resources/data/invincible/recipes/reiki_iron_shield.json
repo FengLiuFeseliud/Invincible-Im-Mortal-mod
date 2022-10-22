@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "WRW",
+        "WWW",
+        " W "
+    ],
+    "key": {
+        "W": {
+            "tag": "minecraft:planks"
+        },
+        "R": {
+            "item": "invincible:reiki_iron"
+        }
+    },
+    "result": {
+        "item": "invincible:reiki_iron_shield"
+    }
+}

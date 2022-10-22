@@ -76,8 +76,19 @@ public class ModItemGroup {
 			.icon(() -> new ItemStack(ModItems.REIKI_IRON_SWORD))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModItems.REIKI_IRON_PICKAXE));
+				stacks.add(new ItemStack(ModItems.REIKI_IRON_HAMMER));
 				stacks.add(new ItemStack(ModItems.REIKI_IRON_SWORD));
 				stacks.add(new ItemStack(ModItems.REIKI_IRON_DAGGER));
+				stacks.add(new ItemStack(ModItems.REIKI_IRON_SHIELD));
+			})
+			.build();
+
+	// 炼丹组
+	public static final ItemGroup LIAN_DAN_GROUP = FabricItemGroupBuilder.create(
+		new Identifier(MOD_ID, "lian_dan_group"))
+			.icon(() -> new ItemStack(ModBlocks.DAN_LU))
+			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ModBlocks.DAN_LU));
 			})
 			.build();
 

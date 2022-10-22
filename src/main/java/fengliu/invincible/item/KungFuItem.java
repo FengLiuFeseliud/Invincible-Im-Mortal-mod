@@ -2,6 +2,8 @@ package fengliu.invincible.item;
 
 import java.util.List;
 
+import fengliu.invincible.util.KungFuCilentData;
+import fengliu.invincible.util.KungFuCilentData.KungFuSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -16,9 +18,15 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class KungFuItem extends WrittenBookItem{
+    private final KungFuSettings kungFuSettings;
 
-    public KungFuItem(Settings settings) {
+    public KungFuItem(Settings settings, KungFuSettings kungFuSettings) {
         super(settings);
+        this.kungFuSettings = kungFuSettings;
+    }
+
+    public KungFuSettings getKungFuSettings(){
+        return kungFuSettings;
     }
 
     /**
@@ -50,7 +58,9 @@ public class KungFuItem extends WrittenBookItem{
     
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(new TranslatableText("info.invincible.kung_fu_learn_residue", 
+            KungFuCilentData.getKungFuItemProficiency(stack), kungFuSettings.getKungFuTiek(0).Proficiency
+        ));
     }
 
     @Override

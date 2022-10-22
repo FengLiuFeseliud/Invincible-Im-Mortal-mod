@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "RRR",
+        "RSR",
+        " S "
+    ],
+    "key": {
+        "S": {
+            "item": "minecraft:stick"
+        },
+        "R": {
+            "item": "invincible:reiki_iron"
+        }
+    },
+    "result": {
+        "item": "invincible:reiki_iron_hammer"
+    }
+}

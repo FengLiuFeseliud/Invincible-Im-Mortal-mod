@@ -5,6 +5,8 @@ import fengliu.invincible.item.ManaSkillsItem.ManaSkillSettings;
 import fengliu.invincible.item.ManaSkillsItem.PostHitManaSkillSettings;
 import fengliu.invincible.item.ManaSkillsItem.PostMineManaSkillSettings;
 import fengliu.invincible.item.kungfu.JuQiKung;
+import fengliu.invincible.item.kungfu.JuQiKung.JuQiKungSettings;
+import fengliu.invincible.util.KungFuCilentData.KungFuTiekSettings;
 import fengliu.invincible.util.ReikiItem.ReikiSettings;
 import fengliu.invincible.util.ReikiItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -59,7 +61,22 @@ public class ModItems {
 	// 聚气功
 	public static final JuQiKung JU_QI_KUNG = new JuQiKung(
 		new FabricItemSettings()
-			.maxCount(1)
+			.maxCount(1),
+		new JuQiKungSettings(
+			new KungFuTiekSettings(JuQiKungSettings::tiek1)
+				.setName(new TranslatableText("kung_fu.tiek.1"))
+				.setProficiency(10),
+			new KungFuTiekSettings(JuQiKungSettings::tiek2)
+				.setName(new TranslatableText("kung_fu.tiek.2"))
+				.setProficiency(10),
+			new KungFuTiekSettings(JuQiKungSettings::tiek3)
+				.setName(new TranslatableText("kung_fu.tiek.3"))
+				.setProficiency(20)
+		)
+			.setName(new TranslatableText("item.invincible.ju_qi_kung"))
+			.setTexture(new Identifier(MOD_ID, "textures/kung_fu/test.png"))
+			.setConsume(25)
+			.setComboTime(250)
 	);
 	// 未注灵的灵铁
 	public static final ReikiIronEmpty REIKI_IRON_EMPTY = new ReikiIronEmpty(
@@ -73,7 +90,7 @@ public class ModItems {
 	);
 	// 灵铁剑
 	public static final ReikiIronSword REIKI_IRON_SWORD = new ReikiIronSword(
-		ToolMaterials.IRON, 7, 1, 
+		ToolMaterials.IRON, 4, -2.4f, 
 			new FabricItemSettings()
 				.maxCount(1),
 			new ManaSkillSettings(ReikiIronSword::activeSkill)
@@ -83,19 +100,37 @@ public class ModItems {
 	);
 	// 灵铁匕首
 	public static final ReikiIronDagger REIKI_IRON_DAGGER = new ReikiIronDagger(
-		ToolMaterials.IRON, 3, 3, 
+		ToolMaterials.IRON, 2, 1, 
 			new FabricItemSettings()
 				.maxCount(1),
 			new PostHitManaSkillSettings(ReikiIronDagger::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(20)
 	);
+	// 灵铁盾
+	public static final ReikiIronShield REIKI_IRON_SHIELD = new ReikiIronShield(
+		new FabricItemSettings()
+				.maxCount(1),
+		new ManaSkillSettings(ReikiIronShield::activeSkill)
+			.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
+			.setConsume(20)
+			.setSkillCd(0)
+	);
 	// 灵铁镐
 	public static final ReikiIronPickaxe REIKI_IRON_PICKAXE = new ReikiIronPickaxe(
-		ToolMaterials.IRON, 1, 1,
+		ToolMaterials.IRON, 1, -2.4f,
 			new FabricItemSettings()
 					.maxCount(1),
 			new PostMineManaSkillSettings(ReikiIronPickaxe::activeSkill)
+				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
+				.setConsume(20)
+	);
+	// 灵铁锤
+	public static final ReikiIronHammer REIKI_IRON_HAMMER = new ReikiIronHammer(
+		ToolMaterials.IRON, 6, -3.1f,
+			new FabricItemSettings()
+					.maxCount(1),
+			new PostMineManaSkillSettings(ReikiIronHammer::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(20)
 	);
@@ -170,8 +205,12 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_sword"), REIKI_IRON_SWORD);
 		// 灵铁匕首
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_dagger"), REIKI_IRON_DAGGER);
+		// 灵铁盾
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_shield"), REIKI_IRON_SHIELD);
 		// 灵铁镐
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_pickaxe"), REIKI_IRON_PICKAXE);
+		// 灵铁锤
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_hammer"), REIKI_IRON_HAMMER);
 		// Registry.register(Registry.ITEM, new Identifier(MOD_ID, "test"), TEST);
     }
 }

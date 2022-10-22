@@ -13,6 +13,7 @@
     "itemGroup.invincible.zhen_fu_group": "逆天修仙 - 阵法",
     "itemGroup.invincible.lian_qi_group": "逆天修仙 - 炼器",
     "itemGroup.invincible.fa_qi_group": "逆天修仙 - 法器",
+    "itemGroup.invincible.lian_dan_group": "逆天修仙 - 炼丹",
 
     "info.invincible.can_up_level": "可以提升至 %d 境界了！ 总需提升 %d 个境界， 成功率总共：",
     "info.invincible.cannot_up_level": "无法提升境界... 距离至 %d 境界，总需 %d 修为",
@@ -22,6 +23,10 @@
     "info.invincible.item_reiki_injection": "灵气注入：%d / %d",
     "info.invincible.skill_in_cd": "《%d》正在 CD 中...",
     "info.invincible.mana_insufficient": "真元不足以催动《%d》...",
+    "info.invincible.kung_fu_learn_residue": "功法领悟：%d / %d",
+    "info.invincible.kung_fu_learn": "学习了功法 《%d》 !!!",
+    "info.invincible.kung_fu_in_learn": "功法 《%d》 已经学习过了...",
+    "info.invincible.kung_fu_up_level": "功法 《%d》 熟练度提升了!!!",
     "info.skill_default_name": "技能",
     "info.invincible.not_can_injection_reiki_item": "%d 不是可以注入灵气的物品",
     "info.invincible.is_exceed_injection_target": "%d 达到灵气注入目标！！！",
@@ -149,9 +154,9 @@
     "item.invincible.ju_qi_kung": "聚气功",
     "item.invincible.ju_qi_kung.tooltip": "最基础的修炼功法，并没有什么高深之处",
     "item.invincible.ju_qi_kung.text": "聚气功, 消耗真元换取修炼灵气吸收效率. 总三层每出一式增加 5% 修炼灵气加成, 回至第一式重新从加 5% 修炼灵气增加",
-    "item.invincible.ju_qi_kung.text_2": "聚气功 - 第一式: 消耗 15 真元增加 5% 修炼灵气加成",
-    "item.invincible.ju_qi_kung.text_3": "聚气功 - 第二式: 消耗 30 真元再增加 5% 修炼灵气加成, 也就是一共 10% 修炼灵气加成",
-    "item.invincible.ju_qi_kung.text_4": "聚气功 - 第三式: 消耗 45 真元再增加 5% 修炼灵气加成, 也就是一共 15% 修炼灵气加成",
+    "item.invincible.ju_qi_kung.text_2": "聚气功 - 第一式: 消耗 25 真元增加 5% 修炼灵气加成",
+    "item.invincible.ju_qi_kung.text_3": "聚气功 - 第二式: 消耗 50 真元再增加 5% 修炼灵气加成, 也就是一共 10% 修炼灵气加成",
+    "item.invincible.ju_qi_kung.text_4": "聚气功 - 第三式: 消耗 75 真元再增加 5% 修炼灵气加成, 也就是一共 15% 修炼灵气加成",
     "item.invincible.ju_qi_kung.text_5": "聚气功 - 第三式至第一式: 重新从加 5% 修炼灵气增加",
 
     "item.invincible.reiki_iron_empty": "未注入灵气的灵铁",
@@ -170,10 +175,15 @@
     "item.invincible.reiki_iron_dagger.tooltip_2": "注元: 攻击命中触发，增加 2 点伤害",
     "item.invincible.reiki_iron_dagger.tooltip_3": "消耗 20 点真元",
 
+    "item.invincible.reiki_iron_shield": "灵铁盾",
+    "item.invincible.reiki_iron_shield.tooltip_2": "注元: 右键使用触发，永久增加 2 点伤害吸收，直至用尽",
+    "item.invincible.reiki_iron_shield.tooltip_3": "消耗 20 点真元",
+
     "item.invincible.reiki_iron_pickaxe": "灵铁镐",
-    "item.invincible.reiki_iron_pickaxe.tooltip": "连一阶法器都算不上，不过可以注入真元强化",
-    "item.invincible.reiki_iron_pickaxe.tooltip_2": "注元: 破坏 3x1x3 的范围",
-    "item.invincible.reiki_iron_pickaxe.tooltip_3": "消耗 20 点真元",
+
+    "item.invincible.reiki_iron_hammer": "灵铁锤",
+    "item.invincible.reiki_iron_hammer.tooltip_2": "注元: 破坏 3x1x3 的范围",
+    "item.invincible.reiki_iron_hammer.tooltip_3": "消耗 20 点真元",
 
     "zhen_fu.invincible.ju_ling_zhen.1": "一阶聚灵阵"
 }

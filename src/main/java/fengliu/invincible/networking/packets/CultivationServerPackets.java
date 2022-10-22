@@ -7,7 +7,6 @@ import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.KungFuServerData;
 import fengliu.invincible.util.ReikiItemData;
 import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
-import fengliu.invincible.util.KungFuCilentData.KungFuTiek;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,10 +22,26 @@ public class CultivationServerPackets {
     
     public static void reiki_practice(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
         CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
-        ItemStack itemStack = player.getStackInHand(player.getActiveHand());
+        KungFuServerData kungFuServerData = ((IEntityDataSaver) player).getKungFuServerData();
 
-        int reiki = Math.round(10 * cultivationData.getGain());
-        cultivationData.addCultivationExpInUpLevel(reiki + ReikiItemData.absord(1000, itemStack));
+        ItemStack mainStack = player.getMainHandStack();
+        ItemStack offStack = player.getOffHandStack();
+
+        if(kungFuServerData.addKungFuProficiencyFromItemStack(mainStack)){
+            kungFuServerData.learnKungFu(mainStack);
+        }
+
+        if(kungFuServerData.addKungFuProficiencyFromItemStack(offStack)){
+            kungFuServerData.learnKungFu(offStack);
+        }
+
+        int absordReiki = 0;
+        absordReiki = ReikiItemData.absord(500, mainStack);
+        if(absordReiki == 0){
+            absordReiki = ReikiItemData.absord(500, offStack);
+        } 
+
+        cultivationData.addCultivationExpInUpLevel(Math.round(10 * cultivationData.getGain()) + absordReiki);
     }
 
     public static void cultivation_up(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
@@ -117,17 +132,16 @@ public class CultivationServerPackets {
 
     public static void uesKungFu(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
         KungFuServerData kungFuServerData = ((IEntityDataSaver) player).getKungFuServerData();
-        KungFuTiek tiek = kungFuServerData.ues();
-        if(tiek == null){
-            return;
-        }   
-        
         if(!kungFuServerData.consume()){
             return;
         }
 
-        tiek.function(server, player);
+        kungFuServerData.ues().function(server, player);
         kungFuServerData.comboUes();
         kungFuServerData.getUesKungFuSettings().comboToNext(server, player);
+        if(kungFuServerData.addKungFuProficiency()){
+            kungFuServerData.upKungFuTiek();
+
+        }
     }
 }

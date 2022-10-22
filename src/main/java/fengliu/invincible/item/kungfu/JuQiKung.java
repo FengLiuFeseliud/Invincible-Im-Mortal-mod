@@ -1,7 +1,7 @@
 package fengliu.invincible.item.kungfu;
 
 import fengliu.invincible.util.KungFuCilentData.KungFuSettings;
-import fengliu.invincible.util.KungFuCilentData.KungFuTiek;
+import fengliu.invincible.util.KungFuCilentData.KungFuTiekSettings;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 
 public class JuQiKung extends KungFuItem{
     
-    public JuQiKung(Settings settings) {
-        super(settings);
+    public JuQiKung(Settings settings, KungFuSettings kungFuSettings) {
+        super(settings, kungFuSettings);
     }
 
     @Override
@@ -37,11 +37,12 @@ public class JuQiKung extends KungFuItem{
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(new TranslatableText("item.invincible.ju_qi_kung.tooltip"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     public static class JuQiKungSettings extends KungFuSettings {
-        public JuQiKungSettings(KungFuTiek... kungFuTieks){
-            super(kungFuTieks);
+        public JuQiKungSettings(KungFuTiekSettings... kungFuTiekSettings){
+            super(kungFuTiekSettings);
         }
     
         @Override

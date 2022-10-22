@@ -47,7 +47,6 @@ public class ModServerTickEvent{
         for(ServerPlayerEntity player: server.getPlayerManager().getPlayerList()){
             IEntityDataSaver iplayer = (IEntityDataSaver) player;
             KungFuServerData KungFuServerData = iplayer.getKungFuServerData();
-
             NbtCompound combo_in = KungFuServerData.getComboIn();
             if(combo_in == null){
                 continue;

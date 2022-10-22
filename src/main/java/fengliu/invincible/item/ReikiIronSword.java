@@ -19,11 +19,11 @@ public class ReikiIronSword extends ManaSword{
     }
 
     private static void clearAllNbt(PlayerEntity user){
-        user.getStackInHand(user.getActiveHand()).getNbt().remove("invincible.player_attack_damage");
+        user.getMainHandStack().getNbt().remove("invincible.player_attack_damage");
     }
 
     public static boolean activeSkill(World world, PlayerEntity user, Hand hand) {
-        user.getStackInHand(user.getActiveHand()).getNbt().putFloat("invincible.player_attack_damage", 10);
+        user.getMainHandStack().getNbt().putFloat("invincible.player_attack_damage", 10);
         scheduledExecutor.scheduledExecutorService.schedule(() ->  clearAllNbt(user), (long) 2, TimeUnit.SECONDS);
         return true;
     }

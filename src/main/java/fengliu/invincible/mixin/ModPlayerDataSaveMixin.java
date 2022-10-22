@@ -4,23 +4,23 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.util.IEntityDataSaver;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 /*
  * 保存玩家修为数据
  */
 
-@Mixin(PlayerEntity.class)
-public abstract class ModPlayerDataSaveMixin extends LivingEntity {
+@Mixin(LivingEntity.class)
+public abstract class ModPlayerDataSaveMixin extends Entity {
 
     protected ModPlayerDataSaveMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -42,11 +42,15 @@ public abstract class ModPlayerDataSaveMixin extends LivingEntity {
         ((IEntityDataSaver) this).writePersistentData(nbt);
     }
 
-    @Override
-    public ItemStack getStackInHand(Hand hand) {
-        ItemStack stack = super.getStackInHand(hand);
-        stack.getOrCreateNbt().putFloat("invincible.player_base_attack_damage", ((IEntityDataSaver) this).getCilentCultivationData().getCultivationLevel().getBaseAttack());
+    /**
+     * 向主手物品添加境界攻击加成 Nbt
+     */
+    @Inject(method = "getMainHandStack", at = @At("RETURN"))
+    public ItemStack getMainHandStack(CallbackInfoReturnable<ItemStack> info) {
+        ItemStack mainHandStack = info.getReturnValue();
+        mainHandStack.getOrCreateNbt().putFloat("invincible.player_base_attack_damage", ((IEntityDataSaver) this).getCilentCultivationData().getCultivationLevel().getBaseAttack());
         
-        return stack;
+        return mainHandStack;
     }
+
 }

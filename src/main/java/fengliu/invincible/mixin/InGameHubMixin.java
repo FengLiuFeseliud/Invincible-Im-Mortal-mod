@@ -26,6 +26,7 @@ import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.KungFuCilentData;
 import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
 import fengliu.invincible.util.KungFuCilentData.KungFuSettings;
+import fengliu.invincible.util.KungFuCilentData.KungFuTiekSettings;
 
 /*
  * 重写原版状态条 以更好显示上千血量
@@ -187,7 +188,23 @@ public class InGameHubMixin {
         }
         KungFuSettings settings = kungFuCilentData.getUesKungFuSettings();
 
-        if(kungFuCilentData.getCanUesKungFu().size() != 0 && settings != null){
+        if(settings != null){
+            if(uesKungFu != null){
+                KungFuTiekSettings tiek = kungFuCilentData.getKungFuNotUesTiek();
+                if(tiek == null){
+                    tiek = settings.getKungFuTiek(settings.getKungFuTiekIndex());
+                }
+                int proficiencyMax = tiek.Proficiency;
+                int proficiencyBarWidth = Math.round((60 / (float) proficiencyMax) * kungFuCilentData.getKungFuProficiency());
+                if(proficiencyBarWidth > 60){
+                    proficiencyBarWidth = 60;
+                }
+
+                DrawableHelper.drawTexture(matrices, 47,  y + 29, 118, 0, 60, 5, TEXTURE_X, TEXTURE_Y);
+
+                DrawableHelper.drawTexture(matrices, 47,  y + 29, 118, 10, proficiencyBarWidth, 5, TEXTURE_X, TEXTURE_Y);
+            }
+
             // 渲染功法 combo 条
             DrawableHelper.drawTexture(matrices, 47,  y + 22, 118, 5, comboBarWidth, 5, TEXTURE_X, TEXTURE_Y);
 
@@ -195,7 +212,7 @@ public class InGameHubMixin {
             // 渲染功法图标
             DrawableHelper.drawTexture(matrices, 8,  y - 5, 0, 0, 32, 32, 32, 32);
             // 渲染功法名称
-            renderer.draw(matrices, kungFuCilentData.getUesKungFuSettings().Name.getString(), 47, y,  0xffffff);
+            renderer.draw(matrices, settings.Name.getString(), 47, y,  0xffffff);
             renderer.draw(matrices, kungFuCilentData.getUesKungFuTiekName(), 47, y + 10,  0xffffff);
         }
 
