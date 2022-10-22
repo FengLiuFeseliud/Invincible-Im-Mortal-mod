@@ -4,6 +4,8 @@ import fengliu.invincible.invincibleMod;
 import fengliu.invincible.item.ManaSkillsItem.ManaSkillSettings;
 import fengliu.invincible.item.ManaSkillsItem.PostHitManaSkillSettings;
 import fengliu.invincible.item.ManaSkillsItem.PostMineManaSkillSettings;
+import fengliu.invincible.item.kungfu.HuanHuoKung;
+import fengliu.invincible.item.kungfu.HuanHuoKung.HuanHuoKungSettings;
 import fengliu.invincible.item.kungfu.JuQiKung;
 import fengliu.invincible.item.kungfu.JuQiKung.JuQiKungSettings;
 import fengliu.invincible.util.KungFuCilentData.KungFuTiekSettings;
@@ -68,13 +70,33 @@ public class ModItems {
 				.setProficiency(10),
 			new KungFuTiekSettings(JuQiKungSettings::tiek2)
 				.setName(new TranslatableText("kung_fu.tiek.2"))
-				.setProficiency(10),
+				.setProficiency(20),
 			new KungFuTiekSettings(JuQiKungSettings::tiek3)
 				.setName(new TranslatableText("kung_fu.tiek.3"))
-				.setProficiency(20)
+				.setProficiency(30)
 		)
 			.setName(new TranslatableText("item.invincible.ju_qi_kung"))
 			.setTexture(new Identifier(MOD_ID, "textures/kung_fu/test.png"))
+			.setConsume(25)
+			.setComboTime(250)
+	);
+	// 唤火功
+	public static final HuanHuoKung HUAN_HUO_KUNG = new HuanHuoKung(
+		new FabricItemSettings()
+			.maxCount(1),
+		new HuanHuoKungSettings(
+			new KungFuTiekSettings(HuanHuoKungSettings::tiek1)
+				.setName(new TranslatableText("kung_fu.tiek.1"))
+				.setProficiency(10),
+			new KungFuTiekSettings(HuanHuoKungSettings::tiek2)
+				.setName(new TranslatableText("kung_fu.tiek.2"))
+				.setProficiency(20),
+			new KungFuTiekSettings(HuanHuoKungSettings::tiek3)
+				.setName(new TranslatableText("kung_fu.tiek.3"))
+				.setProficiency(30)
+		)
+			.setName(new TranslatableText("item.invincible.huan_huo_kung"))
+			.setTexture(new Identifier(MOD_ID, "textures/kung_fu/test2.png"))
 			.setConsume(25)
 			.setComboTime(250)
 	);
@@ -103,7 +125,7 @@ public class ModItems {
 		ToolMaterials.IRON, 2, 1, 
 			new FabricItemSettings()
 				.maxCount(1),
-			new PostHitManaSkillSettings(ReikiIronDagger::activeSkill)
+			new PostHitManaSkillSettings(ReikiIronDagger::postHitSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(20)
 	);
@@ -121,16 +143,20 @@ public class ModItems {
 		ToolMaterials.IRON, 1, -2.4f,
 			new FabricItemSettings()
 					.maxCount(1),
-			new PostMineManaSkillSettings(ReikiIronPickaxe::activeSkill)
+			new ManaSkillSettings(ReikiIronPickaxe::activeSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
-				.setConsume(20)
+				.setConsume(100)
+				.setSkillCd(10)
 	);
 	// 灵铁锤
 	public static final ReikiIronHammer REIKI_IRON_HAMMER = new ReikiIronHammer(
 		ToolMaterials.IRON, 6, -3.1f,
 			new FabricItemSettings()
 					.maxCount(1),
-			new PostMineManaSkillSettings(ReikiIronHammer::activeSkill)
+			new PostHitManaSkillSettings(ReikiIronHammer::postHitSkill)
+				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
+				.setConsume(50),
+			new PostMineManaSkillSettings(ReikiIronHammer::postMineSkill)
 				.setName(new TranslatableText("item.invincible.reiki_iron_sword.skill_1"))
 				.setConsume(20)
 	);
@@ -197,6 +223,8 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_5"), REIKI_STONE_5);
 		// 聚气功
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "ju_qi_kung"), JU_QI_KUNG);
+		// 唤火功
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "huan_huo_kung"), HUAN_HUO_KUNG);
 		// 未注灵的灵铁
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_iron_empty"), REIKI_IRON_EMPTY);
 		// 灵铁

@@ -47,6 +47,7 @@ public class ModItemGroup {
 			.icon(() -> new ItemStack(ModItems.JU_QI_KUNG))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModItems.JU_QI_KUNG));
+				stacks.add(new ItemStack(ModItems.HUAN_HUO_KUNG));
 			})
 			.build();
 	// 阵法组

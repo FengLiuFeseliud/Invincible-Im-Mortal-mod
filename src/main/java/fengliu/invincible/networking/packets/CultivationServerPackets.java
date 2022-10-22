@@ -6,7 +6,6 @@ import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.KungFuServerData;
 import fengliu.invincible.util.ReikiItemData;
-import fengliu.invincible.util.CultivationCilentData.CultivationLevel;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +13,6 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
 
@@ -95,10 +93,7 @@ public class CultivationServerPackets {
     }
 
     public static void cultivation_info (MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){
-        CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
-        CultivationLevel cultivationLevel = cultivationData.getCultivationLevel();
-        int mana = cultivationData.getMana();
-        player.sendMessage(new LiteralText("Lavel " + cultivationLevel.getLevel() + " LevelName " + cultivationLevel.getLevelName().getString() + " CultivationExp " + cultivationData.getCultivationExp() + " UpLevelExp " + cultivationLevel.getUpLevelExp() + " BaseAttack " + cultivationLevel.getBaseAttack() + " mana " + mana), false);
+        
     }
 
     public static void consumeMana(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler hendler, PacketByteBuf buf, PacketSender respsonSender){

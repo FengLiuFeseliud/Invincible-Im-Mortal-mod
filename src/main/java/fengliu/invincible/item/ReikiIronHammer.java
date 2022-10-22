@@ -20,13 +20,18 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ReikiIronHammer extends ManaPickaxe {
+public class ReikiIronHammer extends ManaHammer {
 
-    public ReikiIronHammer(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostMineManaSkillSettings postMineManaSkillSettings) {
-        super(toolMaterial, attackDamage, attackSpeed, settings, postMineManaSkillSettings);
+    public ReikiIronHammer(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostHitManaSkillSettings postHitManaSkillSettings, PostMineManaSkillSettings postMineManaSkillSettings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings, postHitManaSkillSettings, postMineManaSkillSettings);
+    }
+
+    public static boolean postHitSkill(ItemStack stack, LivingEntity target, LivingEntity attacker){
+        attacker.getMainHandStack().getNbt().putFloat("invincible.player_attack_damage", 5);
+        return true;
     }
     
-    public static boolean activeSkill(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner){
+    public static boolean postMineSkill(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner){
         if(!(miner instanceof PlayerEntity)){
             return false;
         }
@@ -60,6 +65,8 @@ public class ReikiIronHammer extends ManaPickaxe {
         tooltip.add(new TranslatableText("item.invincible.reiki_iron_sword.tooltip"));
         tooltip.add(new TranslatableText("item.invincible.reiki_iron_hammer.tooltip_2"));
         tooltip.add(new TranslatableText("item.invincible.reiki_iron_hammer.tooltip_3"));
+        tooltip.add(new TranslatableText("item.invincible.reiki_iron_hammer.tooltip_4"));
+        tooltip.add(new TranslatableText("item.invincible.reiki_iron_hammer.tooltip_5"));
         super.appendTooltip(stack, world, tooltip, context);
     }
     

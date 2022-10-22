@@ -2,23 +2,22 @@ package fengliu.invincible.item;
 
 import java.util.List;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class ReikiIronPickaxe extends ManaPickaxe {
 
-    public ReikiIronPickaxe(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostMineManaSkillSettings postMineManaSkillSettings) {
-        super(toolMaterial, attackDamage, attackSpeed, settings, postMineManaSkillSettings);
+    public ReikiIronPickaxe(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ManaSkillSettings ManaSkillSettings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings, ManaSkillSettings);
     }
     
-    public static boolean activeSkill(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner){
+    public static boolean activeSkill(World world, PlayerEntity player, Hand hand){
         
         return true;
     }

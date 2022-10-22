@@ -1,9 +1,8 @@
 package fengliu.invincible.item;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import fengliu.invincible.util.scheduledExecutor;
+import fengliu.invincible.util.ModTimer;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,13 +17,13 @@ public class ReikiIronSword extends ManaSword{
         super(toolMaterial, attackDamage, attackSpeed, settings, manaSkillsSettings);
     }
 
-    private static void clearAllNbt(PlayerEntity user){
-        user.getMainHandStack().getNbt().remove("invincible.player_attack_damage");
-    }
-
     public static boolean activeSkill(World world, PlayerEntity user, Hand hand) {
-        user.getMainHandStack().getNbt().putFloat("invincible.player_attack_damage", 10);
-        scheduledExecutor.scheduledExecutorService.schedule(() ->  clearAllNbt(user), (long) 2, TimeUnit.SECONDS);
+        ItemStack mainStack = user.getMainHandStack();
+        mainStack.getNbt().putFloat("invincible.player_attack_damage", 10);
+
+        ModTimer.timer(world, "reiki_iron_sword", 40, (tserver, stimer, long_time) -> {
+            mainStack.getNbt().remove("invincible.player_attack_damage");
+        });
         return true;
     }
 

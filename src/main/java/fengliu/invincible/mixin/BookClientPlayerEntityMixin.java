@@ -11,7 +11,8 @@ import fengliu.invincible.item.KungFuItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.BookEditScreen;
+import net.minecraft.client.gui.screen.ingame.BookScreen;
+import net.minecraft.client.gui.screen.ingame.BookScreen.WrittenBookContents;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -34,7 +35,7 @@ public class BookClientPlayerEntityMixin extends PlayerEntity{
     @Inject(method = "useBook", at = @At("HEAD"))
     public void useBook(ItemStack book, Hand hand, CallbackInfo info) {
         if (book.getItem() instanceof KungFuItem) {
-            this.client.setScreen(new BookEditScreen(this, book, hand));
+            this.client.setScreen(new BookScreen(new WrittenBookContents(book)));
         }
     }
 

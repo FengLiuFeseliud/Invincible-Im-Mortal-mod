@@ -159,6 +159,9 @@
     "item.invincible.ju_qi_kung.text_4": "聚气功 - 第三式: 消耗 75 真元再增加 5% 修炼灵气加成, 也就是一共 15% 修炼灵气加成",
     "item.invincible.ju_qi_kung.text_5": "聚气功 - 第三式至第一式: 重新从加 5% 修炼灵气增加",
 
+    "item.invincible.huan_huo_kung": "唤火功",
+    "item.invincible.huan_huo_kung.tooltip": "最基础的火系功法，并没有什么高深之处",
+
     "item.invincible.reiki_iron_empty": "未注入灵气的灵铁",
     "item.invincible.reiki_iron_empty.tooltip": "虽然可以被注入灵气了，但是现在还没有灵气",
     
@@ -184,6 +187,8 @@
     "item.invincible.reiki_iron_hammer": "灵铁锤",
     "item.invincible.reiki_iron_hammer.tooltip_2": "注元: 破坏 3x1x3 的范围",
     "item.invincible.reiki_iron_hammer.tooltip_3": "消耗 20 点真元",
+    "item.invincible.reiki_iron_hammer.tooltip_4": "注元: 攻击命中触发，增加 5 点伤害",
+    "item.invincible.reiki_iron_hammer.tooltip_5": "消耗 50 点真元",
 
     "zhen_fu.invincible.ju_ling_zhen.1": "一阶聚灵阵"
 }

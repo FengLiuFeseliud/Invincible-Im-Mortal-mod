@@ -39,9 +39,14 @@ public class KungFuItem extends WrittenBookItem{
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack itemStack = user.getStackInHand(hand);
-        NbtCompound nbt = itemStack.getOrCreateNbt();
+        NbtCompound nbt = user.getStackInHand(hand).getOrCreateNbt();
+        if(nbt.contains(PAGES_KEY)){
+            return super.use(world, user, hand);
+        }
 
+        /**
+         * 自定义书项目
+         */
         NbtList nbtList = new NbtList();
         TranslatableText[] kungFuText = addKungFuText();
         if(kungFuText == null){
@@ -50,9 +55,12 @@ public class KungFuItem extends WrittenBookItem{
         }
 
         for(TranslatableText page: kungFuText){
-            nbtList.add(NbtString.of(page.getString()));
+            nbtList.add(NbtString.of("{\"text\":\""+page.getString()+"\"}"));
         }
         nbt.put(PAGES_KEY, nbtList);
+        // 必须的标签 不然会显示无效
+        nbt.putBoolean(RESOLVED_KEY, true);
+        nbt.putString(TITLE_KEY, "");
         return super.use(world, user, hand);
     }
     

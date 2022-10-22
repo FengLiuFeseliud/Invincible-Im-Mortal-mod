@@ -17,7 +17,7 @@ public class ReikiIronDagger extends ManaSword {
         super(toolMaterial, attackDamage, attackSpeed, settings, postHitManaSkillSettings);
     }
 
-    public static boolean activeSkill(ItemStack stack, LivingEntity target, LivingEntity attacker){
+    public static boolean postHitSkill(ItemStack stack, LivingEntity target, LivingEntity attacker){
         attacker.getMainHandStack().getNbt().putFloat("invincible.player_attack_damage", 2);
         return true;
     }
