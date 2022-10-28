@@ -14,6 +14,8 @@
     "itemGroup.invincible.lian_qi_group": "逆天修仙 - 炼器",
     "itemGroup.invincible.fa_qi_group": "逆天修仙 - 法器",
     "itemGroup.invincible.lian_dan_group": "逆天修仙 - 炼丹",
+    "itemGroup.invincible.dan_yao_group": "逆天修仙 - 丹药",
+    "itemGroup.invincible.cao_yao_group": "逆天修仙 - 草药",
 
     "info.invincible.can_up_level": "可以提升至 %d 境界了！ 总需提升 %d 个境界， 成功率总共：",
     "info.invincible.cannot_up_level": "无法提升境界... 距离至 %d 境界，总需 %d 修为",
@@ -31,6 +33,7 @@
     "info.invincible.not_can_injection_reiki_item": "%d 不是可以注入灵气的物品",
     "info.invincible.is_exceed_injection_target": "%d 达到灵气注入目标！！！",
     "info.invincible.mana_injection_insufficient": "注入灵气不足，还需 %d",
+    "info.invincible.dan_yan_cd": "丹药服用间隔: %ds",
 
     "invincible.cultivation_level.0": "凡人",
     "invincible.cultivation_level.1": "练气初期一重",
@@ -141,6 +144,21 @@
     "item.invincible.jade.Lv8.tooltip": "品质：极品",
     "item.invincible.jade.Lv9.tooltip": "品质：传说",
 
+    "item.invincible.dan_ping": "丹瓶",
+    "item.invincible.dan_ping.tooltip": "可以用来装丹药, 节省背包空间",
+
+    "item.invincible.hui_qi_dan": "一品回气丹",
+    "item.invincible.hui_qi_dan.tooltip": "回气草炼制而成, 可以补充真元",
+    "item.invincible.hui_qi_dan_1": "一品一纹回气丹",
+    "item.invincible.hui_qi_dan_2": "一品二纹回气丹",
+    "item.invincible.hui_qi_dan_3": "一品三纹回气丹",
+    "item.invincible.hui_qi_dan_4": "一品四纹回气丹",
+    "item.invincible.hui_qi_dan_5": "一品五纹回气丹",
+    "item.invincible.hui_qi_dan_6": "一品六纹回气丹",
+    "item.invincible.hui_qi_dan_7": "一品七纹回气丹",
+    "item.invincible.hui_qi_dan_8": "一品八纹回气丹",
+    "item.invincible.hui_qi_dan_9": "一品九纹回气丹",
+
     "kung_fu.tiek.1": "第一式",
     "kung_fu.tiek.2": "第二式",
     "kung_fu.tiek.3": "第三式",
@@ -190,5 +208,7 @@
     "item.invincible.reiki_iron_hammer.tooltip_4": "注元: 攻击命中触发，增加 5 点伤害",
     "item.invincible.reiki_iron_hammer.tooltip_5": "消耗 50 点真元",
 
-    "zhen_fu.invincible.ju_ling_zhen.1": "一阶聚灵阵"
+    "zhen_fu.invincible.ju_ling_zhen.1": "一阶聚灵阵",
+
+    "block.invincible.hui_qi_cao":"回气草"
 }

@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " P ",
+        "BWB",
+        " B "
+    ],
+    "key": {
+        "P": {
+            "tag": "minecraft:planks"
+        },
+        "W": {
+            "item": "minecraft:white_dye"
+        },
+        "B": {
+            "item": "minecraft:brick"
+        }
+    },
+    "result": {
+        "item": "invincible:dan_ping",
+        "count": 1
+    }
+}

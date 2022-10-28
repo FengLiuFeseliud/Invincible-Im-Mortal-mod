@@ -3,6 +3,7 @@ package fengliu.invincible.networking;
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.networking.packets.CultivationClientPackets;
 import fengliu.invincible.networking.packets.CultivationServerPackets;
+import fengliu.invincible.networking.packets.PlayerServerPackets;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
@@ -28,10 +29,11 @@ public class ModMessage {
         ServerPlayNetworking.registerGlobalReceiver(CULTIVATION_ITEM, CultivationServerPackets::cultivation_item);
         ServerPlayNetworking.registerGlobalReceiver(CULTIVATION_INFO, CultivationServerPackets::cultivation_info);
         ServerPlayNetworking.registerGlobalReceiver(CONSUME_MANA, CultivationServerPackets::consumeMana);
-        ServerPlayNetworking.registerGlobalReceiver(SET_SKILL, CultivationServerPackets::setUesSkill);
-        ServerPlayNetworking.registerGlobalReceiver(SET_UES_KUNG_FU, CultivationServerPackets::setUesKungFu);
-        ServerPlayNetworking.registerGlobalReceiver(SET_UES_KUNG_FU_GROUP, CultivationServerPackets::setUesKungFuGroup);
-        ServerPlayNetworking.registerGlobalReceiver(UES_KUNG_FU, CultivationServerPackets::uesKungFu);
+
+        ServerPlayNetworking.registerGlobalReceiver(SET_SKILL, PlayerServerPackets::setUesSkill);
+        ServerPlayNetworking.registerGlobalReceiver(SET_UES_KUNG_FU, PlayerServerPackets::setUesKungFu);
+        ServerPlayNetworking.registerGlobalReceiver(SET_UES_KUNG_FU_GROUP, PlayerServerPackets::setUesKungFuGroup);
+        ServerPlayNetworking.registerGlobalReceiver(UES_KUNG_FU, PlayerServerPackets::uesKungFu);
     }
 
     public static void registerS2CPackets(){

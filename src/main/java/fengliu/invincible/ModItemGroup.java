@@ -70,7 +70,6 @@ public class ModItemGroup {
 				stacks.add(new ItemStack(ModItems.REIKI_IRON));
 			})
 			.build();
-
 	// 法器组
 	public static final ItemGroup FA_QI_GROUP = FabricItemGroupBuilder.create(
 		new Identifier(MOD_ID, "fa_qi_group"))
@@ -83,13 +82,38 @@ public class ModItemGroup {
 				stacks.add(new ItemStack(ModItems.REIKI_IRON_SHIELD));
 			})
 			.build();
-
 	// 炼丹组
 	public static final ItemGroup LIAN_DAN_GROUP = FabricItemGroupBuilder.create(
 		new Identifier(MOD_ID, "lian_dan_group"))
 			.icon(() -> new ItemStack(ModBlocks.DAN_LU))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModBlocks.DAN_LU));
+			})
+			.build();
+	// 丹药组
+	public static final ItemGroup DAN_YAO_GROUP = FabricItemGroupBuilder.create(
+		new Identifier(MOD_ID, "dan_yao_group"))
+			.icon(() -> new ItemStack(ModItems.HUI_QI_DAN_1))
+			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ModItems.DAN_PING));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_1));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_2));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_3));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_4));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_5));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_6));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_7));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_8));
+				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_9));
+			})
+			.build();
+	// 草药组
+	public static final ItemGroup CAO_YAO_GROUP = FabricItemGroupBuilder.create(
+		new Identifier(MOD_ID, "cao_yao_group"))
+			.icon(() -> new ItemStack(ModBlocks.HUI_QI_CAO))
+			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ModBlocks.HUI_QI_CAO));
 			})
 			.build();
 

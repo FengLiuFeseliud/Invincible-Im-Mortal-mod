@@ -1,4 +1,4 @@
-package fengliu.invincible.item.block;
+package fengliu.invincible.block.item;
 
 import java.util.List;
 

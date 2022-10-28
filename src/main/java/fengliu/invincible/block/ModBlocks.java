@@ -65,6 +65,11 @@ public class ModBlocks {
 		FabricBlockSettings.of(Material.STONE).strength(10.5f).requiresTool(),
 		UniformIntProvider.create(12, 24)
 	);
+	// 回气草
+	public static final Block HUI_QI_CAO = new HuiQiCan(
+		FabricBlockSettings.of(Material.PLANT).strength(10.5f).requiresTool(),
+		UniformIntProvider.create(3, 7)
+	);
 	// 角磨机
 	public static final Block ANGLE_GRINDER = new AngleGrinder(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
@@ -105,6 +110,8 @@ public class ModBlocks {
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_3"), DEEPSLATE_REIKI_STONE_ORE_3);
 		// 四级深层灵石矿
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4);
+		// 回气草
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "hui_qi_cao"), HUI_QI_CAO);
 		// 角磨机
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER);
 		// 注灵台

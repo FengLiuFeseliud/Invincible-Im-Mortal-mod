@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 
 import fengliu.invincible.block.ModBlocks;
 import fengliu.invincible.block.entity.ModBlockEntitys;
+import fengliu.invincible.block.item.ModBlockItems;
 import fengliu.invincible.entity.ModEntitys;
 import fengliu.invincible.event.ModServerTickEvent;
 import fengliu.invincible.item.ModItems;
-import fengliu.invincible.item.block.ModBlockItems;
 import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.particle.ModParticle;
 import fengliu.invincible.recipe.ModRecipes;

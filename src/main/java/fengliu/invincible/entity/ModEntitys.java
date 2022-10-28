@@ -2,6 +2,7 @@ package fengliu.invincible.entity;
 
 import fengliu.invincible.invincibleMod;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -17,6 +18,14 @@ public class ModEntitys {
             .dimensions(EntityDimensions.fixed(0.75f, 0.75f)
         ).build()
     );
+
+    // public static final EntityType<Entity> CanSitEntity = Registry.register(
+    //     Registry.ENTITY_TYPE,
+    //     new Identifier(MOD_ID, "chair_entity"),
+    //     FabricEntityTypeBuilder.create(SpawnGroup.MISC, CanSitEntity::new)
+    //         .dimensions(EntityDimensions.fixed(0.75f, 0.75f)
+    //     ).build()
+    // );
 
     public static void registryAllEntitys(){
         

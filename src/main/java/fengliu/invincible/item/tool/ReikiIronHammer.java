@@ -1,8 +1,9 @@
-package fengliu.invincible.item;
+package fengliu.invincible.item.tool;
 
 import java.util.List;
 import java.util.Map;
 
+import fengliu.invincible.item.ManaHammer;
 import fengliu.invincible.util.CheckStructure;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

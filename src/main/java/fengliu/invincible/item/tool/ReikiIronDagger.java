@@ -1,7 +1,8 @@
-package fengliu.invincible.item;
+package fengliu.invincible.item.tool;
 
 import java.util.List;
 
+import fengliu.invincible.item.ManaSword;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -12,8 +13,7 @@ import net.minecraft.world.World;
 
 public class ReikiIronDagger extends ManaSword {
 
-    public ReikiIronDagger(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings,
-            fengliu.invincible.item.ManaSkillsItem.PostHitManaSkillSettings postHitManaSkillSettings) {
+    public ReikiIronDagger(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, PostHitManaSkillSettings postHitManaSkillSettings) {
         super(toolMaterial, attackDamage, attackSpeed, settings, postHitManaSkillSettings);
     }
 

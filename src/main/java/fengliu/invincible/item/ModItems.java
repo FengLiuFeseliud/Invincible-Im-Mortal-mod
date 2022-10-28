@@ -8,6 +8,8 @@ import fengliu.invincible.item.kungfu.HuanHuoKung;
 import fengliu.invincible.item.kungfu.HuanHuoKung.HuanHuoKungSettings;
 import fengliu.invincible.item.kungfu.JuQiKung;
 import fengliu.invincible.item.kungfu.JuQiKung.JuQiKungSettings;
+import fengliu.invincible.item.tool.*;
+import fengliu.invincible.item.danyan.*;
 import fengliu.invincible.util.KungFuCilentData.KungFuTiekSettings;
 import fengliu.invincible.util.ReikiItem.ReikiSettings;
 import fengliu.invincible.util.ReikiItem;
@@ -59,6 +61,81 @@ public class ModItems {
 	public static final Item JADE= new Jade(
 		new FabricItemSettings()
 			.maxCount(64)
+	);
+	// 丹瓶
+	public static final DanPing DAN_PING = new DanPing(
+		new FabricItemSettings()
+			.maxCount(1)
+	);
+	// 一品回气丹
+	public static final HuiQiDan HUI_QI_DAN = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		1, 30
+	);
+	// 一品一纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_1 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		2, 30
+	);
+	// 一品二纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_2 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		3, 30
+	);
+	// 一品三纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_3 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		4, 30
+	);
+	// 一品四纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_4 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		5, 30
+	);
+	// 一品五纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_5 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		6, 30
+	);
+	// 一品六纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_6 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		7, 30
+	);
+	// 一品七纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_7 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		8, 30
+	);
+	// 一品八纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_8 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		9, 30
+	);
+	// 一品九纹回气丹
+	public static final HuiQiDan HUI_QI_DAN_9 = new HuiQiDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		HuiQiDan::HuiQiDanFunction,
+		10, 30
 	);
 	// 聚气功
 	public static final JuQiKung JU_QI_KUNG = new JuQiKung(
@@ -221,6 +298,28 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_4"), REIKI_STONE_4);
 		// 五级灵石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_5"), REIKI_STONE_5);
+		// 丹瓶
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "dan_ping"), DAN_PING);
+		// 一品回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan"), HUI_QI_DAN);
+		// 一品一纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_1"), HUI_QI_DAN_1);
+		// 一品二纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_2"), HUI_QI_DAN_2);
+		// 一品三纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_3"), HUI_QI_DAN_3);
+		// 一品四纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_4"), HUI_QI_DAN_4);
+		// 一品五纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_5"), HUI_QI_DAN_5);
+		// 一品六纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_6"), HUI_QI_DAN_6);
+		// 一品七纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_7"), HUI_QI_DAN_7);
+		// 一品八纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_8"), HUI_QI_DAN_8);
+		// 一品九纹回气丹
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_9"), HUI_QI_DAN_9);
 		// 聚气功
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "ju_qi_kung"), JU_QI_KUNG);
 		// 唤火功

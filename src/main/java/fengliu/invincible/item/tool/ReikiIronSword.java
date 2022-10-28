@@ -1,7 +1,8 @@
-package fengliu.invincible.item;
+package fengliu.invincible.item.tool;
 
 import java.util.List;
 
+import fengliu.invincible.item.ManaSword;
 import fengliu.invincible.util.ModTimer;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,4 +1,4 @@
-package fengliu.invincible.item.block;
+package fengliu.invincible.block.item;
 
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.block.ModBlocks;
@@ -75,6 +75,12 @@ public class ModBlockItems {
 		new FabricItemSettings()
 			.maxCount(64)
 	);
+	// 回气草
+	public static final BlockItem HUI_QI_CAO_ITEM = new HuiQiCaoItem(
+		ModBlocks.HUI_QI_CAO,
+		new FabricItemSettings()
+			.maxCount(64)
+	);
 	// 角磨机
 	public static final BlockItem ANGLE_GRINDER_ITEM = new AngleGrinderItem(
 		ModBlocks.ANGLE_GRINDER,
@@ -123,6 +129,8 @@ public class ModBlockItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_3"), DEEPSLATE_REIKI_STONE_ORE_3_ITEM);
 		// 四级深层灵石矿
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4_ITEM);
+		// 回气草
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_cao"), HUI_QI_CAO_ITEM);
 		// 角磨机
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "angle_grinder"), ANGLE_GRINDER_ITEM);
 		// 注灵台
