@@ -4,50 +4,27 @@ import org.lwjgl.glfw.GLFW;
 
 import fengliu.invincible.api.Key;
 import fengliu.invincible.block.ModBlocks;
-import fengliu.invincible.entity.CanSitEntity;
-import fengliu.invincible.entity.ModEntitys;
-import fengliu.invincible.entity.renderer.CanSitEntityRenderer;
 import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.particle.ModParticle;
-import fengliu.invincible.screen.AngleGrinderScreen;
-import fengliu.invincible.screen.DanLuScreen;
-import fengliu.invincible.screen.InjectionReikiStandsScreen;
-import fengliu.invincible.screen.JuLingZhenLv1Screen;
-import fengliu.invincible.screen.NotZhenFuScreen;
-import fengliu.invincible.screen.handler.ModScreenHandlers;
+import fengliu.invincible.screen.ModScreens;
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.entity.Entity;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.EntityType;
 
 public class invincibleClient implements ClientModInitializer  {
 	
     @Override
 	public void onInitializeClient() {
 		ModMessage.registerS2CPackets();
+		
 		ModParticle.registerClientAllParticles();
 
+		ModBlocks.setAllBlockRenderLayerMap();
 
-		// 角磨机 UI
-		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, AngleGrinderScreen::new);
-		// 注灵台 UI
-		HandledScreens.register(ModScreenHandlers.INJECTION_REIKI_STANDS_SCREENHANDLER, InjectionReikiStandsScreen::new);
-		HandledScreens.register(ModScreenHandlers.DAN_LU_STANDS_SCREENHANDLER, DanLuScreen::new);
-		// 错误阵法 UI
-		HandledScreens.register(ModScreenHandlers.NOT_ZHEN_FU_SCREENHANDLER, NotZhenFuScreen::new);
-		// 一阶聚灵阵 UI
-		HandledScreens.register(ModScreenHandlers.JU_LING_ZHEN_LV1_SCREENHANDLER, JuLingZhenLv1Screen::new);
-		
-		
-		// 角磨机 渲染层设置
-		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ANGLE_GRINDER, RenderLayer.getCutout());
+		ModScreens.registerAllScreen();
+
 	
 		// EntityRendererRegistry.INSTANCE.register((EntityType<? extends CanSitEntity>) ModEntitys.CanSitEntity, (context) -> {
 		// 	return new CanSitEntityRenderer(context);

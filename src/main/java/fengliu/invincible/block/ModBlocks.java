@@ -1,9 +1,14 @@
 package fengliu.invincible.block;
 
 import fengliu.invincible.invincibleMod;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.OreBlock;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.block.Material;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -67,8 +72,8 @@ public class ModBlocks {
 	);
 	// 回气草
 	public static final Block HUI_QI_CAO = new HuiQiCan(
-		FabricBlockSettings.of(Material.PLANT).strength(10.5f).requiresTool(),
-		UniformIntProvider.create(3, 7)
+		StatusEffects.SATURATION, 30,
+		FabricBlockSettings.of(Material.PLANT).noCollision().nonOpaque().breakInstantly()
 	);
 	// 角磨机
 	public static final Block ANGLE_GRINDER = new AngleGrinder(
@@ -86,6 +91,12 @@ public class ModBlocks {
 	public static final Block ZHEN_YAN_1 = new ZhenYanLv1(
 		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
 	);
+
+	@Environment(EnvType.CLIENT)
+	public static void setAllBlockRenderLayerMap(){
+		BlockRenderLayerMap.INSTANCE.putBlock(ANGLE_GRINDER, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(HUI_QI_CAO, RenderLayer.getTranslucent());
+	};
 
     public static void registerAllBlock(){
         // 灵石砖

@@ -1,12 +1,12 @@
 package fengliu.invincible.block;
 
-import net.minecraft.block.OreBlock;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.entity.effect.StatusEffect;
 
-public class HuiQiCan extends OreBlock {
+public class HuiQiCan extends FlowerBlock {
 
-    public HuiQiCan(Settings settings, UniformIntProvider experienceDropped) {
-        super(settings, experienceDropped);
+    public HuiQiCan(StatusEffect suspiciousStewEffect, int effectDuration, Settings settings) {
+        super(suspiciousStewEffect, effectDuration, settings);
     }
-    
+
 }

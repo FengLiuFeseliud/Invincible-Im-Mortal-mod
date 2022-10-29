@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "invincible:item/hui_qi_cao"
+        "layer0": "invincible:block/hui_qi_cao"
     }
 }
