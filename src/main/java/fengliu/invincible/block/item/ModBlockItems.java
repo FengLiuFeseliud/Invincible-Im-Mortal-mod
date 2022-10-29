@@ -10,97 +10,120 @@ import net.minecraft.util.registry.Registry;
 public class ModBlockItems {
     private static final String MOD_ID = invincibleMod.MOD_ID;
     // 灵石砖
-	public static final BlockItem REIKI_STONE_BRICKS_ITEM= new ReikiStoneBricksItem(
+	public static final BlockItem REIKI_STONE_BRICKS_ITEM= new BaseBlockItem(
+		"block.invincible.reiki_stone_bricks.tooltip",
 		ModBlocks.REIKI_STONE_BRICKS,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 玉石原石矿
-	public static final BlockItem JADE_ROUGH_STONE_ORE_ITEM= new JadeRoughStoneOre(
+	public static final BlockItem JADE_ROUGH_STONE_ORE_ITEM= new BaseBlockItem(
+		"block.invincible.jade_rough_stone_ore.tooltip",
 		ModBlocks.JADE_ROUGH_STONE_ORE,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
     // 一级灵石矿
-	public static final BlockItem REIKI_STONE_ORE_1_ITEM = new ReikiStoneOre.Lv1(
+	public static final BlockItem REIKI_STONE_ORE_1_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_1.tooltip",
 		ModBlocks.REIKI_STONE_ORE_1,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 二级灵石矿
-	public static final BlockItem REIKI_STONE_ORE_2_ITEM = new ReikiStoneOre.Lv2(
+	public static final BlockItem REIKI_STONE_ORE_2_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_2.tooltip",
 		ModBlocks.REIKI_STONE_ORE_2,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 三级灵石矿
-	public static final BlockItem REIKI_STONE_ORE_3_ITEM = new ReikiStoneOre.Lv3(
+	public static final BlockItem REIKI_STONE_ORE_3_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_3.tooltip",
 		ModBlocks.REIKI_STONE_ORE_3,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 四级灵石矿
-	public static final BlockItem REIKI_STONE_ORE_4_ITEM = new ReikiStoneOre.Lv4(
+	public static final BlockItem REIKI_STONE_ORE_4_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_4.tooltip",
 		ModBlocks.REIKI_STONE_ORE_4,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 深层玉石原石矿
-	public static final BlockItem DEEPSLATE_JADE_ROUGH_STONE_ORE_ITEM= new JadeRoughStoneOre(
+	public static final BlockItem DEEPSLATE_JADE_ROUGH_STONE_ORE_ITEM= new BaseBlockItem(
+		"block.invincible.jade_rough_stone_ore.tooltip",
 		ModBlocks.DEEPSLATE_JADE_ROUGH_STONE_ORE,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 一级深层灵石矿
-	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_1_ITEM = new ReikiStoneOre.Lv1(
+	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_1_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_1.tooltip",
 		ModBlocks.DEEPSLATE_REIKI_STONE_ORE_1,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 二级深层灵石矿
-	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_2_ITEM = new ReikiStoneOre.Lv2(
+	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_2_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_2.tooltip",
 		ModBlocks.DEEPSLATE_REIKI_STONE_ORE_2,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 三级深层灵石矿
-	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_3_ITEM = new ReikiStoneOre.Lv3(
+	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_3_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_3.tooltip",
 		ModBlocks.DEEPSLATE_REIKI_STONE_ORE_3,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 四级深层灵石矿
-	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_4_ITEM = new ReikiStoneOre.Lv4(
+	public static final BlockItem DEEPSLATE_REIKI_STONE_ORE_4_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_stone_ore_4.tooltip",
 		ModBlocks.DEEPSLATE_REIKI_STONE_ORE_4,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
+	// 灵草
+	public static final BlockItem REIKI_GRASS_ITEM = new BaseBlockItem(
+		"block.invincible.reiki_grass.tooltip",
+		ModBlocks.REIKI_GRASS,
+		new FabricItemSettings()
+			.maxCount(64)
+	);
 	// 回气草
-	public static final BlockItem HUI_QI_CAO_ITEM = new HuiQiCaoItem(
+	public static final BlockItem HUI_QI_CAO_ITEM = new BaseBlockItem(
+		"block.invincible.hui_qi_cao.tooltip",
 		ModBlocks.HUI_QI_CAO,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 角磨机
-	public static final BlockItem ANGLE_GRINDER_ITEM = new AngleGrinderItem(
+	public static final BlockItem ANGLE_GRINDER_ITEM = new BaseBlockItem(
+		"block.invincible.angle_grinder.tooltip",
 		ModBlocks.ANGLE_GRINDER,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 注灵台
-	public static final BlockItem INJECTION_REIKI_STANDS_ITEM = new InjectionReikiStandsItem(
+	public static final BlockItem INJECTION_REIKI_STANDS_ITEM = new BaseBlockItem(
+		"block.invincible.injection_reiki_stands.tooltip",
 		ModBlocks.INJECTION_REIKI_STANDS,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 丹炉
-	public static final BlockItem DAN_LU = new BlockItem(
+	public static final BlockItem DAN_LU = new BaseBlockItem(
+		"",
 		ModBlocks.DAN_LU,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 一阶阵眼
-	public static final BlockItem ZHEN_YAN_1_ITEM = new ZhenYanItem.Lv1(
+	public static final BlockItem ZHEN_YAN_1_ITEM = new BaseBlockItem(
+		"block.invincible.zhen_yan_1.tooltip",
 		ModBlocks.ZHEN_YAN_1,
 		new FabricItemSettings()
 			.maxCount(64)
@@ -129,6 +152,8 @@ public class ModBlockItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_3"), DEEPSLATE_REIKI_STONE_ORE_3_ITEM);
 		// 四级深层灵石矿
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4_ITEM);
+		// 灵草
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_grass"), REIKI_GRASS_ITEM);
 		// 回气草
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_cao"), HUI_QI_CAO_ITEM);
 		// 角磨机

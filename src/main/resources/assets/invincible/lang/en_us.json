@@ -159,6 +159,18 @@
     "item.invincible.hui_qi_dan_8": "一品八纹回气丹",
     "item.invincible.hui_qi_dan_9": "一品九纹回气丹",
 
+    "item.invincible.xi_shou_dan": "一品吸收丹",
+    "item.invincible.xi_shou_dan.tooltip": "金苹果炼制而成, 可以提供伤害吸收, 上限 50",
+    "item.invincible.xi_shou_dan_1": "一品一纹吸收丹",
+    "item.invincible.xi_shou_dan_2": "一品二纹吸收丹",
+    "item.invincible.xi_shou_dan_3": "一品三纹吸收丹",
+    "item.invincible.xi_shou_dan_4": "一品四纹吸收丹",
+    "item.invincible.xi_shou_dan_5": "一品五纹吸收丹",
+    "item.invincible.xi_shou_dan_6": "一品六纹吸收丹",
+    "item.invincible.xi_shou_dan_7": "一品七纹吸收丹",
+    "item.invincible.xi_shou_dan_8": "一品八纹吸收丹",
+    "item.invincible.xi_shou_dan_9": "一品九纹吸收丹",
+
     "kung_fu.tiek.1": "第一式",
     "kung_fu.tiek.2": "第二式",
     "kung_fu.tiek.3": "第三式",
@@ -210,5 +222,9 @@
 
     "zhen_fu.invincible.ju_ling_zhen.1": "一阶聚灵阵",
 
-    "block.invincible.hui_qi_cao":"回气草"
+    "block.invincible.reiki_grass":"灵草",
+    "block.invincible.reiki_grass.tooltip": "",
+
+    "block.invincible.hui_qi_cao":"回气草",
+    "block.invincible.hui_qi_cao.tooltip": ""
 }

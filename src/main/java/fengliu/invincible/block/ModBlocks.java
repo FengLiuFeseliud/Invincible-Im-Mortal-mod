@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.OreBlock;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
@@ -70,8 +71,13 @@ public class ModBlocks {
 		FabricBlockSettings.of(Material.STONE).strength(10.5f).requiresTool(),
 		UniformIntProvider.create(12, 24)
 	);
+	// 灵草
+	public static final Block REIKI_GRASS = new FlowerBlock(
+		StatusEffects.SATURATION, 30,
+		FabricBlockSettings.of(Material.PLANT).noCollision().nonOpaque().breakInstantly()
+	);
 	// 回气草
-	public static final Block HUI_QI_CAO = new HuiQiCan(
+	public static final Block HUI_QI_CAO = new FlowerBlock(
 		StatusEffects.SATURATION, 30,
 		FabricBlockSettings.of(Material.PLANT).noCollision().nonOpaque().breakInstantly()
 	);
@@ -95,6 +101,7 @@ public class ModBlocks {
 	@Environment(EnvType.CLIENT)
 	public static void setAllBlockRenderLayerMap(){
 		BlockRenderLayerMap.INSTANCE.putBlock(ANGLE_GRINDER, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(REIKI_GRASS, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(HUI_QI_CAO, RenderLayer.getTranslucent());
 	};
 
@@ -121,6 +128,8 @@ public class ModBlocks {
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_3"), DEEPSLATE_REIKI_STONE_ORE_3);
 		// 四级深层灵石矿
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "deepslate_reiki_stone_ore_4"), DEEPSLATE_REIKI_STONE_ORE_4);
+		// 灵草
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "reiki_grass"), REIKI_GRASS);
 		// 回气草
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "hui_qi_cao"), HUI_QI_CAO);
 		// 角磨机

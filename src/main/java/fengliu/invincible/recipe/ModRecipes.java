@@ -10,5 +10,8 @@ public class ModRecipes {
     public static void registerAllRecipe(){
         Registry.register(Registry.RECIPE_SERIALIZER, InjectionReikiRecipe.Serializer.ID, InjectionReikiRecipe.Serializer.INSTANCE);
         Registry.register(Registry.RECIPE_TYPE, new Identifier(MOD_ID, InjectionReikiRecipe.Type.ID), InjectionReikiRecipe.Type.INSTANCE);
+
+        Registry.register(Registry.RECIPE_SERIALIZER, SmeltRecipe.Serializer.ID, SmeltRecipe.Serializer.INSTANCE);
+        Registry.register(Registry.RECIPE_TYPE, new Identifier(MOD_ID, SmeltRecipe.Type.ID), SmeltRecipe.Type.INSTANCE);
     }
 }

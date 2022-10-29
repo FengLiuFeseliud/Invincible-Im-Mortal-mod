@@ -106,13 +106,24 @@ public class ModItemGroup {
 				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_7));
 				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_8));
 				stacks.add(new ItemStack(ModItems.HUI_QI_DAN_9));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_1));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_2));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_3));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_4));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_5));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_6));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_7));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_8));
+				stacks.add(new ItemStack(ModItems.XI_SHOU_DAN_9));
 			})
 			.build();
 	// 草药组
 	public static final ItemGroup CAO_YAO_GROUP = FabricItemGroupBuilder.create(
 		new Identifier(MOD_ID, "cao_yao_group"))
-			.icon(() -> new ItemStack(ModBlocks.HUI_QI_CAO))
+			.icon(() -> new ItemStack(ModBlocks.REIKI_GRASS))
 			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ModBlocks.REIKI_GRASS));
 				stacks.add(new ItemStack(ModBlocks.HUI_QI_CAO));
 			})
 			.build();

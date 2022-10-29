@@ -63,82 +63,152 @@ public class ModItems {
 			.maxCount(64)
 	);
 	// 丹瓶
-	public static final DanPing DAN_PING = new DanPing(
+	public static final Item DAN_PING = new DanPing(
 		new FabricItemSettings()
 			.maxCount(1)
 	);
 	// 一品回气丹
-	public static final HuiQiDan HUI_QI_DAN = new HuiQiDan(
+	public static final Item HUI_QI_DAN = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		1, 30
 	);
 	// 一品一纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_1 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_1 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		2, 30
 	);
 	// 一品二纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_2 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_2 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		3, 30
 	);
 	// 一品三纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_3 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_3 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		4, 30
 	);
 	// 一品四纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_4 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_4 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		5, 30
 	);
 	// 一品五纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_5 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_5 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		6, 30
 	);
 	// 一品六纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_6 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_6 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		7, 30
 	);
 	// 一品七纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_7 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_7 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		8, 30
 	);
 	// 一品八纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_8 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_8 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		9, 30
 	);
 	// 一品九纹回气丹
-	public static final HuiQiDan HUI_QI_DAN_9 = new HuiQiDan(
+	public static final Item HUI_QI_DAN_9 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
 		HuiQiDan::HuiQiDanFunction,
 		10, 30
 	);
+	// 一品吸收丹
+	public static final Item XI_SHOU_DAN = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		1, 20
+	);
+	// 一品一纹吸收丹
+	public static final Item XI_SHOU_DAN_1 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		2, 20
+	);
+	// 一品二纹吸收丹
+	public static final Item XI_SHOU_DAN_2 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		3, 20
+	);
+	// 一品三纹吸收丹
+	public static final Item XI_SHOU_DAN_3 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		4, 20
+	);
+	// 一品四纹吸收丹
+	public static final Item XI_SHOU_DAN_4 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		5, 20
+	);
+	// 一品五纹吸收丹
+	public static final Item XI_SHOU_DAN_5 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		6, 20
+	);
+	// 一品六纹吸收丹
+	public static final Item XI_SHOU_DAN_6 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		7, 20
+	);
+	// 一品七纹吸收丹
+	public static final Item XI_SHOU_DAN_7 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		8, 20
+	);
+	// 一品八纹吸收丹
+	public static final Item XI_SHOU_DAN_8 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		9, 20
+	);
+	// 一品九纹吸收丹
+	public static final Item XI_SHOU_DAN_9 = new XiShouDan(
+		new FabricItemSettings()
+			.maxCount(16),
+		XiShouDan::XiShouDanFunction,
+		10, 20
+	);
 	// 聚气功
-	public static final JuQiKung JU_QI_KUNG = new JuQiKung(
+	public static final Item JU_QI_KUNG = new JuQiKung(
 		new FabricItemSettings()
 			.maxCount(1),
 		new JuQiKungSettings(
@@ -158,7 +228,7 @@ public class ModItems {
 			.setComboTime(250)
 	);
 	// 唤火功
-	public static final HuanHuoKung HUAN_HUO_KUNG = new HuanHuoKung(
+	public static final Item HUAN_HUO_KUNG = new HuanHuoKung(
 		new FabricItemSettings()
 			.maxCount(1),
 		new HuanHuoKungSettings(
@@ -178,17 +248,17 @@ public class ModItems {
 			.setComboTime(250)
 	);
 	// 未注灵的灵铁
-	public static final ReikiIronEmpty REIKI_IRON_EMPTY = new ReikiIronEmpty(
+	public static final Item REIKI_IRON_EMPTY = new ReikiIronEmpty(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 灵铁
-	public static final ReikiIron REIKI_IRON = new ReikiIron(
+	public static final Item REIKI_IRON = new ReikiIron(
 		new FabricItemSettings()
 			.maxCount(64)
 	);
 	// 灵铁剑
-	public static final ReikiIronSword REIKI_IRON_SWORD = new ReikiIronSword(
+	public static final Item REIKI_IRON_SWORD = new ReikiIronSword(
 		ToolMaterials.IRON, 4, -2.4f, 
 			new FabricItemSettings()
 				.maxCount(1),
@@ -198,7 +268,7 @@ public class ModItems {
 				.setSkillCd(5)
 	);
 	// 灵铁匕首
-	public static final ReikiIronDagger REIKI_IRON_DAGGER = new ReikiIronDagger(
+	public static final Item REIKI_IRON_DAGGER = new ReikiIronDagger(
 		ToolMaterials.IRON, 2, 1, 
 			new FabricItemSettings()
 				.maxCount(1),
@@ -207,7 +277,7 @@ public class ModItems {
 				.setConsume(20)
 	);
 	// 灵铁盾
-	public static final ReikiIronShield REIKI_IRON_SHIELD = new ReikiIronShield(
+	public static final Item REIKI_IRON_SHIELD = new ReikiIronShield(
 		new FabricItemSettings()
 				.maxCount(1),
 		new ManaSkillSettings(ReikiIronShield::activeSkill)
@@ -216,7 +286,7 @@ public class ModItems {
 			.setSkillCd(0)
 	);
 	// 灵铁镐
-	public static final ReikiIronPickaxe REIKI_IRON_PICKAXE = new ReikiIronPickaxe(
+	public static final Item REIKI_IRON_PICKAXE = new ReikiIronPickaxe(
 		ToolMaterials.IRON, 1, -2.4f,
 			new FabricItemSettings()
 					.maxCount(1),
@@ -226,7 +296,7 @@ public class ModItems {
 				.setSkillCd(10)
 	);
 	// 灵铁锤
-	public static final ReikiIronHammer REIKI_IRON_HAMMER = new ReikiIronHammer(
+	public static final Item REIKI_IRON_HAMMER = new ReikiIronHammer(
 		ToolMaterials.IRON, 6, -3.1f,
 			new FabricItemSettings()
 					.maxCount(1),
@@ -320,6 +390,16 @@ public class ModItems {
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_8"), HUI_QI_DAN_8);
 		// 一品九纹回气丹
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "hui_qi_dan_9"), HUI_QI_DAN_9);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan"), XI_SHOU_DAN);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_1"), XI_SHOU_DAN_1);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_2"), XI_SHOU_DAN_2);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_3"), XI_SHOU_DAN_3);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_4"), XI_SHOU_DAN_4);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_5"), XI_SHOU_DAN_5);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_6"), XI_SHOU_DAN_6);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_7"), XI_SHOU_DAN_7);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_8"), XI_SHOU_DAN_8);
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "xi_shou_dan_9"), XI_SHOU_DAN_9);
 		// 聚气功
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "ju_qi_kung"), JU_QI_KUNG);
 		// 唤火功

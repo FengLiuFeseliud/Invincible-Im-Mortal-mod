@@ -14,8 +14,8 @@ public class KungFuCilentData {
     private final IEntityDataSaver EntityData;
 
     protected static final KungFuSettings[] kungFuSettings = {
-        ModItems.JU_QI_KUNG.getKungFuSettings(),
-        ModItems.HUAN_HUO_KUNG.getKungFuSettings()
+        ((KungFuItem) ModItems.JU_QI_KUNG).getKungFuSettings(),
+        ((KungFuItem) ModItems.HUAN_HUO_KUNG).getKungFuSettings()
     };
 
     public KungFuCilentData(IEntityDataSaver player){

@@ -28,6 +28,13 @@ public class DanLuScreen extends HandledScreen<DanLuScreenHandler>{
         RenderSystem.setShaderTexture(0, TEXTTURE);
         
         this.drawTexture(matrices, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+
+        if(this.handler.isFireIn()){
+            this.drawTexture(matrices, this.x + 126, this.y + 59, 176, 0, 14, 14);
+        }
+
+        int tick_draw_width = this.handler.getTickCount() * 24 / 200;
+        this.drawTexture(matrices, this.x + 89, 70, 176, 14, tick_draw_width, 17);
     }
 
     @Override

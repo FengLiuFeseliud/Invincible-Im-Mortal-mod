@@ -14,7 +14,7 @@ public class DanLuScreenHandler extends BaseScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
     public DanLuScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(10), new ArrayPropertyDelegate(0));
+        this(syncId, playerInventory, new SimpleInventory(10), new ArrayPropertyDelegate(2));
     }
 
     public DanLuScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
@@ -23,7 +23,7 @@ public class DanLuScreenHandler extends BaseScreenHandler {
         this.propertyDelegate = propertyDelegate;
         this.addProperties(propertyDelegate);
         checkSize(inventory, 10);
-        checkDataCount(propertyDelegate, 0);
+        checkDataCount(propertyDelegate, 2);
 
         this.addSlot(new Slot(inventory, 0, 30, 17){
             @Override
@@ -98,6 +98,11 @@ public class DanLuScreenHandler extends BaseScreenHandler {
         this.playerSlot(playerInventory);
     }
 
+    public boolean isFireIn(){
+        return propertyDelegate.get(0) == 1 ? true : false;
+    }
 
-
+    public int getTickCount(){
+        return propertyDelegate.get(1);
+    }
 }

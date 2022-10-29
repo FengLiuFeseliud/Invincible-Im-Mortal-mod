@@ -1,0 +1,10 @@
+{
+    "type": "invincible:smelt_recipe",
+    "input": 
+    {
+        "invincible:hui_qi_cao": 1,
+        "invincible:reiki_grass": 2
+    },
+    "result": "invincible:hui_qi_dan",
+    "count": 4
+}

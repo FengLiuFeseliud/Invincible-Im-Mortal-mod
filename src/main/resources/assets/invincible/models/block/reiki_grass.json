@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "invincible:block/reiki_grass"
+    }
+}

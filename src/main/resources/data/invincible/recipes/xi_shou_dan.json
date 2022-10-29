@@ -1,0 +1,10 @@
+{
+    "type": "invincible:smelt_recipe",
+    "input": 
+    {
+        "minecraft:golden_apple": 1,
+        "invincible:reiki_grass": 2
+    },
+    "result": "invincible:xi_shou_dan",
+    "count": 2
+}
