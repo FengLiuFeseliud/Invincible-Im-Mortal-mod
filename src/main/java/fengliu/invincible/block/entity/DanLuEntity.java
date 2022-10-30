@@ -1,22 +1,21 @@
 package fengliu.invincible.block.entity;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Nullable;
 
 import fengliu.invincible.api.Ui_Block;
 import fengliu.invincible.block.DanLu;
+import fengliu.invincible.item.DanYanItem;
 import fengliu.invincible.recipe.SmeltRecipe;
 import fengliu.invincible.screen.handler.DanLuScreenHandler;
+import fengliu.invincible.util.IEntityDataSaver;
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
@@ -25,7 +24,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class DanLuEntity extends Ui_Block.Entity {
+public class DanLuEntity extends Ui_Block.Entity implements SmeltingBlockEntity {
+    private Optional<SmeltRecipe> match = Optional.empty();
+    private PlayerEntity uesPlayer;
     public int tick_count;
     public int fire_in = 0;
     
@@ -68,8 +69,33 @@ public class DanLuEntity extends Ui_Block.Entity {
         this.setMaxItemStack(10);
     }
 
+    @Override
+    public Optional<SmeltRecipe> getMatch() {
+        return match;
+    }
+
+    @Override
+    public PlayerEntity getPlayer() {
+        return uesPlayer;
+    }
+
+    @Override
+    public int getPlayerExp(){
+        return ((IEntityDataSaver) uesPlayer).getLianDanServerData().getLianDanExp();
+    }
+    
+    @Override
+    public void setUesPlayer(PlayerEntity player){
+        uesPlayer = player;
+    }
+
     public static void tick(World world, BlockPos pos, BlockState state, DanLuEntity be){
         if(world.isClient){
+            return;
+        }
+
+        PlayerEntity uesPlayer = be.getUesPlayer(world);
+        if(uesPlayer == null){
             return;
         }
         
@@ -80,20 +106,8 @@ public class DanLuEntity extends Ui_Block.Entity {
         }
         be.fire_in = 1;
 
-        SimpleInventory inventory = new SimpleInventory(9);
-        for(int index = 0; index < 9; index++){
-            inventory.addStack(be.inventory.get(index));
-        }
-        Optional<SmeltRecipe> match = world.getRecipeManager().getFirstMatch(SmeltRecipe.Type.INSTANCE, inventory, world);
-        
-        ItemStack outDanLuStack = be.inventory.get(9);
-        if(!match.isPresent()){
-            be.tick_count = 0;
-            return;
-        }
-
-        Item outItem = match.get().getOutput().getItem();
-        if((!outDanLuStack.isOf(outItem) && !outDanLuStack.isEmpty()) || outDanLuStack.getCount() == outItem.getMaxCount()){
+        be.match = be.getRecipeMatch(world);
+        if(!be.match.isPresent() || !be.canSmelting()){
             be.tick_count = 0;
             return;
         }
@@ -103,23 +117,15 @@ public class DanLuEntity extends Ui_Block.Entity {
             return;
         }
         be.tick_count = 0;
+        be.consumeRecipeItems();
 
-        List<ItemStack> clearItems = match.get().getInventory().clearToList();
-        int clearItemsSize = clearItems.size();
-        for(int index = 0; index < 9; index++){
-            if(index > clearItemsSize - 1){
-                be.inventory.set(index, new ItemStack(Items.AIR));
-                continue;
-            }
-            be.inventory.set(index, clearItems.get(index));
+        Item outSmeltItem = be.getMatchOutSmeltItem();
+        if(!(outSmeltItem instanceof DanYanItem)){
+            return;
         }
         
-        int outItemCount = match.get().getCount();
-        if(outDanLuStack.isEmpty()){
-            be.inventory.set(9, new ItemStack(outItem, outItemCount));
-        }else{
-            outDanLuStack.increment(outItemCount);
-        }
+        ((IEntityDataSaver) uesPlayer).getLianDanServerData().addLianDanExpInUpLevel((DanYanItem) outSmeltItem);
+        be.setOutSmeltItem();
 
     };
 

@@ -71,141 +71,121 @@ public class ModItems {
 	public static final Item HUI_QI_DAN = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
-		1, 30
+		1, 20
 	);
 	// 一品一纹回气丹
 	public static final Item HUI_QI_DAN_1 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
-		2, 30
+		2, 20
 	);
 	// 一品二纹回气丹
 	public static final Item HUI_QI_DAN_2 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
-		3, 30
+		3, 20
 	);
 	// 一品三纹回气丹
 	public static final Item HUI_QI_DAN_3 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
 		4, 30
 	);
 	// 一品四纹回气丹
 	public static final Item HUI_QI_DAN_4 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
 		5, 30
 	);
 	// 一品五纹回气丹
 	public static final Item HUI_QI_DAN_5 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
 		6, 30
 	);
 	// 一品六纹回气丹
 	public static final Item HUI_QI_DAN_6 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
-		7, 30
+		7, 40
 	);
 	// 一品七纹回气丹
 	public static final Item HUI_QI_DAN_7 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
-		8, 30
+		8, 40
 	);
 	// 一品八纹回气丹
 	public static final Item HUI_QI_DAN_8 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
-		9, 30
+		9, 40
 	);
 	// 一品九纹回气丹
 	public static final Item HUI_QI_DAN_9 = new HuiQiDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		HuiQiDan::HuiQiDanFunction,
-		10, 30
+		10, 50
 	);
 	// 一品吸收丹
 	public static final Item XI_SHOU_DAN = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
-		1, 20
+		1, 5
 	);
 	// 一品一纹吸收丹
 	public static final Item XI_SHOU_DAN_1 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
-		2, 20
+		2, 5
 	);
 	// 一品二纹吸收丹
 	public static final Item XI_SHOU_DAN_2 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
-		3, 20
+		3, 10
 	);
 	// 一品三纹吸收丹
 	public static final Item XI_SHOU_DAN_3 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
-		4, 20
+		4, 10
 	);
 	// 一品四纹吸收丹
 	public static final Item XI_SHOU_DAN_4 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
-		5, 20
+		5, 10
 	);
 	// 一品五纹吸收丹
 	public static final Item XI_SHOU_DAN_5 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
 		6, 20
 	);
 	// 一品六纹吸收丹
 	public static final Item XI_SHOU_DAN_6 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
 		7, 20
 	);
 	// 一品七纹吸收丹
 	public static final Item XI_SHOU_DAN_7 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
 		8, 20
 	);
 	// 一品八纹吸收丹
 	public static final Item XI_SHOU_DAN_8 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
-		9, 20
+		9, 30
 	);
 	// 一品九纹吸收丹
 	public static final Item XI_SHOU_DAN_9 = new XiShouDan(
 		new FabricItemSettings()
 			.maxCount(16),
-		XiShouDan::XiShouDanFunction,
-		10, 20
+		10, 30
 	);
 	// 聚气功
 	public static final Item JU_QI_KUNG = new JuQiKung(

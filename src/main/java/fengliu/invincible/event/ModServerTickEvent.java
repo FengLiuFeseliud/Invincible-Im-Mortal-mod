@@ -1,6 +1,5 @@
 package fengliu.invincible.event;
 
-import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.KungFuServerData;
 import net.minecraft.nbt.NbtCompound;
@@ -32,9 +31,7 @@ public class ModServerTickEvent{
         }
 
         for(ServerPlayerEntity player: server.getPlayerManager().getPlayerList()){
-            CultivationServerData cultivationData = ((IEntityDataSaver) player).getServerCultivationData();
-            cultivationData.recoverMana(10);
-            cultivationData.syncData((IEntityDataSaver) player);
+            ((IEntityDataSaver) player).getServerCultivationData().recoverMana(10);
         }
         playerTick_count = 0;
         
@@ -60,7 +57,7 @@ public class ModServerTickEvent{
             int comboIn = nbt.getInt("combo_in");
             if(0 < comboIn){
                 nbt.putInt("combo_in", --comboIn);
-                KungFuServerData.syncData(iplayer);
+                KungFuServerData.syncData();
                 continue;
             }
             
@@ -69,7 +66,7 @@ public class ModServerTickEvent{
             nbt.putInt("combo_in", nbt.getInt("combo_end"));
             iplayer.getPersistentData().remove("combo_in");
 
-            KungFuServerData.syncData(iplayer);
+            KungFuServerData.syncData();
         }
         
     }

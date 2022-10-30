@@ -26,7 +26,7 @@ public class CultivationServerData extends CultivationCilentData {
         int cultivation_exp = nbt.getInt("cultivation_exp");
         if(cultivation_exp < 0){
             nbt.putInt("cultivation_exp", 0);
-            syncData(EntityData);
+            syncData();
             return 0;
         }
         return cultivation_exp;
@@ -39,13 +39,13 @@ public class CultivationServerData extends CultivationCilentData {
 
         if(level < 0){
             nbt.putInt("cultivation_level", 0);
-            syncData(EntityData);
+            syncData();
             return CultivationLevelAll[0];
         }
 
         if(level >= CultivationLevelAll.length - 1){
             nbt.putInt("cultivation_level", CultivationLevelAll.length - 1);
-            syncData(EntityData);
+            syncData();
             return CultivationLevelAll[CultivationLevelAll.length - 1];
         }
 
@@ -59,14 +59,14 @@ public class CultivationServerData extends CultivationCilentData {
 
         if(mana < 0){
             nbt.putInt("mana", 0);
-            syncData(EntityData);
+            syncData();
             return 0;
         }
 
         CultivationLevel level = getCultivationLevel();
         if(mana > level.getBaseMana()){
             nbt.putInt("mana", level.getBaseMana());
-            syncData(EntityData);
+            syncData();
             return level.getBaseMana();
         }
         
@@ -127,7 +127,7 @@ public class CultivationServerData extends CultivationCilentData {
         int cultivationExp = getCultivationExp();
         int new_cultivationExp = cultivationExp + addExp;
         EntityData.getPersistentData().putInt("cultivation_exp", new_cultivationExp);
-        syncData(EntityData);
+        syncData();
 
         return getUpLevelIndex(new_cultivationExp);
     }
@@ -163,7 +163,7 @@ public class CultivationServerData extends CultivationCilentData {
         }
 
         EntityData.getPersistentData().putInt("cultivation_level", level.getLevel() + 1);
-        syncData(EntityData);
+        syncData();
         return random_result;
     }
 
@@ -181,7 +181,7 @@ public class CultivationServerData extends CultivationCilentData {
         }
 
         EntityData.getPersistentData().putInt("mana", recover_mana);
-        syncData(EntityData);
+        syncData();
     }
 
     /**
@@ -197,7 +197,7 @@ public class CultivationServerData extends CultivationCilentData {
             return false;
         }
         nbt.putInt("mana", consume_mana);
-        syncData(EntityData);
+        syncData();
         return true;
     }
 
@@ -205,8 +205,8 @@ public class CultivationServerData extends CultivationCilentData {
      * 向客户端同步修为数据
      * @param player 当前同步玩家
      */
-    public void syncData(IEntityDataSaver player){
+    public void syncData(){
         ServerPlayNetworking.send((ServerPlayerEntity) EntityData, ModMessage.SYNC_DATA, 
-            PacketByteBufs.create().writeNbt((player.getPersistentData())));
+            PacketByteBufs.create().writeNbt((EntityData.getPersistentData())));
     }
 }

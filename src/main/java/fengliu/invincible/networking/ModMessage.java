@@ -3,6 +3,7 @@ package fengliu.invincible.networking;
 import fengliu.invincible.invincibleMod;
 import fengliu.invincible.networking.packets.CultivationClientPackets;
 import fengliu.invincible.networking.packets.CultivationServerPackets;
+import fengliu.invincible.networking.packets.LianDanClientPackets;
 import fengliu.invincible.networking.packets.PlayerServerPackets;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -23,6 +24,8 @@ public class ModMessage {
     public static final Identifier SET_UES_KUNG_FU_GROUP = new Identifier(MOD_ID, "set_ues_kung_fu_group");
     public static final Identifier UES_KUNG_FU = new Identifier(MOD_ID, "ues_kung_fu");
 
+    public static final Identifier LIAN_DAN_SYNC_DATA = new Identifier(MOD_ID, "lian_dan_sync_data");
+
     public static void registerC2SPackets(){
         ServerPlayNetworking.registerGlobalReceiver(REIKI_PRACTICE, CultivationServerPackets::reiki_practice);
         ServerPlayNetworking.registerGlobalReceiver(CULTIVATION_UP, CultivationServerPackets::cultivation_up);
@@ -38,5 +41,6 @@ public class ModMessage {
 
     public static void registerS2CPackets(){
         ClientPlayNetworking.registerGlobalReceiver(SYNC_DATA, CultivationClientPackets::syncData);
+        ClientPlayNetworking.registerGlobalReceiver(LIAN_DAN_SYNC_DATA, LianDanClientPackets::syncData);
     }
 }

@@ -29,7 +29,7 @@ public class KungFuServerData extends KungFuCilentData{
 
         NbtList nbtList = new NbtList();
         nbt.put("can_ues_kung_fu", nbtList);
-        syncData(EntityData);
+        syncData();
         return nbtList;
     }
 
@@ -55,7 +55,7 @@ public class KungFuServerData extends KungFuCilentData{
         }
 
         nbt.putInt("kung_fu_group_ues_in", 0);
-        syncData(EntityData);
+        syncData();
         return 0;
     }
 
@@ -67,7 +67,7 @@ public class KungFuServerData extends KungFuCilentData{
         }
 
         nbt.putInt("kung_fu_ues_in", 0);
-        syncData(EntityData);
+        syncData();
         return 0;
     }
 
@@ -95,12 +95,12 @@ public class KungFuServerData extends KungFuCilentData{
         int kungFuUesIn = getKungFuUesIn();
         if(kungFuUesIn < canUesGroup.size() - 1){
             nbt.putInt("kung_fu_ues_in", ++kungFuUesIn);
-            syncData(EntityData);
+            syncData();
             return;
         }
 
         nbt.putInt("kung_fu_ues_in", 0);
-        syncData(EntityData);
+        syncData();
     }
 
     /**
@@ -116,12 +116,12 @@ public class KungFuServerData extends KungFuCilentData{
         int kungFuGroupUesIn = getKungFuGroupUesIn();
         if(kungFuGroupUesIn < canUes.size() - 1){
             nbt.putInt("kung_fu_group_ues_in", ++kungFuGroupUesIn);
-            syncData(EntityData);
+            syncData();
             return;
         }
 
         nbt.putInt("kung_fu_group_ues_in", 0);
-        syncData(EntityData);
+        syncData();
     }
 
     /**
@@ -175,7 +175,7 @@ public class KungFuServerData extends KungFuCilentData{
         uesKungFu.putInt("combo_in", uesKungFu.getInt("combo_end"));
         uesKungFu.putInt("tieks", getUesKungFuSettings().getNextTiekIndex(uesKungFu.getInt("tieks"), (NbtList) uesKungFu.get("can_ues_tieks")));
         setComboIn();
-        syncData(EntityData);
+        syncData();
     }
 
     /**
@@ -216,7 +216,7 @@ public class KungFuServerData extends KungFuCilentData{
         }
 
         settings.initialNbt(EntityData);
-        syncData(EntityData);
+        syncData();
 
         player.sendMessage(new TranslatableText("info.invincible.kung_fu_learn",
             settings.Name.getString()
@@ -238,7 +238,7 @@ public class KungFuServerData extends KungFuCilentData{
         proficiency++;
         getUesKungFu().putInt("proficiency", proficiency);
 
-        syncData(EntityData);
+        syncData();
         if(proficiency >= KungFuTiekSettings.Proficiency){
             return true;
         }
@@ -284,7 +284,7 @@ public class KungFuServerData extends KungFuCilentData{
 
             nbtTiek.putBoolean(index+"", true);
             nbtList.set(index, nbtTiek);
-            syncData(EntityData);
+            syncData();
 
             ((PlayerEntity) EntityData).sendMessage(new TranslatableText("info.invincible.kung_fu_up_level",
                 getUesKungFuSettings().Name.getString()
@@ -295,10 +295,9 @@ public class KungFuServerData extends KungFuCilentData{
 
     /**
      * 向客户端同步修为数据
-     * @param player 当前同步玩家
      */
-    public void syncData(IEntityDataSaver player){
+    public void syncData(){
         ServerPlayNetworking.send((ServerPlayerEntity) EntityData, ModMessage.SYNC_DATA, 
-            PacketByteBufs.create().writeNbt((player.getPersistentData())));
+            PacketByteBufs.create().writeNbt((EntityData.getPersistentData())));
     }
 }

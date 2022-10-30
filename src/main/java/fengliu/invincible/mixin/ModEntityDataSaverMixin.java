@@ -14,11 +14,11 @@ import fengliu.invincible.util.CultivationServerData;
 import fengliu.invincible.util.IEntityDataSaver;
 import fengliu.invincible.util.KungFuCilentData;
 import fengliu.invincible.util.KungFuServerData;
+import fengliu.invincible.util.LianDanServerData;
 
 /*
  * 为每个实体添加修为数据
  */
-
 
 @Mixin(Entity.class)
 public class ModEntityDataSaverMixin implements IEntityDataSaver {
@@ -31,6 +31,8 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         NbtCompound persistent_data = new NbtCompound();
         persistent_data.putInt("cultivation_level", 0);
         persistent_data.putInt("cultivation_exp", 0);
+        persistent_data.putInt("lian_dan_level", 0);
+        persistent_data.putInt("lian_dan_exp", 0);
         persistent_data.putInt("mana", 0);
         persistent_data.putInt("kung_fu_ues_in", 0);
         persistent_data.putInt("kung_fu_group_ues_in", 0);
@@ -38,26 +40,6 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         persistent_data.put("can_ues_kung_fu", new NbtList());
         this.persistentData = persistent_data;
         return this.persistentData;
-    }
-
-    @Override
-    public CultivationCilentData getCilentCultivationData() {
-        return new CultivationCilentData(this);
-    }
-
-    @Override
-    public CultivationServerData getServerCultivationData() {
-        return new CultivationServerData(this);
-    }
-
-    @Override
-    public KungFuCilentData getKungFuCilentData() {
-        return new KungFuCilentData(this);
-    }
-
-    @Override
-    public KungFuServerData getKungFuServerData() {
-        return new KungFuServerData(this);
     }
 
     @Inject(method = "writeNbt", at = @At("HEAD"))
@@ -85,4 +67,28 @@ public class ModEntityDataSaverMixin implements IEntityDataSaver {
         persistentData = nbt.getCompound("invincible.cultivation");
     }
 
+    @Override
+    public CultivationCilentData getCilentCultivationData() {
+        return new CultivationCilentData(this);
+    }
+
+    @Override
+    public CultivationServerData getServerCultivationData() {
+        return new CultivationServerData(this);
+    }
+
+    @Override
+    public KungFuCilentData getKungFuCilentData() {
+        return new KungFuCilentData(this);
+    }
+
+    @Override
+    public KungFuServerData getKungFuServerData() {
+        return new KungFuServerData(this);
+    }
+
+    @Override
+    public LianDanServerData getLianDanServerData() {
+        return new LianDanServerData(this);
+    }
 }

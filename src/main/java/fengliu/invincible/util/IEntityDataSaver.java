@@ -9,4 +9,5 @@ public interface IEntityDataSaver {
     CultivationServerData getServerCultivationData();
     KungFuCilentData getKungFuCilentData();
     KungFuServerData getKungFuServerData();
+    LianDanServerData getLianDanServerData();
 }
