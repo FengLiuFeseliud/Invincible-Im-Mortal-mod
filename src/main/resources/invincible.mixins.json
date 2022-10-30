@@ -6,6 +6,7 @@
   "mixins": [
     "ModEntityDataSaverMixin",
     "ModPlayerDataSaveMixin",
+    "ModPlayerExtendMixin",
     "EnchantmentMixin",
     "ItemStackMixin",
     "ItemMixin"

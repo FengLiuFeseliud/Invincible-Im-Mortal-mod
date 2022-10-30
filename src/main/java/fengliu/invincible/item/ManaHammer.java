@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ManaHammer extends PickaxeItem implements ManaSkillsItem  {
-    private ManaSkillSettings[] ManaSkillSettings;
+    private ManaSkillSettings[] ManaSkillSettings = {};
     private PostHitManaSkillSettings PostHitManaSkillSettings;
     private PostMineManaSkillSettings PostMineManaSkillSettings;
 

@@ -28,7 +28,8 @@ dependencies {
 	modImplementation "vazkii.patchouli:Patchouli:1.18.2-71.1-FABRIC"
 
 	// Customportalapi 维度传送门
-	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta51-1.18'
+	// modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta51-1.18'
+	// include 'net.kyrptonaught:customportalapi:0.0.1-beta51-1.18'
 }
 
 processResources {

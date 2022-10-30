@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
 /*
- * 允许 nbt 控制玩家属性
+ * 允许 nbt 控制装备属性
  */
 
 @Mixin(EnchantmentHelper.class)
@@ -30,10 +30,6 @@ public class EnchantmentMixin{
             player_attack_damage += nbt.getFloat("invincible.player_attack_damage");
         }
 
-        if(nbt.contains("invincible.player_base_attack_damage")){
-            player_attack_damage += nbt.getFloat("invincible.player_base_attack_damage");
-        }
-        
         return info.getReturnValueF() + player_attack_damage;
     }
 }

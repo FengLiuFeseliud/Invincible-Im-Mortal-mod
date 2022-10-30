@@ -80,7 +80,7 @@ public class InGameHubMixin {
         DrawableHelper.drawTexture(matrices, x, y, 0, 27, 81, 9, TEXTURE_X, TEXTURE_Y);
 
         // 渲染生命值条
-        int healthBarWidth = Math.round((81 / (float) maxHealth) * lastHealth);
+        int healthBarWidth = Math.round((81 / (float) player.getMaxHealth()) * lastHealth);
         if(healthBarWidth > 20){
             DrawableHelper.drawTexture(matrices, x, y, 0, 0, healthBarWidth, 9, TEXTURE_X, TEXTURE_Y);
         }else{

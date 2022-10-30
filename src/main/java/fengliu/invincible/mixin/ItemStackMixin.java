@@ -39,6 +39,7 @@ public class ItemStackMixin{
         ItemStack stack = slot.getStack();
         Item stackItem = stack.getItem();
         
+        // 丹瓶使用
         if(stackItem instanceof DanYanItem && cursorStack.isOf(ModItems.DAN_PING)){
             DanPing.add(cursorStack, stack);
         }
