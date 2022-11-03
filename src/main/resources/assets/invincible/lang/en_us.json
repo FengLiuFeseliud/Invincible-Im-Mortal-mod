@@ -16,6 +16,7 @@
     "itemGroup.invincible.lian_dan_group": "逆天修仙 - 炼丹",
     "itemGroup.invincible.dan_yao_group": "逆天修仙 - 丹药",
     "itemGroup.invincible.cao_yao_group": "逆天修仙 - 草药",
+    "itemGroup.invincible.sundry_group": "逆天修仙 - 杂项",
 
     "info.invincible.can_up_level": "可以提升至 %d 境界了！ 总需提升 %d 个境界， 成功率总共：",
     "info.invincible.cannot_up_level": "无法提升境界... 距离至 %d 境界，总需 %d 修为",
@@ -68,6 +69,13 @@
     "block.invincible.reiki_stone_bricks": "灵石砖",
     "block.invincible.reiki_stone_bricks.tooltip": "包含十足灵气砖石",
 
+    "block.invincible.book_shelf": "书架",
+    "block.invincible.book_shelf.name": "书架",
+    "block.invincible.book_shelf.tooltip": "顾名思义, 就是用来放书的",
+
+    "block.invincible.gold_heap": "金币堆",
+    "block.invincible.gold_heap.tooltip": "堆成堆的金币!",
+
     "block.invincible.jade_rough_stone_ore": "玉石原石矿",
     "block.invincible.deepslate_jade_rough_stone_ore": "深层玉石原石矿",
     "block.invincible.jade_rough_stone_ore.tooltip": "比较罕见的矿物，打磨出来好像可以注入法力？",
@@ -103,6 +111,9 @@
     "block.invincible.zhen_yan_1": "一阶阵眼",
     "block.invincible.zhen_yan_1.name": "一阶阵眼",
     "block.invincible.zhen_yan_1.tooltip": "一阶阵法的核心",
+
+    "item.invincible.gold": "金币",
+    "item.invincible.gold.tooltip": "一种普遍的货币",
 
     "item.invincible.reiki_stone_0": "灵石",
     "item.invincible.reiki_stone_0.tooltip": "没冇灵气的普通石头，不过可以注入灵气？",

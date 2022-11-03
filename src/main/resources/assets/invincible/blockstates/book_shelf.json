@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "invincible:block/book_shelf"
+        },
+        "facing=east": {
+            "model": "invincible:block/book_shelf",
+            "y": 90
+        },
+        "facing=south": {
+            "model": "invincible:block/book_shelf",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "invincible:block/book_shelf",
+            "y": 270
+        }
+    }
+}

@@ -1,5 +1,7 @@
 package fengliu.invincible.util;
 
+import fengliu.invincible.api.Probability_Random;
+import fengliu.invincible.api.Probability_Random.Random_Item;
 import fengliu.invincible.item.DanYanItem;
 import fengliu.invincible.networking.ModMessage;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -59,6 +61,41 @@ public class LianDanServerData extends LianDanCilentData {
         syncData();
 
         return getUpLevelIndex(new_lianDanExp);
+    }
+
+    /**
+     * 进行突破
+     * @return 成功突破为 true
+     */
+    public boolean upLevel(){
+        LianDanLevel level = getLianDanLevel();
+        if(level.getLevel() >= LianDanLevelAll.length - 1){
+            return false;
+        }
+
+        if(!level.canUpLevel(getLianDanExp())){
+            return false;
+        }
+
+        /*
+         * 进行概率随机
+         * 第一个随机项目为成功 概率 突破成功率 内容 true 
+         * 第二个随机项目为失败 概率 突破失败率 内容 false 
+         */
+        Random_Item[] random = {
+            new Random_Item(level.getUpLevelRate(), true),
+            new Random_Item(level.getUpLevelFailureRate(), false)
+        };
+        // 进行随机并获取内容
+        boolean random_result = (boolean) Probability_Random.random(random).getItem();
+
+        if(!random_result){
+            return random_result;
+        }
+
+        EntityData.getPersistentData().putInt("lian_dan_level", level.getLevel() + 1);
+        syncData();
+        return random_result;
     }
 
     /**

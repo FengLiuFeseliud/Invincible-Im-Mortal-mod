@@ -132,6 +132,38 @@ public class CultivationServerData extends CultivationCilentData {
         return getUpLevelIndex(new_cultivationExp);
     }
 
+    public void randomReduceCultivation(){
+        Random_Item[] random = {
+            new Random_Item(20, 1),
+            new Random_Item(20, 2),
+            new Random_Item(20, 3),
+            new Random_Item(20, 4),
+            new Random_Item(20, 5),
+        };
+        // 进行随机并获取内容
+        int random_result = (int) Probability_Random.random(random).getItem();
+        int reduceExp = getNeedCultivationExp() * random_result;
+
+        int oldExp = getCultivationExp();
+        if(reduceExp > oldExp){
+            reduceExp = oldExp;
+        }
+        int newExp = getCultivationExp() - reduceExp;
+
+        NbtCompound nbt = EntityData.getPersistentData();
+        nbt.putInt("cultivation_exp", newExp);
+        
+        while(true){
+            CultivationLevel oldLevel = getCultivationLevel();
+            if(!oldLevel.canDownLevel(newExp) || oldLevel.getLevel() == 0){
+                break;
+            }
+            nbt.putInt("cultivation_level", oldLevel.getLevel() - 1);
+        }
+
+        syncData();
+    }
+
     /**
      * 进行突破
      * @return 成功突破为 true
@@ -159,6 +191,7 @@ public class CultivationServerData extends CultivationCilentData {
         boolean random_result = (boolean) Probability_Random.random(random).getItem();
 
         if(!random_result){
+            randomReduceCultivation();
             return random_result;
         }
 

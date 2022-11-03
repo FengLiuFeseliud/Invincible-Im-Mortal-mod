@@ -6,6 +6,8 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 public class ModScreens {
     
     public static void registerAllScreen(){
+		// 书架 UI
+		HandledScreens.register(ModScreenHandlers.BOOK_SHELF_SCREENHANDLER, BookShelfScreen::new);
         // 角磨机 UI
 		HandledScreens.register(ModScreenHandlers.ANGLE_GRINDER_SCREENHANDLER, AngleGrinderScreen::new);
 		// 注灵台 UI

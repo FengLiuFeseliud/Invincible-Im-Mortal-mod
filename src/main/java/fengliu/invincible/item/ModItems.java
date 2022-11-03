@@ -22,6 +22,11 @@ import net.minecraft.text.TranslatableText;
 
 public class ModItems {
     private static final String MOD_ID = invincibleMod.MOD_ID;
+	// 金币
+	public static final Item GOLD = new Gold(
+		new FabricItemSettings()
+			.maxCount(64)
+	);
     // 灵石
 	public static final Item REIKI_STONE_0 = new ReikiStone.Lv0(
 		new FabricItemSettings()
@@ -332,6 +337,8 @@ public class ModItems {
     public static void registerAllItem(){
 		setAllItemReiki();
 		
+		// 金币
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "gold"), GOLD);
         // 玉石原石
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "jade_rough_stone"), JADE_ROUGH_STONE);
 		// 玉石

@@ -9,6 +9,11 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlockEntitys {
     private static final String MOD_ID = invincibleMod.MOD_ID;
+    // 书架
+	public static BlockEntityType<BookShelfEntity> BOOK_SHELF_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
+        new Identifier(MOD_ID, "book_shelf_entity"), 
+        FabricBlockEntityTypeBuilder.create(BookShelfEntity::new, ModBlocks.BOOK_SHELF).build(null)
+    );
     // 角磨机
 	public static BlockEntityType<AngleGrinderEntity> ANGLE_GRINDER_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, 
         new Identifier(MOD_ID, "angle_grinder_entity"), 

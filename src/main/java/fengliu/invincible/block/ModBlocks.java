@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.OreBlock;
+import net.minecraft.block.SnowBlock;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.block.Material;
@@ -20,6 +21,14 @@ public class ModBlocks {
     // 灵石砖
 	public static final Block REIKI_STONE_BRICKS= new Block(
 		FabricBlockSettings.of(Material.STONE).strength(10.0f).requiresTool()
+	);
+	// 书架
+	public static final Block BOOK_SHELF = new BookShelf(
+		FabricBlockSettings.of(Material.WOOD).strength(1.5f)
+	);
+	// 金币堆
+	public static final Block GOLD_HEAP = new SnowBlock(
+		FabricBlockSettings.of(Material.SNOW_LAYER).strength(0.5f)
 	);
     // 玉石原石矿
 	public static final Block JADE_ROUGH_STONE_ORE = new OreBlock(
@@ -74,12 +83,12 @@ public class ModBlocks {
 	// 灵草
 	public static final Block REIKI_GRASS = new FlowerBlock(
 		StatusEffects.SATURATION, 30,
-		FabricBlockSettings.of(Material.PLANT).noCollision().nonOpaque().breakInstantly()
+		FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly()
 	);
 	// 回气草
 	public static final Block HUI_QI_CAO = new FlowerBlock(
 		StatusEffects.SATURATION, 30,
-		FabricBlockSettings.of(Material.PLANT).noCollision().nonOpaque().breakInstantly()
+		FabricBlockSettings.of(Material.PLANT).noCollision().breakInstantly()
 	);
 	// 角磨机
 	public static final Block ANGLE_GRINDER = new AngleGrinder(
@@ -95,12 +104,15 @@ public class ModBlocks {
 	);
 	// 一阶阵眼
 	public static final Block ZHEN_YAN_1 = new ZhenYanLv1(
-		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool()
+		FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque()
 	);
 
 	@Environment(EnvType.CLIENT)
 	public static void setAllBlockRenderLayerMap(){
+		BlockRenderLayerMap.INSTANCE.putBlock(BOOK_SHELF, RenderLayer.getTranslucent());
+		BlockRenderLayerMap.INSTANCE.putBlock(ZHEN_YAN_1, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ANGLE_GRINDER, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(DAN_LU, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(REIKI_GRASS, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(HUI_QI_CAO, RenderLayer.getTranslucent());
 	};
@@ -108,6 +120,10 @@ public class ModBlocks {
     public static void registerAllBlock(){
         // 灵石砖
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "reiki_stone_bricks"), REIKI_STONE_BRICKS);
+		// 书架
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "book_shelf"), BOOK_SHELF);
+		// 金币堆
+		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "gold_heap"), GOLD_HEAP);
 		// 玉石原石矿
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "jade_rough_stone_ore"), JADE_ROUGH_STONE_ORE);
 		// 一级灵石矿

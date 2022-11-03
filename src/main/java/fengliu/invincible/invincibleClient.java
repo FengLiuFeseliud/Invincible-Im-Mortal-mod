@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 import fengliu.invincible.api.Key;
 import fengliu.invincible.block.ModBlocks;
+import fengliu.invincible.client.block.entity.renderer.ModBlockEntityRenderers;
 import fengliu.invincible.networking.ModMessage;
 import fengliu.invincible.particle.ModParticle;
 import fengliu.invincible.screen.ModScreens;
@@ -22,6 +23,8 @@ public class invincibleClient implements ClientModInitializer  {
 		ModParticle.registerClientAllParticles();
 
 		ModBlocks.setAllBlockRenderLayerMap();
+
+		ModBlockEntityRenderers.registerAllBlockEntityRenderers();
 
 		ModScreens.registerAllScreen();
 

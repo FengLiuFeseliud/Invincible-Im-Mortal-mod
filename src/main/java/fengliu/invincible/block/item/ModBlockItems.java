@@ -10,14 +10,28 @@ import net.minecraft.util.registry.Registry;
 public class ModBlockItems {
     private static final String MOD_ID = invincibleMod.MOD_ID;
     // 灵石砖
-	public static final BlockItem REIKI_STONE_BRICKS_ITEM= new BaseBlockItem(
+	public static final BlockItem REIKI_STONE_BRICKS_ITEM = new BaseBlockItem(
 		"block.invincible.reiki_stone_bricks.tooltip",
 		ModBlocks.REIKI_STONE_BRICKS,
 		new FabricItemSettings()
 			.maxCount(64)
 	);
+	// 书架
+	public static final BlockItem BOOK_SHELF_ITEM = new BaseBlockItem(
+		"block.invincible.book_shelf.tooltip",
+		ModBlocks.BOOK_SHELF,
+		new FabricItemSettings()
+			.maxCount(64)
+	);
+	// 金币堆
+	public static final BlockItem GOLD_HEAP_ITEM = new BaseBlockItem(
+		"block.invincible.gold_heap.tooltip",
+		ModBlocks.GOLD_HEAP,
+		new FabricItemSettings()
+			.maxCount(64)
+	);
 	// 玉石原石矿
-	public static final BlockItem JADE_ROUGH_STONE_ORE_ITEM= new BaseBlockItem(
+	public static final BlockItem JADE_ROUGH_STONE_ORE_ITEM = new BaseBlockItem(
 		"block.invincible.jade_rough_stone_ore.tooltip",
 		ModBlocks.JADE_ROUGH_STONE_ORE,
 		new FabricItemSettings()
@@ -132,6 +146,10 @@ public class ModBlockItems {
     public static void registerAllBlockItem(){
         // 灵石砖
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "reiki_stone_bricks"), REIKI_STONE_BRICKS_ITEM);
+		// 书架
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "book_shelf"), BOOK_SHELF_ITEM);
+		// 金币堆
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "gold_heap"), GOLD_HEAP_ITEM);
 		// 玉石原石矿
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "jade_rough_stone_ore"), JADE_ROUGH_STONE_ORE_ITEM);
 		// 一级灵石矿

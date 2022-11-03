@@ -29,6 +29,8 @@ public class ModItemGroup {
 			.icon(() -> new ItemStack(ModBlocks.REIKI_STONE_BRICKS))
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModBlocks.REIKI_STONE_BRICKS));
+				stacks.add(new ItemStack(ModBlocks.BOOK_SHELF));
+				stacks.add(new ItemStack(ModBlocks.GOLD_HEAP));
 				stacks.add(new ItemStack(ModBlocks.JADE_ROUGH_STONE_ORE));
 				stacks.add(new ItemStack(ModBlocks.REIKI_STONE_ORE_1));
 				stacks.add(new ItemStack(ModBlocks.REIKI_STONE_ORE_2));
@@ -125,6 +127,14 @@ public class ModItemGroup {
 			.appendItems(stacks -> {
 				stacks.add(new ItemStack(ModBlocks.REIKI_GRASS));
 				stacks.add(new ItemStack(ModBlocks.HUI_QI_CAO));
+			})
+			.build();
+	// 杂项组
+	public static final ItemGroup SUNDRY_GROUP = FabricItemGroupBuilder.create(
+		new Identifier(MOD_ID, "sundry_group"))
+			.icon(() -> new ItemStack(ModItems.GOLD))
+			.appendItems(stacks -> {
+				stacks.add(new ItemStack(ModItems.GOLD));
 			})
 			.build();
 

@@ -2,11 +2,11 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "invincible:gold"
+            "item": "minecraft:amethyst_shard"
         }
     ],
     "result": {
-        "item": "minecraft:gold_nugget",
+        "item": "invincible:reiki_stone_0",
         "count": 4
     }
 }

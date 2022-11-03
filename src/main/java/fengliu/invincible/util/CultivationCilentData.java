@@ -13,30 +13,30 @@ public class CultivationCilentData {
     protected static final CultivationLevel[] CultivationLevelAll = {
         new CultivationLevel(0, "invincible.cultivation_level.0", 0, 10000, 100, 0, 0, 0),
         // 练气
-        new CultivationLevel(1, "invincible.cultivation_level.1", 10000, 20000, 99, 1, 1, 100),
-        new CultivationLevel(2, "invincible.cultivation_level.2", 20000, 31000, 99, 1.1, 1, 110),
-        new CultivationLevel(3, "invincible.cultivation_level.3", 31000, 43000, 99, 1.2, 1, 120),
-        new CultivationLevel(4, "invincible.cultivation_level.4", 43000, 56000, 98, 1.5, 2, 130),
-        new CultivationLevel(5, "invincible.cultivation_level.5", 56000, 70000, 97, 1.6, 2, 140),
-        new CultivationLevel(6, "invincible.cultivation_level.6", 70000, 85000, 96, 1.7, 2, 150),
-        new CultivationLevel(7, "invincible.cultivation_level.7", 85000, 100000, 94, 2, 3, 160),
-        new CultivationLevel(8, "invincible.cultivation_level.8", 100000, 116000, 93, 2.1, 3, 170),
-        new CultivationLevel(9, "invincible.cultivation_level.9", 116000, 133000, 92, 2.2, 3, 180),
-        new CultivationLevel(10, "invincible.cultivation_level.10", 133000, 180000, 90, 2.5, 5, 190),
+        new CultivationLevel(1, "invincible.cultivation_level.1", 10000, 20000, 90, 1, 1, 100),
+        new CultivationLevel(2, "invincible.cultivation_level.2", 20000, 31000, 85, 1.1, 1, 110),
+        new CultivationLevel(3, "invincible.cultivation_level.3", 31000, 43000, 80, 1.2, 1, 120),
+        new CultivationLevel(4, "invincible.cultivation_level.4", 43000, 56000, 75, 1.5, 2, 130),
+        new CultivationLevel(5, "invincible.cultivation_level.5", 56000, 70000, 70, 1.6, 2, 140),
+        new CultivationLevel(6, "invincible.cultivation_level.6", 70000, 85000, 70, 1.7, 2, 150),
+        new CultivationLevel(7, "invincible.cultivation_level.7", 85000, 100000, 70, 2, 3, 160),
+        new CultivationLevel(8, "invincible.cultivation_level.8", 100000, 116000, 65, 2.1, 3, 170),
+        new CultivationLevel(9, "invincible.cultivation_level.9", 116000, 133000, 60, 2.2, 3, 180),
+        new CultivationLevel(10, "invincible.cultivation_level.10", 133000, 180000, 60, 2.5, 5, 190),
         // 筑基
-        new CultivationLevel(11, "invincible.cultivation_level.11", 180000, 200000, 89, 3, 6, 250),
-        new CultivationLevel(12, "invincible.cultivation_level.12", 200000, 221000, 88, 3.2, 6, 260),
-        new CultivationLevel(13, "invincible.cultivation_level.13", 221000, 242000, 87, 3.4, 6, 270),
-        new CultivationLevel(14, "invincible.cultivation_level.14", 242000, 264000, 85, 3.6, 6, 280),
-        new CultivationLevel(15, "invincible.cultivation_level.15", 264000, 288000, 84, 4, 7, 290),
-        new CultivationLevel(16, "invincible.cultivation_level.16", 288000, 313000, 83, 4.2, 7, 300),
-        new CultivationLevel(17, "invincible.cultivation_level.17", 313000, 339000, 82, 4.4, 7, 310),
-        new CultivationLevel(18, "invincible.cultivation_level.18", 339000, 366000, 80, 4.6, 7, 320),
-        new CultivationLevel(19, "invincible.cultivation_level.19", 366000, 396000, 79, 5, 8, 330),
-        new CultivationLevel(20, "invincible.cultivation_level.20", 396000, 425000, 78, 5.2, 8, 340),
-        new CultivationLevel(21, "invincible.cultivation_level.21", 425000, 451000, 75, 5.4, 8, 350),
-        new CultivationLevel(22, "invincible.cultivation_level.22", 451000, 483000, 73, 5.6, 8, 360),
-        new CultivationLevel(23, "invincible.cultivation_level.23", 483000, 500000, 70, 7, 10, 370),
+        new CultivationLevel(11, "invincible.cultivation_level.11", 180000, 200000, 90, 3, 6, 250),
+        new CultivationLevel(12, "invincible.cultivation_level.12", 200000, 221000, 85, 3.2, 6, 260),
+        new CultivationLevel(13, "invincible.cultivation_level.13", 221000, 242000, 80, 3.4, 6, 270),
+        new CultivationLevel(14, "invincible.cultivation_level.14", 242000, 264000, 75, 3.6, 6, 280),
+        new CultivationLevel(15, "invincible.cultivation_level.15", 264000, 288000, 70, 4, 7, 290),
+        new CultivationLevel(16, "invincible.cultivation_level.16", 288000, 313000, 65, 4.2, 7, 300),
+        new CultivationLevel(17, "invincible.cultivation_level.17", 313000, 339000, 60, 4.4, 7, 310),
+        new CultivationLevel(18, "invincible.cultivation_level.18", 339000, 366000, 55, 4.6, 7, 320),
+        new CultivationLevel(19, "invincible.cultivation_level.19", 366000, 396000, 50, 5, 8, 330),
+        new CultivationLevel(20, "invincible.cultivation_level.20", 396000, 425000, 50, 5.2, 8, 340),
+        new CultivationLevel(21, "invincible.cultivation_level.21", 425000, 451000, 45, 5.4, 8, 350),
+        new CultivationLevel(22, "invincible.cultivation_level.22", 451000, 483000, 40, 5.6, 8, 360),
+        new CultivationLevel(23, "invincible.cultivation_level.23", 483000, 500000, 40, 7, 10, 370),
     };
 
     private final IEntityDataSaver EntityData;
@@ -142,7 +142,7 @@ public class CultivationCilentData {
             return getCultivationLevel().getNeedCultivationExp();
         }
 
-        if(index >= CultivationLevelAll.length){
+        if(index >= CultivationLevelAll.length || index < 0){
             return 0;
         }
 
@@ -248,7 +248,7 @@ public class CultivationCilentData {
          * @return 可以时为 true
          */
         public boolean canDownLevel(int cultivationExp){
-            return CultivationExp - cultivationExp < 0;
+            return cultivationExp - CultivationExp < 0;
         }
 
 
